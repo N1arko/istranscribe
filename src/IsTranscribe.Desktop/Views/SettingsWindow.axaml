@@ -1,0 +1,475 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.SettingsWindow"
+    x:DataType="vm:SettingsViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    xmlns:views="using:IsTranscribe.Desktop.Views"
+    Title="{DynamicResource String.Settings.Title}"
+    Width="560"
+    Height="760"
+    MinWidth="460"
+    MinHeight="560"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterOwner">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#settings -->
+  <Window.Styles>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Primary}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Subtle}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="Padding" Value="18" />
+    </Style>
+    <Style Selector="TextBlock.section-title">
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.label">
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.quiet">
+      <Setter Property="Padding" Value="9,6" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="28,22,28,18">
+    <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+      <StackPanel Spacing="4">
+        <TextBlock
+            Text="{DynamicResource String.Settings.Title}"
+            Foreground="{DynamicResource Brush.Text.Primary}"
+            FontSize="28"
+            FontWeight="SemiBold"
+            LetterSpacing="-0.8" />
+        <TextBlock
+            Text="{DynamicResource String.Status.AutoSaved}"
+            Foreground="{DynamicResource Brush.Text.Tertiary}"
+            FontSize="12" />
+      </StackPanel>
+      <Button
+          Grid.Column="1"
+          Classes="quiet"
+          Content="{DynamicResource String.Action.Close}"
+          Command="{Binding CloseCommand}" />
+    </Grid>
+
+    <ScrollViewer Grid.Row="1" Margin="0,20,0,14" VerticalScrollBarVisibility="Auto">
+      <StackPanel Spacing="12">
+        <Border Classes="card">
+          <StackPanel Spacing="14">
+            <TextBlock Text="{DynamicResource String.Settings.General}" Classes="section-title" />
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{DynamicResource String.Setup.Service.Title}" Classes="label" />
+              <ToggleSwitch
+                  Grid.Column="1"
+                  IsChecked="{Binding ServiceEnabled}"
+                  AutomationProperties.Name="{DynamicResource String.Setup.Service.Title}"
+                  OffContent=""
+                  OnContent="" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{DynamicResource String.Settings.Autostart}" Classes="label" />
+              <ToggleSwitch
+                  Grid.Column="1"
+                  IsChecked="{Binding Autostart}"
+                  AutomationProperties.Name="{DynamicResource String.Settings.Autostart}"
+                  OffContent=""
+                  OnContent="" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{DynamicResource String.Settings.Notifications}" Classes="label" />
+              <ToggleSwitch
+                  Grid.Column="1"
+                  IsChecked="{Binding Notifications}"
+                  AutomationProperties.Name="{DynamicResource String.Settings.Notifications}"
+                  OffContent=""
+                  OnContent="" />
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card">
+          <StackPanel Spacing="12">
+            <TextBlock Text="{DynamicResource String.Settings.Applications}" Classes="section-title" />
+            <TextBlock
+                Text="{DynamicResource String.Settings.Applications.Description}"
+                Foreground="{DynamicResource Brush.Text.Secondary}"
+                FontSize="12"
+                LineHeight="18"
+                TextWrapping="Wrap" />
+            <ItemsControl ItemsSource="{Binding Applications}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:MeetingApplicationOptionViewModel">
+                  <StackPanel Margin="0,0,14,8" Spacing="2">
+                    <CheckBox
+                        Content="{Binding DisplayName}"
+                        IsChecked="{Binding IsMonitored}" />
+                    <TextBlock
+                        Margin="28,0,0,0"
+                        Width="302"
+                        Text="{DynamicResource String.App.OtherBrowser.Description}"
+                        Foreground="{DynamicResource Brush.Text.Tertiary}"
+                        FontSize="11"
+                        LineHeight="16"
+                        TextWrapping="Wrap"
+                        IsVisible="{Binding IsBrowserFallback}" />
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+
+        <!-- @spec spec://modules/app/FEAT-015-cloud-transcription-groq-openrouter#behavior.consent -->
+        <!-- @spec spec://modules/app/FEAT-015-cloud-transcription-groq-openrouter#privacy -->
+        <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#experience -->
+        <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#model-download -->
+        <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#privacy -->
+        <Border Classes="card">
+          <StackPanel Spacing="12">
+            <TextBlock
+                Text="{Binding TranscriptionSettingsTitle}"
+                Classes="section-title" />
+            <TextBlock
+                Text="{Binding TranscriptionSettingsDescription}"
+                Foreground="{DynamicResource Brush.Text.Secondary}"
+                FontSize="12"
+                LineHeight="18"
+                TextWrapping="Wrap" />
+
+            <!-- @spec spec://modules/app/FEAT-017-speaker-aware-transcription#modes -->
+            <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{Binding TranscriptionModeIndex, Mode=TwoWay}"
+                      AutomationProperties.Name="{Binding TranscriptionSettingsTitle}">
+              <ComboBoxItem Content="{DynamicResource String.Transcription.Mode.Off}" />
+              <ComboBoxItem Content="{DynamicResource String.Transcription.Mode.Local}" />
+              <ComboBoxItem Content="{DynamicResource String.Transcription.Mode.Online}" />
+            </ComboBox>
+            <TextBlock IsVisible="{Binding ShowOnlineProviderChoice}"
+                Text="{DynamicResource String.Transcription.Settings.Service}"
+                Classes="label" />
+            <Button IsVisible="{Binding ShowOnlineProviderChoice}"
+                    Content="{DynamicResource String.Transcription.Action.InstallSpeakers}"
+                    Command="{Binding InstallDiarizationCommand}" />
+            <ComboBox
+                HorizontalAlignment="Stretch"
+                AutomationProperties.Name="{DynamicResource String.Transcription.Settings.Service}"
+                IsVisible="{Binding ShowOnlineProviderChoice}"
+                ItemsSource="{Binding OnlineProviderChoices}"
+                SelectedItem="{Binding SelectedTranscriptionEngine}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:TranscriptionEngineOptionViewModel">
+                  <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <StackPanel Spacing="12" IsVisible="{Binding HasSelectedTranscriptionEngine}">
+              <StackPanel Spacing="12" IsVisible="{Binding ShowRemoteTranscriptionSettings}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                  <StackPanel Spacing="3">
+                    <TextBlock
+                        Text="{DynamicResource String.Transcription.Settings.Key}"
+                        Classes="label" />
+                    <TextBlock
+                        Text="{Binding TranscriptionCredentialState}"
+                        Foreground="{DynamicResource Brush.Text.Tertiary}"
+                        FontSize="11" />
+                  </StackPanel>
+                  <Button
+                      Grid.Column="1"
+                      Classes="quiet"
+                      Content="{DynamicResource String.Transcription.Action.DeleteKey}"
+                      Command="{Binding DeleteTranscriptionCredentialCommand}"
+                      IsVisible="{Binding SelectedTranscriptionEngineHasCredential}" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                  <TextBox
+                      PasswordChar="●"
+                      Text="{Binding TranscriptionCredential, Mode=TwoWay}"
+                      PlaceholderText="{DynamicResource String.Transcription.Settings.Key.Watermark}"
+                      AutomationProperties.Name="{DynamicResource String.Transcription.Settings.Key}" />
+                  <Button
+                      Grid.Column="1"
+                      Content="{DynamicResource String.Transcription.Action.SaveKey}"
+                      Command="{Binding SaveTranscriptionCredentialCommand}" />
+                </Grid>
+              </StackPanel>
+
+
+              <StackPanel Spacing="8" IsVisible="{Binding ShowLocalTranscriptionSettings}">
+                <TextBlock
+                    Text="{Binding SelectedLocalModelDescription}"
+                    Foreground="{DynamicResource Brush.Text.Tertiary}"
+                    FontSize="11"
+                    LineHeight="17"
+                    TextWrapping="Wrap" />
+                <views:PoliteLiveTextBlock
+                    Text="{Binding LocalModelStatusText}"
+                    Foreground="{DynamicResource Brush.Text.Secondary}"
+                    FontSize="12"
+                    TextWrapping="Wrap"
+                    IsVisible="{Binding HasSelectedLocalModel}" />
+                <ProgressBar
+                    Minimum="0"
+                    Maximum="100"
+                    Value="{Binding LocalModelProgressPercent}"
+                    IsIndeterminate="{Binding IsLocalModelProgressIndeterminate}"
+                    IsVisible="{Binding ShowLocalModelProgress}" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Button
+                      Content="{Binding InstallLocalModelActionText}"
+                      Command="{Binding InstallLocalModelCommand}"
+                      IsVisible="{Binding ShowInstallLocalModelAction}" />
+                  <Button
+                      Classes="quiet"
+                      Content="{DynamicResource String.Transcription.Action.CancelModelDownload}"
+                      Command="{Binding CancelLocalModelInstallCommand}"
+                      IsVisible="{Binding ShowCancelLocalModelInstallAction}" />
+                  <Button
+                      Classes="quiet"
+                      Content="{DynamicResource String.Transcription.Action.RemoveModel}"
+                      Command="{Binding RemoveLocalModelCommand}"
+                      IsVisible="{Binding ShowRemoveLocalModelAction}" />
+                </StackPanel>
+                <Border
+                    Padding="10,9"
+                    CornerRadius="8"
+                    Background="{DynamicResource Brush.Status.SuccessSoft}">
+                  <TextBlock
+                      Text="{DynamicResource String.Transcription.Settings.Local.Privacy}"
+                      Foreground="{DynamicResource Brush.Text.Primary}"
+                      FontSize="11"
+                      LineHeight="17"
+                      TextWrapping="Wrap" />
+                </Border>
+                <Border
+                    Padding="10,9"
+                    CornerRadius="8"
+                    Background="{DynamicResource Brush.Status.WarningSoft}"
+                    BorderBrush="{DynamicResource Brush.Status.Warning}"
+                    BorderThickness="1"
+                    IsVisible="{Binding ShowLocalResourceWarning}">
+                  <TextBlock
+                      Text="{Binding LocalResourceWarningText}"
+                      Foreground="{DynamicResource Brush.Text.Primary}"
+                      FontSize="11"
+                      LineHeight="17"
+                      TextWrapping="Wrap" />
+                </Border>
+                <Border
+                    Padding="10,9"
+                    CornerRadius="8"
+                    Background="{DynamicResource Brush.Status.WarningSoft}"
+                    IsVisible="{Binding ShowLocalTranscriptionRecordingNotice}">
+                  <TextBlock
+                      Text="{DynamicResource String.Transcription.Settings.Local.RecordingNotice}"
+                      Foreground="{DynamicResource Brush.Text.Primary}"
+                      FontSize="11"
+                      LineHeight="17"
+                      TextWrapping="Wrap" />
+                </Border>
+              </StackPanel>
+
+
+              <StackPanel Spacing="4" IsVisible="{Binding ShowZeroDataRetentionOption}">
+                <CheckBox
+                    Content="{DynamicResource String.Transcription.Settings.OpenRouter.Zdr}"
+                    IsChecked="{Binding RequireZeroDataRetention}"
+                    AutomationProperties.Name="{DynamicResource String.Transcription.Settings.OpenRouter.Zdr}" />
+                <TextBlock
+                    Margin="28,0,0,0"
+                    MaxWidth="405"
+                    Text="{DynamicResource String.Transcription.Settings.OpenRouter.Zdr.Description}"
+                    Foreground="{DynamicResource Brush.Text.Tertiary}"
+                    FontSize="11"
+                    LineHeight="17"
+                    TextWrapping="Wrap" />
+              </StackPanel>
+
+              <CheckBox
+                  IsChecked="{Binding TranscriptionConsentAccepted}"
+                  IsVisible="{Binding ShowRemoteTranscriptionSettings}">
+                <TextBlock
+                    MaxWidth="430"
+                    Text="{Binding TranscriptionConsentText}"
+                    FontSize="12"
+                    LineHeight="18"
+                    TextWrapping="Wrap" />
+              </CheckBox>
+              <Button
+                  HorizontalAlignment="Left"
+                  Classes="quiet"
+                  Margin="-7,0,0,0"
+                  Content="{DynamicResource String.Transcription.Action.OpenPolicy}"
+                  Command="{Binding OpenTranscriptionPolicyCommand}"
+                  IsVisible="{Binding HasTranscriptionPolicyLink}" />
+
+
+              <views:AssertiveLiveTextBlock
+                  Text="{Binding TranscriptionErrorMessage}"
+                  Foreground="{DynamicResource Brush.Status.Danger}"
+                  FontSize="12"
+                  TextWrapping="Wrap"
+                  IsVisible="{Binding HasTranscriptionError}" />
+              <views:PoliteLiveTextBlock
+                  Text="{Binding TranscriptionStatusMessage}"
+                  Foreground="{DynamicResource Brush.Status.Success}"
+                  FontSize="12"
+                  TextWrapping="Wrap"
+                  IsVisible="{Binding HasTranscriptionStatus}" />
+            </StackPanel>
+              <Button
+                  HorizontalAlignment="Left"
+                  Content="{DynamicResource String.Transcription.Action.SaveSettings}"
+                  Command="{Binding SaveTranscriptionSettingsCommand}" />
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card">
+          <StackPanel Spacing="14">
+            <TextBlock Text="{DynamicResource String.Settings.Microphone}" Classes="section-title" />
+            <ComboBox
+                HorizontalAlignment="Stretch"
+                AutomationProperties.Name="{DynamicResource String.Settings.Microphone}"
+                ItemsSource="{Binding MicrophoneChoices}"
+                SelectedItem="{Binding SelectedMicrophone}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:MicrophoneOptionViewModel">
+                  <TextBlock Text="{Binding Label}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Border
+                Padding="10,9"
+                CornerRadius="8"
+                Background="{DynamicResource Brush.Status.WarningSoft}"
+                BorderBrush="{DynamicResource Brush.Status.Warning}"
+                BorderThickness="1"
+                IsVisible="{Binding HasMicrophoneCapabilityNotice}">
+              <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <TextBlock
+                    x:Name="MicrophoneCapabilityLiveRegion"
+                    Text="{Binding MicrophoneCapabilityMessage}"
+                    Foreground="{DynamicResource Brush.Text.Primary}"
+                    FontSize="12"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center" />
+                <Button
+                    Grid.Column="1"
+                    MinHeight="34"
+                    Padding="10,6"
+                    Content="{Binding MicrophoneCapabilityActionText}"
+                    Command="{Binding RetryCapabilitiesCommand}" />
+              </Grid>
+            </Border>
+
+            <TextBlock Text="{DynamicResource String.Settings.RecordingsFolder}" Classes="section-title" />
+            <Button
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
+                Padding="11,8"
+                Background="{DynamicResource Brush.Surface.Secondary}"
+                BorderBrush="{DynamicResource Brush.Border.Subtle}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Content="{Binding RecordingsFolderLabel}"
+                Command="{Binding ChooseFolderCommand}" />
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card" IsVisible="{Binding HasPlatformPermissions}">
+          <StackPanel Spacing="12">
+            <TextBlock Text="{DynamicResource String.Permission.Title}" Classes="section-title" />
+            <ItemsControl ItemsSource="{Binding PlatformPermissions}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:PlatformPermissionOptionViewModel">
+                  <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" Margin="0,3">
+                    <StackPanel Spacing="2" VerticalAlignment="Center">
+                      <TextBlock Text="{Binding Title}" FontSize="13" />
+                      <TextBlock Text="{Binding StateLabel}" Foreground="{DynamicResource Brush.Text.Tertiary}" FontSize="11" />
+                    </StackPanel>
+                    <Button Grid.Column="1" Padding="10,6" Content="{Binding RequestActionText}"
+                            Command="{Binding RequestCommand}" IsVisible="{Binding !IsGranted}" />
+                    <Button Grid.Column="2" Padding="10,6" Content="{Binding OpenSettingsActionText}"
+                            Command="{Binding OpenSettingsCommand}" IsVisible="{Binding ShowOpenSettings}" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card">
+          <StackPanel Spacing="14">
+            <TextBlock Text="{DynamicResource String.Settings.Theme}" Classes="section-title" />
+            <ComboBox
+                AutomationProperties.Name="{DynamicResource String.Settings.Theme}"
+                ItemsSource="{Binding ThemeChoices}"
+                SelectedItem="{Binding SelectedTheme}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:SettingChoiceOptionViewModel">
+                  <TextBlock Text="{Binding Label}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Text="{DynamicResource String.Settings.Language}" Classes="section-title" />
+            <ComboBox
+                AutomationProperties.Name="{DynamicResource String.Settings.Language}"
+                ItemsSource="{Binding LanguageChoices}"
+                SelectedItem="{Binding SelectedLanguage}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:SettingChoiceOptionViewModel">
+                  <TextBlock Text="{Binding Label}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+          </StackPanel>
+        </Border>
+
+        <Button
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left"
+            Padding="16,13"
+            Background="{DynamicResource Brush.Surface.Primary}"
+            BorderBrush="{DynamicResource Brush.Border.Subtle}"
+            BorderThickness="1"
+            CornerRadius="12"
+            Content="{DynamicResource String.Settings.AdvancedDiagnostics}"
+            Command="{Binding OpenDiagnosticsCommand}" />
+      </StackPanel>
+    </ScrollViewer>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,Auto" MinHeight="26">
+      <TextBlock
+          x:Name="SettingsErrorLiveRegion"
+          Text="{Binding ErrorMessage}"
+          Foreground="{DynamicResource Brush.Status.Danger}"
+          FontSize="12"
+          VerticalAlignment="Center"
+          IsVisible="{Binding HasError}" />
+      <TextBlock
+          x:Name="SettingsStatusLiveRegion"
+          Grid.Column="1"
+          Text="{Binding StatusMessage}"
+          Foreground="{DynamicResource Brush.Status.Success}"
+          FontSize="12"
+          VerticalAlignment="Center"
+          IsVisible="{Binding HasStatus}" />
+    </Grid>
+  </Grid>
+</Window>

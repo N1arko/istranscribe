@@ -1,0 +1,35 @@
+<!-- @spec spec://modules/app/FEAT-008-modern-ui-design-system#behavior.resources.colors -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Light theme color tokens (dark variants are handled by WPF-UI theme engine override) -->
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F3F4F6" />
+    <SolidColorBrush x:Key="AppSurfaceBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="AppBorderBrush" Color="#E5E7EB" />
+    <SolidColorBrush x:Key="AppTextPrimaryBrush" Color="#1F2937" />
+    <SolidColorBrush x:Key="AppTextSecondaryBrush" Color="#4B5563" />
+    <SolidColorBrush x:Key="AppTextTertiaryBrush" Color="#6B7280" />
+    <SolidColorBrush x:Key="AppAccentBrush" Color="#3730A3" />
+    <SolidColorBrush x:Key="AppAccentBackgroundBrush" Color="#EEF2FF" />
+    <SolidColorBrush x:Key="AppWarningBrush" Color="#B45309" />
+    <SolidColorBrush x:Key="AppWarningBackgroundBrush" Color="#FEF3C7" />
+    <SolidColorBrush x:Key="AppErrorBrush" Color="#B91C1C" />
+    <SolidColorBrush x:Key="AppErrorBackgroundBrush" Color="#FEE2E2" />
+    <SolidColorBrush x:Key="AppSuccessBrush" Color="#15803D" />
+
+    <!-- Supplementary tokens used in existing surfaces -->
+    <SolidColorBrush x:Key="AppSurfaceAltBrush" Color="#F9FAFB" />
+    <SolidColorBrush x:Key="AppSurfaceSubtleBrush" Color="#F8FAFC" />
+    <SolidColorBrush x:Key="AppBorderSubtleBrush" Color="#D1D5DB" />
+    <SolidColorBrush x:Key="AppBorderFadedBrush" Color="#DCE3EA" />
+    <SolidColorBrush x:Key="AppWarningContrastBrush" Color="#92400E" />
+    <SolidColorBrush x:Key="AppWarningDeepBrush" Color="#7C2D12" />
+    <SolidColorBrush x:Key="AppWarningPanelBrush" Color="#FFF7ED" />
+    <SolidColorBrush x:Key="AppWarningPanelBorderBrush" Color="#FED7AA" />
+    <SolidColorBrush x:Key="AppSidebarBrush" Color="#111827" />
+    <SolidColorBrush x:Key="AppSidebarTextBrush" Color="#E5E7EB" />
+    <SolidColorBrush x:Key="AppSidebarTextMutedBrush" Color="#9CA3AF" />
+    <SolidColorBrush x:Key="AppSidebarSurfaceBrush" Color="#1F2937" />
+    <SolidColorBrush x:Key="AppTextLabelBrush" Color="#374151" />
+
+</ResourceDictionary>

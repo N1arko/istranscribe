@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Shell_Window_Title" xml:space="preserve"><value>isTranscribe</value></data>
+  <data name="Wizard_Window_Title" xml:space="preserve"><value>isTranscribe first-run setup</value></data>
+  <data name="Dialog_BlockedStartup_WindowTitle" xml:space="preserve"><value>isTranscribe blocked startup</value></data>
+  <data name="Dialog_Recovery_WindowTitle" xml:space="preserve"><value>isTranscribe recovery</value></data>
+  <data name="Dialog_AddApplication_WindowTitle" xml:space="preserve"><value>Add application</value></data>
+  <data name="Dialog_RunningProcessPicker_WindowTitle" xml:space="preserve"><value>Add from running processes</value></data>
+  <data name="Dialog_Prompt_WindowTitle" xml:space="preserve"><value>Value</value></data>
+  <data name="Shell_Header_BrandName" xml:space="preserve"><value>isTranscribe</value></data>
+  <data name="Shell_Header_Subtitle" xml:space="preserve"><value>Tray-first host with setup, manual controls and section-based settings.</value></data>
+  <data name="Shell_Tab_Home" xml:space="preserve"><value>Home</value></data>
+  <data name="Shell_Tab_CurrentRecording" xml:space="preserve"><value>Current Recording</value></data>
+  <data name="Shell_Tab_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Shell_Home_HostState_Title" xml:space="preserve"><value>Host state</value></data>
+  <data name="Shell_Home_Capability_Full" xml:space="preserve"><value>Capability: full</value></data>
+  <data name="Shell_Home_Capability_Degraded" xml:space="preserve"><value>Capability: degraded</value></data>
+  <data name="Shell_Home_Capability_Blocked" xml:space="preserve"><value>Capability: blocked</value></data>
+  <data name="Shell_Home_Onboarding_Completed" xml:space="preserve"><value>Onboarding completed. Explicit launches open the shell; autostart remains tray-first.</value></data>
+  <data name="Shell_Home_Onboarding_Incomplete" xml:space="preserve"><value>Onboarding is incomplete. The host should route back into the wizard until setup is finished.</value></data>
+  <data name="Shell_Home_RecordingState" xml:space="preserve"><value>Recording state: {0}</value></data>
+  <data name="Shell_Home_PrivacyPause" xml:space="preserve"><value>Privacy Pause: {0}</value></data>
+  <data name="Shell_Home_PrivacyPause_On" xml:space="preserve"><value>On</value></data>
+  <data name="Shell_Home_PrivacyPause_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Shell_Home_LogsPath" xml:space="preserve"><value>Logs: {0}</value></data>
+  <data name="Shell_Home_Paths_Title" xml:space="preserve"><value>Paths and persistence</value></data>
+  <data name="Shell_Home_RecordingsFolder" xml:space="preserve"><value>Recordings folder: {0}</value></data>
+  <data name="Shell_Home_TranscriptsFolder" xml:space="preserve"><value>Transcripts folder: {0}</value></data>
+  <data name="Shell_Home_ApiKey_NotConfigured" xml:space="preserve"><value>Fireworks API key: not configured</value></data>
+  <data name="Shell_Home_ApiKey_Configured" xml:space="preserve"><value>Fireworks API key: {0}</value></data>
+  <data name="Shell_Home_RecentMeetings_Title" xml:space="preserve"><value>Recent meetings</value></data>
+  <data name="Shell_Home_RecentMeetings_Empty" xml:space="preserve"><value>No recordings yet. Your meetings will appear here after the first saved session.</value></data>
+  <data name="Shell_Home_RecentSessions_None" xml:space="preserve"><value>No recent sessions available yet.</value></data>
+  <data name="Shell_Home_RecentSessions_Info" xml:space="preserve"><value>Showing {0} of {1} recent sessions.</value></data>
+  <data name="Shell_Home_RecentSessions_Loading" xml:space="preserve"><value>Loading recent sessions...</value></data>
+  <data name="Shell_Home_RecentSessions_Error" xml:space="preserve"><value>Failed to load sessions: {0}</value></data>
+  <data name="Shell_Home_OpenFolder" xml:space="preserve"><value>Open Folder</value></data>
+  <data name="Shell_Home_OpenMarkdown" xml:space="preserve"><value>Open Markdown</value></data>
+  <data name="Shell_Home_RetryTranscription" xml:space="preserve"><value>Retry Transcription</value></data>
+  <data name="Shell_Home_LoadMore" xml:space="preserve"><value>Load more</value></data>
+  <data name="Shell_Home_ManualActions_Title" xml:space="preserve"><value>Manual actions</value></data>
+  <data name="Shell_Home_StartForceRecord" xml:space="preserve"><value>Start Force Record</value></data>
+  <data name="Shell_Home_PauseRecording" xml:space="preserve"><value>Pause Recording</value></data>
+  <data name="Shell_Home_ResumeRecording" xml:space="preserve"><value>Resume Recording</value></data>
+  <data name="Shell_Home_StopCurrentRecording" xml:space="preserve"><value>Stop Current Recording</value></data>
+  <data name="Shell_Home_DiscardCurrentRecording" xml:space="preserve"><value>Discard Current Recording</value></data>
+  <data name="Shell_Home_TogglePrivacyPause" xml:space="preserve"><value>Toggle Privacy Pause</value></data>
+  <data name="Shell_Home_OpenLogsFolder" xml:space="preserve"><value>Open Logs Folder</value></data>
+  <data name="Shell_Home_Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="Shell_CurrentRecording_Title" xml:space="preserve"><value>Current recording</value></data>
+  <data name="Shell_CurrentRecording_NoActive" xml:space="preserve"><value>No recording is active right now. Start Force Record to begin one.</value></data>
+  <data name="Shell_CurrentRecording_AwaitConfirmation" xml:space="preserve"><value>Waiting for confirmation: {0}</value></data>
+  <data name="Shell_CurrentRecording_State" xml:space="preserve"><value>State: {0}</value></data>
+  <data name="Shell_CurrentRecording_Mode" xml:space="preserve"><value>Mode: {0}</value></data>
+  <data name="Shell_CurrentRecording_Mode_None" xml:space="preserve"><value>none</value></data>
+  <data name="Shell_CurrentRecording_Duration" xml:space="preserve"><value>Recorded duration: {0}</value></data>
+  <data name="Shell_CurrentRecording_Sources_None" xml:space="preserve"><value>Sources: no active recording</value></data>
+  <data name="Shell_CurrentRecording_Sources" xml:space="preserve"><value>Sources: {0}</value></data>
+  <data name="Shell_CurrentRecording_Output_None" xml:space="preserve"><value>Output: not part of the current session</value></data>
+  <data name="Shell_CurrentRecording_Output" xml:space="preserve"><value>Output: {0}</value></data>
+  <data name="Shell_CurrentRecording_Mic_None" xml:space="preserve"><value>Microphone: not part of the current session</value></data>
+  <data name="Shell_CurrentRecording_Mic" xml:space="preserve"><value>Microphone: {0}</value></data>
+  <data name="Shell_CurrentRecording_StartForceRecord" xml:space="preserve"><value>Start Force Record</value></data>
+  <data name="Shell_CurrentRecording_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Shell_CurrentRecording_Resume" xml:space="preserve"><value>Resume</value></data>
+  <data name="Shell_CurrentRecording_Stop" xml:space="preserve"><value>Stop</value></data>
+  <data name="Shell_CurrentRecording_Discard" xml:space="preserve"><value>Discard</value></data>
+  <data name="Shell_CurrentRecording_PrivacyPause" xml:space="preserve"><value>Privacy Pause</value></data>
+  <data name="Shell_Device_Active" xml:space="preserve"><value>{0} (active)</value></data>
+  <data name="Shell_Device_Active_Short" xml:space="preserve"><value>active</value></data>
+  <data name="Shell_Device_Unavailable" xml:space="preserve"><value>{0} (unavailable)</value></data>
+  <data name="Shell_Device_Unavailable_Short" xml:space="preserve"><value>unavailable</value></data>
+  <data name="Shell_Device_NotInSession" xml:space="preserve"><value>not part of the current session</value></data>
+  <data name="Shell_Settings_DegradedBanner" xml:space="preserve"><value>This system does not support process-specific capture. Device loopback and microphone remain available.</value></data>
+  <data name="Shell_Settings_Unsaved" xml:space="preserve"><value>Unsaved</value></data>
+  <data name="Shell_Settings_General_Tab" xml:space="preserve"><value>General</value></data>
+  <data name="Shell_Settings_General_Title" xml:space="preserve"><value>General</value></data>
+  <data name="Shell_Settings_General_Autostart" xml:space="preserve"><value>Launch at Windows startup</value></data>
+  <data name="Shell_Settings_General_MinimizeToTray" xml:space="preserve"><value>Minimize to tray instead of closing</value></data>
+  <data name="Shell_Settings_General_Notifications" xml:space="preserve"><value>Show notifications</value></data>
+  <data name="Shell_Settings_General_Language_Label" xml:space="preserve"><value>Interface language</value></data>
+  <data name="Shell_Settings_General_Theme_Label" xml:space="preserve"><value>App theme</value></data>
+  <data name="Shell_Settings_General_Advanced" xml:space="preserve"><value>Advanced settings (4 parameters)</value></data>
+  <data name="Shell_Settings_General_Hotkeys_Title" xml:space="preserve"><value>Hotkeys</value></data>
+  <data name="Shell_Settings_General_ForceRecordHotkey" xml:space="preserve"><value>Force Record hotkey</value></data>
+  <data name="Shell_Settings_General_PrivacyPauseHotkey" xml:space="preserve"><value>Privacy Pause hotkey</value></data>
+  <data name="Shell_Settings_General_DiscardRecordingHotkey" xml:space="preserve"><value>Discard Recording hotkey</value></data>
+  <data name="Shell_Settings_General_OpenMainWindowHotkey" xml:space="preserve"><value>Open Main Window hotkey</value></data>
+  <data name="Common_Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Common_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Shell_Settings_Recording_Tab" xml:space="preserve"><value>Recording</value></data>
+  <data name="Shell_Settings_Recording_Title" xml:space="preserve"><value>Recording</value></data>
+  <data name="Shell_Settings_Recording_Mode_Label" xml:space="preserve"><value>Recording mode</value></data>
+  <data name="Shell_Settings_Recording_Preset_Label" xml:space="preserve"><value>Recording preset</value></data>
+  <data name="Shell_Settings_Recording_PrivacyPausePolicy_Label" xml:space="preserve"><value>Privacy pause policy</value></data>
+  <data name="Shell_Settings_Recording_Advanced" xml:space="preserve"><value>Advanced settings (9 parameters)</value></data>
+  <data name="Shell_Settings_Recording_Prebuffer_Label" xml:space="preserve"><value>Prebuffer</value></data>
+  <data name="Shell_Settings_Recording_Prebuffer_Desc" xml:space="preserve"><value>Seconds of audio kept in memory before recording starts</value></data>
+  <data name="Shell_Settings_Recording_SilenceThreshold_Label" xml:space="preserve"><value>Silence threshold</value></data>
+  <data name="Shell_Settings_Recording_SilenceThreshold_Desc" xml:space="preserve"><value>Audio level below which silence is detected (-60 quietest, 0 loudest)</value></data>
+  <data name="Shell_Settings_Recording_StartDelay_Label" xml:space="preserve"><value>Start delay (seconds)</value></data>
+  <data name="Shell_Settings_Recording_StartDelay_Desc" xml:space="preserve"><value>Wait before starting a new recording</value></data>
+  <data name="Shell_Settings_Recording_StopDelay_Label" xml:space="preserve"><value>Stop delay (seconds)</value></data>
+  <data name="Shell_Settings_Recording_StopDelay_Desc" xml:space="preserve"><value>Wait for silence before stopping</value></data>
+  <data name="Shell_Settings_Recording_MergeWindow_Label" xml:space="preserve"><value>Merge window (seconds)</value></data>
+  <data name="Shell_Settings_Recording_MergeWindow_Desc" xml:space="preserve"><value>Automatically merge recordings that restart within this many seconds</value></data>
+  <data name="Shell_Settings_Recording_AutoSources_Title" xml:space="preserve"><value>Default sources (Auto)</value></data>
+  <data name="Shell_Settings_Recording_CaptureAppAudio" xml:space="preserve"><value>Capture app audio</value></data>
+  <data name="Shell_Settings_Recording_CaptureAppAudio_Desc" xml:space="preserve"><value>Record audio from the target application directly</value></data>
+  <data name="Shell_Settings_Recording_CaptureSystemAudio" xml:space="preserve"><value>Capture system audio</value></data>
+  <data name="Shell_Settings_Recording_CaptureSystemAudio_Desc" xml:space="preserve"><value>Record all audio playing through the output device</value></data>
+  <data name="Shell_Settings_Recording_CaptureMicrophone" xml:space="preserve"><value>Capture microphone</value></data>
+  <data name="Shell_Settings_Recording_ForceSources_Title" xml:space="preserve"><value>Default sources (Force Record)</value></data>
+  <data name="Shell_Settings_Recording_NoteNextSession" xml:space="preserve"><value>This change will take effect with the next recording session.</value></data>
+  <data name="Shell_Settings_Devices_Tab" xml:space="preserve"><value>Devices</value></data>
+  <data name="Shell_Settings_Devices_Title" xml:space="preserve"><value>Devices</value></data>
+  <data name="Shell_Settings_Devices_OutputDevice_Label" xml:space="preserve"><value>Output device</value></data>
+  <data name="Shell_Settings_Devices_FollowSystemOutput" xml:space="preserve"><value>Follow system default (output)</value></data>
+  <data name="Shell_Settings_Devices_Microphone_Label" xml:space="preserve"><value>Microphone</value></data>
+  <data name="Shell_Settings_Devices_FollowSystemMic" xml:space="preserve"><value>Follow system default (microphone)</value></data>
+  <data name="Shell_Settings_Devices_Advanced" xml:space="preserve"><value>Advanced settings (5 parameters)</value></data>
+  <data name="Shell_Settings_Devices_AutoDiscoverOutput" xml:space="preserve"><value>Auto-discover output devices</value></data>
+  <data name="Shell_Settings_Devices_AutoDiscoverMic" xml:space="preserve"><value>Auto-discover microphones</value></data>
+  <data name="Shell_Settings_Devices_OutputChangePolicy_Label" xml:space="preserve"><value>When output device changes</value></data>
+  <data name="Shell_Settings_Devices_OutputChangePolicy_Desc" xml:space="preserve"><value>What happens if the audio device changes while idle</value></data>
+  <data name="Shell_Settings_Devices_MicChangePolicy_Label" xml:space="preserve"><value>When microphone changes</value></data>
+  <data name="Shell_Settings_Devices_ActiveRecordingPolicy_Label" xml:space="preserve"><value>When device changes during recording</value></data>
+  <data name="Shell_Settings_Devices_UnavailableWarning" xml:space="preserve"><value>One or more fixed devices are currently unavailable. Save remains allowed because the device may return later.</value></data>
+  <data name="Shell_Settings_Applications_Tab" xml:space="preserve"><value>Applications</value></data>
+  <data name="Shell_Settings_Applications_Title" xml:space="preserve"><value>Applications</value></data>
+  <data name="Shell_Settings_Applications_AutoDiscovery_Label" xml:space="preserve"><value>How app discovery should behave</value></data>
+  <data name="Shell_Settings_Applications_AutoDiscovery_Desc" xml:space="preserve"><value>Known apps on this PC can be turned on below. Runtime suggestions follow this policy, and explicit rejections move into Ignored app suggestions instead of asking over and over.</value></data>
+  <data name="Shell_Settings_Applications_KnownApps_Title" xml:space="preserve"><value>Known apps on this PC</value></data>
+  <data name="Shell_Settings_Applications_KnownApps_Desc" xml:space="preserve"><value>This is the main place to turn common meeting apps on or off without hunting for live processes.</value></data>
+  <data name="Shell_Settings_Applications_KnownApps_Empty" xml:space="preserve"><value>No known meeting apps were detected yet. You can still add a running process or enter one manually.</value></data>
+  <data name="Shell_Settings_Applications_Whitelist_Title" xml:space="preserve"><value>Whitelist used for Ask and Auto</value></data>
+  <data name="Shell_Settings_Applications_Whitelist_Empty" xml:space="preserve"><value>Nothing is whitelisted yet. Ask and Auto mode will wait until you add apps.</value></data>
+  <data name="Shell_Settings_Applications_Whitelist_Summary" xml:space="preserve"><value>{0} app(s) are currently used for Ask and Auto matching. Order still defines priority when multiple rules match.</value></data>
+  <data name="Shell_Settings_Applications_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="Shell_Settings_Applications_MoveUp" xml:space="preserve"><value>Move up</value></data>
+  <data name="Shell_Settings_Applications_MoveDown" xml:space="preserve"><value>Move down</value></data>
+  <data name="Shell_Settings_Applications_AddFromRunning" xml:space="preserve"><value>Add from running...</value></data>
+  <data name="Shell_Settings_Applications_Advanced" xml:space="preserve"><value>Advanced settings (4+ parameters)</value></data>
+  <data name="Shell_Settings_Applications_ManualAdd_Title" xml:space="preserve"><value>Manual add</value></data>
+  <data name="Shell_Settings_Applications_ManualAdd_Desc" xml:space="preserve"><value>Use running processes only when a meeting app is already active or when the known-app catalog did not find what you need.</value></data>
+  <data name="Shell_Settings_Applications_AddManually" xml:space="preserve"><value>Add manually...</value></data>
+  <data name="Shell_Settings_Applications_IgnoredSuggestions_Title" xml:space="preserve"><value>Ignored app suggestions</value></data>
+  <data name="Shell_Settings_Applications_IgnoredSuggestions_Desc" xml:space="preserve"><value>Apps that were explicitly rejected from runtime suggestions appear here so they do not keep prompting on every meeting. Remove one to allow future suggestions again.</value></data>
+  <data name="Shell_Settings_Applications_AllowAgain" xml:space="preserve"><value>Allow again</value></data>
+  <data name="Shell_Settings_Applications_Exclusions_Title" xml:space="preserve"><value>Excluded applications</value></data>
+  <data name="Shell_Settings_Applications_Exclusions_Desc" xml:space="preserve"><value>Technical exclusions filter out system or irrelevant processes and stay separate from user-level ignored suggestions.</value></data>
+  <data name="Shell_Settings_Applications_AddExclusion" xml:space="preserve"><value>Add exclusion</value></data>
+  <data name="Shell_Settings_Applications_RemoveExclusion" xml:space="preserve"><value>Remove exclusion</value></data>
+  <data name="Shell_Settings_Storage_Tab" xml:space="preserve"><value>Storage</value></data>
+  <data name="Shell_Settings_Storage_Title" xml:space="preserve"><value>Storage</value></data>
+  <data name="Shell_Settings_Storage_RecordingsFolder_Label" xml:space="preserve"><value>Recordings folder</value></data>
+  <data name="Shell_Settings_Storage_TranscriptsFolder_Label" xml:space="preserve"><value>Transcripts folder</value></data>
+  <data name="Common_Browse" xml:space="preserve"><value>Browse...</value></data>
+  <data name="Shell_Settings_Storage_AudioCompression" xml:space="preserve"><value>Compress audio (Opus) after recording</value></data>
+  <data name="Shell_Settings_Storage_AudioCompression_Desc" xml:space="preserve"><value>Reduces file size ~10x, requires FFmpeg</value></data>
+  <data name="Shell_Settings_Storage_Advanced" xml:space="preserve"><value>Advanced settings (4 parameters)</value></data>
+  <data name="Shell_Settings_Storage_TempFolder_Label" xml:space="preserve"><value>Temporary files folder</value></data>
+  <data name="Shell_Settings_Storage_FilenameTemplate_Label" xml:space="preserve"><value>Filename template</value></data>
+  <data name="Shell_Settings_Storage_FilenamePreview" xml:space="preserve"><value>Preview: {0}</value></data>
+  <data name="Shell_Settings_Storage_KeepRawAudio" xml:space="preserve"><value>Keep raw audio after transcription</value></data>
+  <data name="Shell_Settings_Storage_TempRetention_Label" xml:space="preserve"><value>Clean up temporary files after</value></data>
+  <data name="Shell_Settings_Storage_NotePathsChange" xml:space="preserve"><value>Existing recordings and transcripts will remain in their current folders. New sessions will use the saved paths.</value></data>
+  <data name="Shell_Settings_Transcription_Tab" xml:space="preserve"><value>Transcription</value></data>
+  <data name="Shell_Settings_Transcription_Title" xml:space="preserve"><value>Transcription</value></data>
+  <data name="Shell_Settings_Transcription_ApiKey_Label" xml:space="preserve"><value>Fireworks API key</value></data>
+  <data name="Shell_Settings_Transcription_ApiKey_NotConfigured" xml:space="preserve"><value>Not configured</value></data>
+  <data name="Shell_Settings_Transcription_Change" xml:space="preserve"><value>Change</value></data>
+  <data name="Shell_Settings_Transcription_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="Shell_Settings_Transcription_Show" xml:space="preserve"><value>Show</value></data>
+  <data name="Shell_Settings_Transcription_Hide" xml:space="preserve"><value>Hide</value></data>
+  <data name="Shell_Settings_Transcription_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Shell_Settings_Transcription_Model_Label" xml:space="preserve"><value>Transcription model</value></data>
+  <data name="Shell_Settings_Transcription_Language_Label" xml:space="preserve"><value>Transcription language</value></data>
+  <data name="Shell_Settings_Transcription_Advanced" xml:space="preserve"><value>Advanced settings (4 parameters)</value></data>
+  <data name="Shell_Settings_Transcription_Diarization" xml:space="preserve"><value>Distinguish speakers</value></data>
+  <data name="Shell_Settings_Transcription_Diarization_Desc" xml:space="preserve"><value>Identify different speakers in the transcript</value></data>
+  <data name="Shell_Settings_Transcription_MinSpeakers_Label" xml:space="preserve"><value>Minimum speakers</value></data>
+  <data name="Shell_Settings_Transcription_MaxSpeakers_Label" xml:space="preserve"><value>Maximum speakers</value></data>
+  <data name="Shell_Settings_Transcription_AutoRetry" xml:space="preserve"><value>Retry failed transcriptions</value></data>
+  <data name="Shell_Settings_Transcription_RetryCount_Label" xml:space="preserve"><value>Retry attempts</value></data>
+  <data name="Shell_StatusBar_CloseHint" xml:space="preserve"><value>Close hides the window to tray. Use Quit to terminate the primary host process.</value></data>
+  <data name="Validation_General_LanguageRequired" xml:space="preserve"><value>Language is required.</value></data>
+  <data name="Validation_General_UnsupportedHotkey" xml:space="preserve"><value>Unsupported hotkey: {0}.</value></data>
+  <data name="Validation_General_HotkeyRegisterFailed" xml:space="preserve"><value>Windows could not register hotkey {0}. It may already be in use by another application.</value></data>
+  <data name="Validation_Recording_InvalidPrebuffer" xml:space="preserve"><value>Prebuffer must be 5, 10, 15 or 30 seconds.</value></data>
+  <data name="Validation_Recording_InvalidSilenceThreshold" xml:space="preserve"><value>Silence threshold must stay between -60 and -20 dBFS.</value></data>
+  <data name="Validation_Recording_InvalidStartDelay" xml:space="preserve"><value>Start delay must stay between 1 and 10 seconds.</value></data>
+  <data name="Validation_Recording_InvalidStopDelay" xml:space="preserve"><value>Stop delay must stay between 5 and 120 seconds.</value></data>
+  <data name="Validation_Recording_InvalidMergeWindow" xml:space="preserve"><value>Merge window must stay between 0 and 300 seconds.</value></data>
+  <data name="Validation_Recording_NoSources" xml:space="preserve"><value>At least one source is required for Auto and Force Record.</value></data>
+  <data name="Validation_Recording_ProcessOutputUnavailable" xml:space="preserve"><value>process_output is unavailable in degraded mode.</value></data>
+  <data name="Validation_Applications_DuplicateRule" xml:space="preserve"><value>Duplicate whitelist rule: {0}.</value></data>
+  <data name="Validation_Storage_MissingSessionId" xml:space="preserve"><value>Filename template must contain {SessionId}.</value></data>
+  <data name="Validation_Storage_NotWritable" xml:space="preserve"><value>{0} must point to a writable directory. {1}</value></data>
+  <data name="Validation_Transcription_ApiKeyRequired" xml:space="preserve"><value>API key is required for transcription.</value></data>
+  <data name="Validation_Transcription_InvalidSpeakerLimits" xml:space="preserve"><value>Speaker limits must stay between 1 and 20.</value></data>
+  <data name="Validation_Transcription_MinExceedsMax" xml:space="preserve"><value>Min speakers must not exceed max speakers.</value></data>
+  <data name="Validation_Transcription_InvalidRetryCount" xml:space="preserve"><value>Retry count must stay between 1 and 10.</value></data>
+  <data name="Dialog_RemoveApiKey_Message" xml:space="preserve"><value>Remove the saved Fireworks API key?</value></data>
+  <data name="Dialog_RemoveApiKey_Title" xml:space="preserve"><value>Remove API key</value></data>
+  <data name="Dialog_RemoveApiKey_Failed" xml:space="preserve"><value>Failed to remove API key.</value></data>
+  <data name="Dialog_UnsavedChanges_Message" xml:space="preserve"><value>Save changes?\nYes = Save, No = Discard, Cancel = Stay on this section.</value></data>
+  <data name="Dialog_UnsavedChanges_Title" xml:space="preserve"><value>Unsaved changes</value></data>
+  <data name="Dialog_SaveError_General" xml:space="preserve"><value>Failed to save General settings.</value></data>
+  <data name="Dialog_SaveError_Recording" xml:space="preserve"><value>Failed to save Recording settings.</value></data>
+  <data name="Dialog_SaveError_Devices" xml:space="preserve"><value>Failed to save Device settings.</value></data>
+  <data name="Dialog_SaveError_Applications" xml:space="preserve"><value>Failed to save Applications settings.</value></data>
+  <data name="Dialog_SaveError_Storage" xml:space="preserve"><value>Failed to save Storage settings.</value></data>
+  <data name="Dialog_SaveError_Transcription" xml:space="preserve"><value>Failed to save Transcription settings.</value></data>
+  <data name="Dialog_RetryFailed" xml:space="preserve"><value>Retry failed.</value></data>
+  <data name="Dialog_RetryTranscription_Title" xml:space="preserve"><value>Retry transcription</value></data>
+  <data name="Dialog_AddExclusion_Title" xml:space="preserve"><value>Add exclusion</value></data>
+  <data name="Dialog_AddExclusion_Prompt" xml:space="preserve"><value>Enter process name (.exe):</value></data>
+  <data name="Dialog_Prompt_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Dialog_Prompt_OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_SystemDefault" xml:space="preserve"><value>System default</value></data>
+  <data name="Option_Language_Russian" xml:space="preserve"><value>Russian</value></data>
+  <data name="Option_Language_English" xml:space="preserve"><value>English</value></data>
+  <data name="Option_Theme_System" xml:space="preserve"><value>System</value></data>
+  <data name="Option_Theme_Light" xml:space="preserve"><value>Light</value></data>
+  <data name="Option_Theme_Dark" xml:space="preserve"><value>Dark</value></data>
+  <data name="Option_RecordingMode_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Option_RecordingMode_Ask" xml:space="preserve"><value>Ask</value></data>
+  <data name="Option_RecordingMode_Auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="Option_Preset_Meetings" xml:space="preserve"><value>Meetings</value></data>
+  <data name="Option_Preset_MeetingsMic" xml:space="preserve"><value>Meetings + Mic</value></data>
+  <data name="Option_Preset_QuickNotes" xml:space="preserve"><value>Quick notes</value></data>
+  <data name="Option_Preset_Custom" xml:space="preserve"><value>Custom</value></data>
+  <data name="Option_Prebuffer_5s" xml:space="preserve"><value>5s</value></data>
+  <data name="Option_Prebuffer_10s" xml:space="preserve"><value>10s</value></data>
+  <data name="Option_Prebuffer_15s" xml:space="preserve"><value>15s</value></data>
+  <data name="Option_Prebuffer_30s" xml:space="preserve"><value>30s</value></data>
+  <data name="Option_PrivacyPause_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Option_PrivacyPause_Finish" xml:space="preserve"><value>Finish</value></data>
+  <data name="Option_DevicePolicy_SeamlessSwitch" xml:space="preserve"><value>Seamless switch</value></data>
+  <data name="Option_DevicePolicy_EndAndStartNew" xml:space="preserve"><value>End and start new</value></data>
+  <data name="Option_DevicePolicy_Ask" xml:space="preserve"><value>Ask</value></data>
+  <data name="Option_AutoDiscovery_AutoAdd" xml:space="preserve"><value>Auto add</value></data>
+  <data name="Option_AutoDiscovery_AskToAdd" xml:space="preserve"><value>Ask to add</value></data>
+  <data name="Option_AutoDiscovery_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Option_TempRetention_1Day" xml:space="preserve"><value>1 day</value></data>
+  <data name="Option_TempRetention_3Days" xml:space="preserve"><value>3 days</value></data>
+  <data name="Option_TempRetention_7Days" xml:space="preserve"><value>7 days</value></data>
+  <data name="Option_TempRetention_14Days" xml:space="preserve"><value>14 days</value></data>
+  <data name="Option_TempRetention_30Days" xml:space="preserve"><value>30 days</value></data>
+  <data name="Option_TempRetention_Never" xml:space="preserve"><value>Never</value></data>
+  <data name="Wizard_Title" xml:space="preserve"><value>Set up isTranscribe</value></data>
+  <data name="Wizard_Subtitle" xml:space="preserve"><value>Finish the first-run wizard once and the tray app can work without manual file edits.</value></data>
+  <data name="Wizard_Steps_Header" xml:space="preserve"><value>Setup steps</value></data>
+  <data name="Wizard_Step_Language" xml:space="preserve"><value>1. App language</value></data>
+  <data name="Wizard_Step_Storage" xml:space="preserve"><value>2. Storage paths</value></data>
+  <data name="Wizard_Step_Devices" xml:space="preserve"><value>3. Devices</value></data>
+  <data name="Wizard_Step_ApiKey" xml:space="preserve"><value>4. Fireworks API key</value></data>
+  <data name="Wizard_Step_RecordingMode" xml:space="preserve"><value>5. Recording mode</value></data>
+  <data name="Wizard_Step_Applications" xml:space="preserve"><value>6. Applications</value></data>
+  <data name="Wizard_StepCounter" xml:space="preserve"><value>Step {0} of {1}</value></data>
+  <data name="Wizard_Step0_Title" xml:space="preserve"><value>App language</value></data>
+  <data name="Wizard_Step0_Desc" xml:space="preserve"><value>Pick the interface language before the rest of the setup flow.</value></data>
+  <data name="Wizard_Step0_Language_Label" xml:space="preserve"><value>App language</value></data>
+  <data name="Wizard_Step0_Language_Hint" xml:space="preserve"><value>The first-run flow starts with interface language so the remaining setup reads naturally. The language list is expected to grow beyond Russian and English later.</value></data>
+  <data name="Wizard_Step1_Title" xml:space="preserve"><value>Storage paths</value></data>
+  <data name="Wizard_Step1_Desc" xml:space="preserve"><value>Choose writable folders for recordings and transcripts.</value></data>
+  <data name="Wizard_Step1_RecordingsFolder_Label" xml:space="preserve"><value>Recordings folder</value></data>
+  <data name="Wizard_Step1_TranscriptsFolder_Label" xml:space="preserve"><value>Transcripts folder</value></data>
+  <data name="Wizard_Step1_FolderCreation_Hint" xml:space="preserve"><value>If a folder does not exist yet, the wizard will offer to create it before continuing.</value></data>
+  <data name="Wizard_Step2_Title" xml:space="preserve"><value>Devices</value></data>
+  <data name="Wizard_Step2_Desc" xml:space="preserve"><value>Use automatic device detection or pin explicit output and microphone devices.</value></data>
+  <data name="Wizard_Step2_AutomaticDevices" xml:space="preserve"><value>Determine devices automatically</value></data>
+  <data name="Wizard_Step2_OutputDevice_Label" xml:space="preserve"><value>Output device</value></data>
+  <data name="Wizard_Step2_Microphone_Label" xml:space="preserve"><value>Microphone</value></data>
+  <data name="Wizard_Step2_DeviceMode_Automatic" xml:space="preserve"><value>Automatic mode keeps following the devices currently used by the meeting app or system route, so switching headsets or microphones does not lock you to the first pair chosen here.</value></data>
+  <data name="Wizard_Step2_DeviceMode_Manual" xml:space="preserve"><value>Manual mode pins the preferred devices below. Choose this only if you want recordings to stay on specific hardware until you change it later.</value></data>
+  <data name="Wizard_Step2_DevicesAvailable" xml:space="preserve"><value>The wizard is using the currently active Windows audio devices.</value></data>
+  <data name="Wizard_Step2_DevicesUnavailable" xml:space="preserve"><value>One or more device classes are currently unavailable. You can continue and follow system defaults, then adjust devices later in Settings.</value></data>
+  <data name="Wizard_Step2_SystemDefaultFollow" xml:space="preserve"><value>System default (follow)</value></data>
+  <data name="Wizard_Step3_Title" xml:space="preserve"><value>Fireworks API key</value></data>
+  <data name="Wizard_Step3_Desc" xml:space="preserve"><value>Provide the Fireworks key that will be stored in protected local storage.</value></data>
+  <data name="Wizard_Step3_ApiKey_Label" xml:space="preserve"><value>Fireworks API key</value></data>
+  <data name="Wizard_Step3_ApiKey_Hint" xml:space="preserve"><value>The key is stored only in DPAPI-protected local storage. Testing is optional and does not block the wizard.</value></data>
+  <data name="Wizard_Step3_ApiKey_DocsLink" xml:space="preserve"><value>Where do I get the API key?</value></data>
+  <data name="Wizard_Step3_TestKey" xml:space="preserve"><value>Test key</value></data>
+  <data name="Wizard_Step3_Testing" xml:space="preserve"><value>Testing Fireworks API key...</value></data>
+  <data name="Wizard_Step3_TestSuccess" xml:space="preserve"><value>Fireworks API responded successfully.</value></data>
+  <data name="Wizard_Step3_TestFailed" xml:space="preserve"><value>Fireworks API key test failed.</value></data>
+  <data name="Wizard_Step4_Title" xml:space="preserve"><value>Recording mode</value></data>
+  <data name="Wizard_Step4_Desc" xml:space="preserve"><value>Select how the MVP starts recording new sessions.</value></data>
+  <data name="Wizard_Step4_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Wizard_Step4_Off_Desc" xml:space="preserve"><value>Automatic detection stays disabled. You can still configure sources and enable capture later in Settings.</value></data>
+  <data name="Wizard_Step4_Ask" xml:space="preserve"><value>Ask</value></data>
+  <data name="Wizard_Step4_Ask_Desc" xml:space="preserve"><value>Meeting detection asks before recording. Ignored prompts default to No after the ask timeout.</value></data>
+  <data name="Wizard_Step4_Auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="Wizard_Step4_Auto_Desc_Full" xml:space="preserve"><value>Meetings are detected and recorded automatically based on the configured detection signals and whitelist.</value></data>
+  <data name="Wizard_Step4_Auto_Desc_Degraded" xml:space="preserve"><value>Meetings can still be auto-detected from device loopback and microphone activity, but process-specific auto-capture is unavailable on this machine.</value></data>
+  <data name="Wizard_Step5_Title" xml:space="preserve"><value>Applications</value></data>
+  <data name="Wizard_Step5_Desc" xml:space="preserve"><value>Decide whether the app should suggest newly detected meeting apps later, without forcing app-level choices during setup.</value></data>
+  <data name="Wizard_Step5_RecommendedBehavior_Title" xml:space="preserve"><value>Recommended behavior</value></data>
+  <data name="Wizard_Step5_RecommendedBehavior_Desc" xml:space="preserve"><value>Choose whether isTranscribe should later suggest newly detected meeting apps. The apps selected below will also define the first whitelist used for Ask and Auto matching.</value></data>
+  <data name="Wizard_Step5_SuggestApps" xml:space="preserve"><value>Suggest new meeting apps automatically</value></data>
+  <data name="Wizard_Step5_IgnoredApps_Desc" xml:space="preserve"><value>If you decline a runtime suggestion later, that app moves into an ignored list so it stops asking on every meeting. You can reset it later in Settings.</value></data>
+  <data name="Wizard_Step5_KnownApps_Title" xml:space="preserve"><value>Known meeting apps on this PC</value></data>
+  <data name="Wizard_Step5_KnownApps_Desc" xml:space="preserve"><value>These recommended apps are the primary onboarding path. Leave the ones you want isTranscribe to recognize automatically.</value></data>
+  <data name="Wizard_Step5_KnownApps_Empty" xml:space="preserve"><value>No known installed meeting apps were found right now. You can still add a running process or enter one manually.</value></data>
+  <data name="Wizard_Step5_SelectedApps_Title" xml:space="preserve"><value>Apps selected for the initial whitelist</value></data>
+  <data name="Wizard_Step5_SelectedApps_Empty" xml:space="preserve"><value>No applications are selected yet.</value></data>
+  <data name="Wizard_Step5_RemoveSelected" xml:space="preserve"><value>Remove selected</value></data>
+  <data name="Wizard_Step5_ManualAdd_Title" xml:space="preserve"><value>Secondary/manual add</value></data>
+  <data name="Wizard_Step5_ManualAdd_Desc" xml:space="preserve"><value>Use running processes only if the meeting app is already active or the known-app catalog missed it.</value></data>
+  <data name="Wizard_Step5_AddFromRunning" xml:space="preserve"><value>Add from running...</value></data>
+  <data name="Wizard_Step5_AddManually" xml:space="preserve"><value>Add manually...</value></data>
+  <data name="Wizard_Navigation_Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="Wizard_Navigation_Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Wizard_Navigation_Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Wizard_Navigation_Finish" xml:space="preserve"><value>Finish</value></data>
+  <data name="Wizard_Validation_IncompleteFields" xml:space="preserve"><value>Complete the required fields before continuing.</value></data>
+  <data name="Wizard_Validation_Title" xml:space="preserve"><value>Validation</value></data>
+  <data name="Dialog_CreateFolder_Prompt" xml:space="preserve"><value>{0} does not exist yet. Create it now?\n\n{1}</value></data>
+  <data name="Dialog_CreateFolder_Title" xml:space="preserve"><value>Create folder</value></data>
+  <data name="Dialog_CreateFolder_Error" xml:space="preserve"><value>Failed to create folder:\n{0}</value></data>
+  <data name="Wizard_DegradedBanner_Full" xml:space="preserve"><value>This system supports the full MVP capture contour, including process-specific auto-capture.</value></data>
+  <data name="Wizard_DegradedBanner_Degraded" xml:space="preserve"><value>Process-specific capture is unavailable on this system. Device loopback and microphone capture remain available.</value></data>
+  <data name="Wizard_Warning_AutoCaptureDegraded" xml:space="preserve"><value>Auto remains available, but process-specific capture is unavailable on this system.</value></data>
+  <data name="Wizard_Error_CompletionUnavailable" xml:space="preserve"><value>Wizard completion callback is unavailable.</value></data>
+  <data name="Wizard_Error_Title" xml:space="preserve"><value>Error</value></data>
+  <data name="Wizard_Error_SaveFailed" xml:space="preserve"><value>Failed to save onboarding data.</value></data>
+  <data name="Wizard_Error_MessageBox_Title" xml:space="preserve"><value>Wizard error</value></data>
+  <data name="Wizard_KnownApp_Recommended" xml:space="preserve"><value>Recommended for first run</value></data>
+  <data name="Wizard_KnownApp_RecommendedAndIncluded" xml:space="preserve"><value>Recommended and currently included</value></data>
+  <data name="Wizard_DeviceSystemDefault" xml:space="preserve"><value>(system default)</value></data>
+  <data name="Dialog_BlockedStartup_Title" xml:space="preserve"><value>Startup blocked</value></data>
+  <data name="Dialog_BlockedStartup_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Dialog_Recovery_Title" xml:space="preserve"><value>Recovery-sensitive launch</value></data>
+  <data name="Dialog_Recovery_Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="Dialog_Recovery_OpenApp" xml:space="preserve"><value>Open app</value></data>
+  <data name="Dialog_AddApplication_Title" xml:space="preserve"><value>Add application rule manually</value></data>
+  <data name="Dialog_AddApplication_DisplayName_Label" xml:space="preserve"><value>Display name</value></data>
+  <data name="Dialog_AddApplication_ProcessName_Label" xml:space="preserve"><value>Process name (.exe)</value></data>
+  <data name="Dialog_AddApplication_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Dialog_AddApplication_Add" xml:space="preserve"><value>Add</value></data>
+  <data name="Validation_AddApplication_ProcessNameRequired" xml:space="preserve"><value>Process name is required.</value></data>
+  <data name="Validation_AddApplication_Title" xml:space="preserve"><value>Validation</value></data>
+  <data name="Dialog_RunningProcessPicker_Title" xml:space="preserve"><value>Running processes with audio activity</value></data>
+  <data name="Dialog_RunningProcessPicker_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Dialog_RunningProcessPicker_Add" xml:space="preserve"><value>Add selected</value></data>
+  <data name="Tray_StartForceRecord" xml:space="preserve"><value>Start Force Record</value></data>
+  <data name="Tray_StopCurrentRecording" xml:space="preserve"><value>Stop current recording</value></data>
+  <data name="Tray_PrivacyPause_Off" xml:space="preserve"><value>Privacy Pause: Off</value></data>
+  <data name="Tray_PrivacyPause_On" xml:space="preserve"><value>Privacy Pause: On</value></data>
+  <data name="Tray_OpenApp" xml:space="preserve"><value>Open app</value></data>
+  <data name="Tray_Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="Tray_Tooltip_Default" xml:space="preserve"><value>isTranscribe</value></data>
+  <data name="Tray_Status_PrivacyPause" xml:space="preserve"><value>isTranscribe: privacy pause</value></data>
+  <data name="Tray_Status_AwaitingConfirmation" xml:space="preserve"><value>isTranscribe: awaiting confirmation</value></data>
+  <data name="Tray_Status_Recording" xml:space="preserve"><value>isTranscribe: recording</value></data>
+  <data name="Tray_Status_Paused" xml:space="preserve"><value>isTranscribe: paused</value></data>
+  <data name="Tray_Status_Stopping" xml:space="preserve"><value>isTranscribe: stopping</value></data>
+  <data name="Tray_Status_SetupRequired" xml:space="preserve"><value>isTranscribe: setup required</value></data>
+  <data name="Prompt_Title_UnknownMeeting" xml:space="preserve"><value>New meeting detected</value></data>
+  <data name="Prompt_Title_DeviceChanged" xml:space="preserve"><value>Recording device has changed</value></data>
+  <data name="Prompt_Title_KnownMeeting" xml:space="preserve"><value>Hear a meeting — record?</value></data>
+  <data name="Prompt_Countdown" xml:space="preserve"><value>Window closes in {0} sec.</value></data>
+  <data name="Prompt_AddAndStart" xml:space="preserve"><value>Add and start</value></data>
+  <data name="Prompt_StartOnce" xml:space="preserve"><value>Start once</value></data>
+  <data name="Prompt_NotNow" xml:space="preserve"><value>Not now</value></data>
+  <data name="Prompt_IgnoreThisApp" xml:space="preserve"><value>Ignore this app</value></data>
+  <data name="Prompt_SwitchNow" xml:space="preserve"><value>Switch now</value></data>
+  <data name="Prompt_FinishAndStartNew" xml:space="preserve"><value>Finish and start new</value></data>
+  <data name="Prompt_KeepCurrentIfPossible" xml:space="preserve"><value>Keep current if possible</value></data>
+  <data name="Prompt_StartRecording" xml:space="preserve"><value>Start recording</value></data>
+  <data name="Prompt_No" xml:space="preserve"><value>No</value></data>
+  <data name="Shell_Settings_KnownApp_Installed" xml:space="preserve"><value>Installed on this PC</value></data>
+  <data name="Shell_Settings_KnownApp_InstalledAndWhitelisted" xml:space="preserve"><value>Installed on this PC and already in the whitelist</value></data>
+  <data name="Dialog_BlockedStartup_DefaultDetail" xml:space="preserve"><value>The desktop host cannot enter a truthful MVP state on this machine.</value></data>
+  <data name="Dialog_Recovery_DefaultDetail" xml:space="preserve"><value>No additional recovery details were reported.</value></data>
+  <data name="Wizard_Apps_WhitelistWarning" xml:space="preserve"><value>Without apps in the list automatic detection will not work. You can add applications later in Settings.</value></data>
+  <data name="Wizard_Apps_NoAppsSelected" xml:space="preserve"><value>No meeting apps are selected yet.</value></data>
+  <data name="Wizard_Apps_SelectionSummary" xml:space="preserve"><value>{0} app(s) will be added to the initial whitelist.</value></data>
+  <data name="Hotkey_UnsupportedGesture" xml:space="preserve"><value>Unsupported hotkey: {0}.</value></data>
+  <data name="Hotkey_RegistrationFailed" xml:space="preserve"><value>Windows could not register hotkey {0}. It may already be in use by another application.</value></data>
+  <data name="Host_QuitConfirm_Message" xml:space="preserve"><value>Recording is still active. Stop the current recording and quit?</value></data>
+  <data name="Host_QuitConfirm_Title" xml:space="preserve"><value>Quit isTranscribe</value></data>
+  <data name="Host_CapabilityUnavailable" xml:space="preserve"><value>Capability state is unavailable.</value></data>
+  <data name="Host_SaveNote_NextRecording" xml:space="preserve"><value>Changes will take effect from the next recording.</value></data>
+  <data name="Host_MeetingSessionsUnavailable" xml:space="preserve"><value>Meeting sessions repository is unavailable.</value></data>
+  <data name="Host_RetryUnavailable" xml:space="preserve"><value>Retry is not available for this session.</value></data>
+  <data name="Host_AppRulesUnavailable" xml:space="preserve"><value>Application rules repository is unavailable.</value></data>
+  <data name="Host_Hotkey_ForceRecord_Title" xml:space="preserve"><value>Force Record</value></data>
+  <data name="Host_Hotkey_ForceRecord_Stopping" xml:space="preserve"><value>The current recording is already stopping.</value></data>
+  <data name="Host_Hotkey_ForceRecord_AwaitingConfirmation" xml:space="preserve"><value>A meeting is waiting for confirmation.</value></data>
+  <data name="Host_Hotkey_ForceRecord_OnboardingBlocked" xml:space="preserve"><value>Finish onboarding before starting a recording.</value></data>
+  <data name="Host_Hotkey_ForceRecord_Unavailable" xml:space="preserve"><value>Force Record is unavailable right now.</value></data>
+  <data name="Host_Hotkey_ForceRecord_CannotRun" xml:space="preserve"><value>Force Record cannot run in the current state.</value></data>
+  <data name="Host_Hotkey_Discard_Title" xml:space="preserve"><value>Discard recording</value></data>
+  <data name="Host_Hotkey_Discard_NoRecording" xml:space="preserve"><value>There is no active recording to discard.</value></data>
+  <data name="Host_Hotkey_Discard_Unavailable" xml:space="preserve"><value>Discard is unavailable right now.</value></data>
+  <data name="Host_Discard_Confirm_Message" xml:space="preserve"><value>Discard the current recording? Recorded audio from this session will be deleted.</value></data>
+  <data name="Host_Discard_Confirm_Title" xml:space="preserve"><value>Discard recording</value></data>
+</root>

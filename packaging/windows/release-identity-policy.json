@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "infra-005-release-identity-policy-v1",
+  "packageName": "isTranscribe.Desktop",
+  "publisherDisplayName": "isTranscribe",
+  "developmentPublisher": "CN=isTranscribe Development",
+  "productionPublisherSubjects": [],
+  "rollover": {
+    "requiresReviewedPolicyChange": true,
+    "instructions": "Add the exact trusted certificate subject to productionPublisherSubjects in a reviewed release-policy change before building or accepting a public MSIX. Keep the packageName stable; changing it creates a different Windows package identity."
+  }
+}

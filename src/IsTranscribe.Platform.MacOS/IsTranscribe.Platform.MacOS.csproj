@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-009-cross-platform-repository-boundaries#structure -->
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.Platform.MacOS</RootNamespace>
+    <AssemblyName>IsTranscribe.Platform.MacOS</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ekgn.LameNative" Version="3.100.0"
+                      GeneratePathProperty="true"
+                      ExcludeAssets="all" />
+    <ProjectReference Include="..\IsTranscribe.Application\IsTranscribe.Application.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Core\IsTranscribe.Core.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Persistence\IsTranscribe.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <None Include="$(IntermediateOutputPath)native/libistranscribe_audio.dylib"
+          Link="libistranscribe_audio.dylib"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+    <None Include="$(IntermediateOutputPath)native/lame/lib/libmp3lame.0.dylib"
+          Link="libmp3lame.0.dylib"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+    <None Include="$(PkgEkgn_LameNative)/contentFiles/any/any/lame-3.100.tar.xz"
+          Link="third-party/lame-3.100.tar.xz"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+    <None Include="$(PkgEkgn_LameNative)/COPYING.LGPL-2.1.txt"
+          Link="third-party/LAME-COPYING.LGPL-2.1.txt"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="BuildMacOSLame"
+          BeforeTargets="CoreCompile"
+          Condition="$([MSBuild]::IsOSPlatform('OSX'))"
+          Inputs="$(PkgEkgn_LameNative)/contentFiles/any/any/lame-3.100.tar.xz;$(MSBuildProjectDirectory)/../../eng/build-macos-lame.sh"
+          Outputs="$(IntermediateOutputPath)native/lame/lib/libmp3lame.0.dylib">
+    <Exec Command="/bin/sh &quot;$(MSBuildProjectDirectory)/../../eng/build-macos-lame.sh&quot; &quot;$(PkgEkgn_LameNative)/contentFiles/any/any/lame-3.100.tar.xz&quot; &quot;$(MSBuildProjectDirectory)/$(IntermediateOutputPath)native/lame&quot;" />
+  </Target>
+
+  <!-- @spec spec://modules/platform/INFRA-010-macos-platform-parity-and-dmg#audio-detection -->
+  <Target Name="BuildMacOSAudioBridge"
+          BeforeTargets="CoreCompile"
+          DependsOnTargets="BuildMacOSLame"
+          Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <MakeDir Directories="$(IntermediateOutputPath)native" />
+    <Exec Command="xcrun clang -fobjc-arc -fblocks -dynamiclib -O2 -mmacosx-version-min=14.2 -framework Foundation -framework AppKit -framework ApplicationServices -framework ServiceManagement -framework Security -framework UserNotifications -framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework AVFAudio -o &quot;$(IntermediateOutputPath)native/libistranscribe_audio.dylib&quot; &quot;$(MSBuildProjectDirectory)/Native/istranscribe_audio.m&quot;" />
+  </Target>
+
+  <Target Name="CopyMacOSAudioBridge"
+          AfterTargets="Build"
+          DependsOnTargets="BuildMacOSAudioBridge"
+          Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <Copy SourceFiles="$(IntermediateOutputPath)native/libistranscribe_audio.dylib"
+          DestinationFolder="$(TargetDir)" />
+  </Target>
+</Project>

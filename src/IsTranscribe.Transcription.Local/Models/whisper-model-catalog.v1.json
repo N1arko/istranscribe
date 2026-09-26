@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "2",
+  "catalogId": "isTranscribe.whisper.multilingual",
+  "upstreamRevision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+  "sourceRepository": "https://huggingface.co/ggerganov/whisper.cpp",
+  "modelOriginRepository": "https://github.com/openai/whisper",
+  "modelSource": "OpenAI Whisper weights converted to whisper.cpp GGML by the upstream whisper.cpp model repository.",
+  "licenseSpdx": "MIT",
+  "licenseUrl": "https://github.com/openai/whisper/blob/main/LICENSE",
+  "format": {
+    "token": "whisper.cpp.ggml-f16.v1",
+    "magicLittleEndian": "0x67676d6c",
+    "minimumRuntimeVersion": "1.9.1"
+  },
+  "models": [
+    {
+      "id": "large-v3-turbo",
+      "uiPreset": "accurate",
+      "upstreamModelId": "openai/whisper-large-v3-turbo",
+      "fileName": "ggml-large-v3-turbo.bin",
+      "downloadUrl": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-turbo.bin",
+      "downloadSizeBytes": 1624555275,
+      "sha256": "1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69",
+      "expectedMemoryBytes": 4000000000,
+      "multilingual": true,
+      "recommended": true
+    }
+  ]
+}

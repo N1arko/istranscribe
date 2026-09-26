@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-009-cross-platform-repository-boundaries#entrypoints -->
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <RootNamespace>IsTranscribe.App.Windows</RootNamespace>
+    <AssemblyName>IsTranscribe.Desktop</AssemblyName>
+    <ApplicationManifest>..\IsTranscribe.Desktop\app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\IsTranscribe.Desktop\Assets\isTranscribe.ico</ApplicationIcon>
+    <AssemblyTitle>isTranscribe</AssemblyTitle>
+    <Product>isTranscribe</Product>
+    <Company>isTranscribe</Company>
+    <Description>Local meeting recorder</Description>
+    <Version>2.0.0</Version>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference
+      Include="Microsoft.NETCore.App.Runtime.win-x64"
+      Version="[10.0.11]"
+      ExcludeAssets="all"
+      PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IsTranscribe.Application\IsTranscribe.Application.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Core\IsTranscribe.Core.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Desktop\IsTranscribe.Desktop.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Persistence\IsTranscribe.Persistence.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Platform.Windows\IsTranscribe.Platform.Windows.csproj" />
+    <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#engine.projects -->
+    <ProjectReference Include="..\IsTranscribe.Transcription.Local\IsTranscribe.Transcription.Local.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+<Application x:Class="IsTranscribe.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <!-- @spec spec://modules/app/FEAT-008-modern-ui-design-system#behavior.resources.files -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Light" />
+                <ui:ControlsDictionary />
+                <ResourceDictionary Source="Themes/AppColors.xaml" />
+                <ResourceDictionary Source="Themes/AppTypography.xaml" />
+                <ResourceDictionary Source="Themes/AppSpacing.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

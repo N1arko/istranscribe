@@ -1,0 +1,66 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.PrivacyPolicyWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{DynamicResource String.Privacy.Title}"
+    Width="560"
+    Height="640"
+    MinWidth="460"
+    MinHeight="480"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterOwner">
+
+  <!-- @spec spec://modules/platform/INFRA-005.B-store-signed-windows-distribution#submission -->
+  <Grid RowDefinitions="Auto,*,Auto" Margin="28,24">
+    <StackPanel Spacing="5">
+      <TextBlock Text="{DynamicResource String.Privacy.Title}" FontSize="26" FontWeight="SemiBold" />
+      <TextBlock
+          Text="{DynamicResource String.Privacy.Intro}"
+          Foreground="{DynamicResource Brush.Text.Secondary}"
+          TextWrapping="Wrap" />
+    </StackPanel>
+
+    <ScrollViewer Grid.Row="1" Margin="0,24,0,18" VerticalScrollBarVisibility="Auto">
+      <StackPanel Spacing="10">
+        <Border Padding="17" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+          <StackPanel Spacing="6">
+            <TextBlock Text="{DynamicResource String.Privacy.Access.Title}" FontWeight="SemiBold" />
+            <TextBlock Text="{DynamicResource String.Privacy.Access.Description}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+        <Border Padding="17" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+          <StackPanel Spacing="6">
+            <TextBlock Text="{DynamicResource String.Privacy.Detection.Title}" FontWeight="SemiBold" />
+            <TextBlock Text="{DynamicResource String.Privacy.Detection.Description}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+        <Border Padding="17" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+          <StackPanel Spacing="6">
+            <TextBlock Text="{DynamicResource String.Privacy.Storage.Title}" FontWeight="SemiBold" />
+            <TextBlock Text="{DynamicResource String.Privacy.Storage.Description}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+        <Border Padding="17" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+          <StackPanel Spacing="6">
+            <TextBlock Text="{DynamicResource String.Privacy.Network.Title}" FontWeight="SemiBold" />
+            <TextBlock Text="{DynamicResource String.Privacy.Network.Description}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+        <Border Padding="17" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+          <StackPanel Spacing="6">
+            <TextBlock Text="{DynamicResource String.Privacy.Controls.Title}" FontWeight="SemiBold" />
+            <TextBlock Text="{DynamicResource String.Privacy.Controls.Description}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+
+    <Button
+        Grid.Row="2"
+        HorizontalAlignment="Right"
+        Padding="16,9"
+        CornerRadius="9"
+        Content="{DynamicResource String.Action.Close}"
+        Click="CloseButton_OnClick" />
+  </Grid>
+</Window>

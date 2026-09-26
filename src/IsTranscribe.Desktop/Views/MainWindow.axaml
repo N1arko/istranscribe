@@ -1,0 +1,481 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.MainWindow"
+    x:DataType="vm:MainWindowViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    xmlns:views="using:IsTranscribe.Desktop.Views"
+    Title="{DynamicResource String.Brand.WindowTitle}"
+    Width="460"
+    Height="620"
+    MinWidth="420"
+    MinHeight="520"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterScreen">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#primary-window -->
+  <Window.Styles>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Primary}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Subtle}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="18" />
+    </Style>
+
+    <Style Selector="Button.primary">
+      <Setter Property="MinHeight" Value="42" />
+      <Setter Property="Padding" Value="18,10" />
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Primary}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Hover}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+    </Style>
+
+    <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Pressed}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+    </Style>
+
+    <Style Selector="Button.finish">
+      <Setter Property="MinHeight" Value="42" />
+      <Setter Property="Padding" Value="18,10" />
+      <Setter Property="Background" Value="{DynamicResource Brush.Status.Recording}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+
+    <Style Selector="Button.finish:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Status.RecordingHover}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+    </Style>
+
+    <Style Selector="Button.finish:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Status.RecordingPressed}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+    </Style>
+
+    <Style Selector="Button.secondary">
+      <Setter Property="MinHeight" Value="42" />
+      <Setter Property="Padding" Value="16,10" />
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Secondary}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Subtle}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+
+    <Style Selector="Button.quiet">
+      <Setter Property="Padding" Value="7,5" />
+      <Setter Property="MinHeight" Value="28" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style Selector="Button.iconQuiet">
+      <Setter Property="Width" Value="28" />
+      <Setter Property="Height" Value="28" />
+      <Setter Property="Padding" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="7" />
+    </Style>
+
+    <Style Selector="Button.iconQuiet:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Secondary}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+
+    <Style Selector="Button.iconQuiet:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Soft}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="24,20,24,18">
+    <Grid ColumnDefinitions="*,Auto,Auto" VerticalAlignment="Center">
+      <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+        <Ellipse Width="8" Height="8" Fill="{DynamicResource Brush.Accent.Primary}" />
+        <TextBlock
+            Text="{DynamicResource String.Brand.Name}"
+            Foreground="{DynamicResource Brush.Text.Primary}"
+            FontSize="18"
+            FontWeight="SemiBold"
+            VerticalAlignment="Center" />
+      </StackPanel>
+
+      <Button
+          Grid.Column="1"
+          Command="{Binding ToggleServiceCommand}"
+          AutomationProperties.Name="{Binding ServiceActionLabel}"
+          Padding="10,6"
+          Background="{DynamicResource Brush.Surface.Secondary}"
+          BorderBrush="{DynamicResource Brush.Border.Subtle}"
+          BorderThickness="1"
+          CornerRadius="999">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="{Binding ServiceStatusLabel}" FontSize="12" VerticalAlignment="Center" />
+          <Border
+              Width="26"
+              Height="16"
+              CornerRadius="999"
+              Background="{DynamicResource Brush.Accent.Soft}">
+            <Grid>
+              <Ellipse
+                  Width="10"
+                  Height="10"
+                  Margin="3"
+                  HorizontalAlignment="Right"
+                  Fill="{DynamicResource Brush.Accent.Primary}"
+                  IsVisible="{Binding ServiceEnabled}" />
+              <Ellipse
+                  Width="10"
+                  Height="10"
+                  Margin="3"
+                  HorizontalAlignment="Left"
+                  Fill="{DynamicResource Brush.Text.Tertiary}"
+                  IsVisible="{Binding !ServiceEnabled}" />
+            </Grid>
+          </Border>
+        </StackPanel>
+      </Button>
+
+      <Button
+          Grid.Column="2"
+          Margin="14,0,0,0"
+          Width="34"
+          Height="34"
+          Padding="0"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          AutomationProperties.Name="{DynamicResource String.Action.More}">
+        <StackPanel
+            Orientation="Horizontal"
+            Spacing="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+          <Ellipse Width="3" Height="3" Fill="{DynamicResource Brush.Text.Secondary}" />
+          <Ellipse Width="3" Height="3" Fill="{DynamicResource Brush.Text.Secondary}" />
+          <Ellipse Width="3" Height="3" Fill="{DynamicResource Brush.Text.Secondary}" />
+        </StackPanel>
+        <Button.Flyout>
+          <MenuFlyout Placement="BottomEdgeAlignedRight">
+            <MenuItem Header="{DynamicResource String.Action.Settings}" Command="{Binding OpenSettingsCommand}" />
+            <MenuItem Header="{DynamicResource String.Action.Help}" Command="{Binding OpenHelpCommand}" />
+            <Separator />
+            <MenuItem Header="{DynamicResource String.Action.Quit}" Click="QuitMenuItem_OnClick" />
+          </MenuFlyout>
+        </Button.Flyout>
+      </Button>
+    </Grid>
+
+    <ScrollViewer Grid.Row="1" Margin="0,24,0,18" VerticalScrollBarVisibility="Auto">
+      <StackPanel Spacing="20">
+        <Border Classes="card" Padding="20">
+          <StackPanel Spacing="0">
+            <TextBlock
+                Margin="0,0,0,8"
+                Text="{Binding StateKicker}"
+                Foreground="{DynamicResource Brush.Accent.Primary}"
+                FontSize="11"
+                FontWeight="SemiBold"
+                LetterSpacing="1.1"
+                IsVisible="{Binding ShowStateKicker}" />
+            <TextBlock
+                Text="{Binding StateTitle}"
+                Foreground="{DynamicResource Brush.Text.Primary}"
+                FontSize="31"
+                FontWeight="SemiBold"
+                LetterSpacing="-1.2"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Margin="0,8,0,0"
+                MaxWidth="340"
+                Text="{Binding StateDescription}"
+                Foreground="{DynamicResource Brush.Text.Secondary}"
+                FontSize="14"
+                LineHeight="20"
+                TextWrapping="Wrap" />
+
+            <Border
+                Margin="0,14,0,0"
+                Padding="10,7"
+                HorizontalAlignment="Left"
+                CornerRadius="8"
+                Background="{DynamicResource Brush.Surface.Secondary}"
+                IsVisible="{Binding HasActiveSource}">
+              <StackPanel Orientation="Horizontal" Spacing="9">
+                <TextBlock Text="{Binding ActiveSourceLabel}" FontSize="12" Foreground="{DynamicResource Brush.Text.Secondary}" />
+                <TextBlock
+                    Text="{Binding ElapsedLabel}"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource Brush.Status.Recording}"
+                    IsVisible="{Binding ShowElapsed}" />
+              </StackPanel>
+            </Border>
+
+            <ProgressBar
+                Margin="0,16,0,0"
+                Height="3"
+                Minimum="0"
+                Maximum="1"
+                Value="{Binding Progress}"
+                IsVisible="{Binding HasProgress}" />
+
+            <Border
+                Margin="0,16,0,0"
+                Padding="12,10"
+                CornerRadius="10"
+                Background="{DynamicResource Brush.Status.WarningSoft}"
+                IsVisible="{Binding HasAttention}">
+              <StackPanel Spacing="8">
+                <TextBlock
+                    x:Name="AttentionLiveRegion"
+                    Text="{Binding AttentionMessage}"
+                    Foreground="{DynamicResource Brush.Text.Primary}"
+                    FontSize="13"
+                    TextWrapping="Wrap" />
+                <Button
+                    HorizontalAlignment="Left"
+                    Padding="10,6"
+                    Content="{DynamicResource String.Action.OpenFolder}"
+                    Command="{Binding OpenRecoveryFolderCommand}"
+                    IsVisible="{Binding HasRecoveryAction}" />
+                <Button
+                    HorizontalAlignment="Left"
+                    Padding="10,6"
+                    Content="{DynamicResource String.Setup.RetryPermissions}"
+                    Command="{Binding RetryCapabilitiesCommand}"
+                    IsVisible="{Binding HasCapabilityRetryAction}" />
+                <Button
+                    HorizontalAlignment="Left"
+                    Padding="10,6"
+                    Content="{DynamicResource String.Action.TryAgain}"
+                    Command="{Binding RetryInitializationCommand}"
+                    IsVisible="{Binding ShowInitializationRetryAction}" />
+                <Button
+                    HorizontalAlignment="Left"
+                    Padding="10,6"
+                    Content="{DynamicResource String.Settings.AdvancedDiagnostics}"
+                    Command="{Binding OpenDiagnosticsCommand}"
+                    IsVisible="{Binding ShowDiagnosticsRecoveryAction}" />
+              </StackPanel>
+            </Border>
+
+            <Button
+                Margin="0,18,0,0"
+                HorizontalAlignment="Left"
+                Classes="primary"
+                Content="{DynamicResource String.Action.RecordNow}"
+                Command="{Binding StartManualRecordingCommand}"
+                IsVisible="{Binding ShowManualRecordingAction}" />
+
+            <Button
+                Margin="0,18,0,0"
+                HorizontalAlignment="Left"
+                Classes="primary"
+                Content="{DynamicResource String.Action.EnableService}"
+                Command="{Binding ToggleServiceCommand}"
+                IsVisible="{Binding ShowEnableServiceAction}" />
+
+            <Grid
+                Margin="0,18,0,0"
+                ColumnDefinitions="*,Auto"
+                ColumnSpacing="10"
+                IsVisible="{Binding ShowRecordingActions}">
+              <Button
+                  Classes="finish"
+                  Content="{DynamicResource String.Action.Finish}"
+                  Command="{Binding FinishRecordingCommand}"
+                  HorizontalAlignment="Stretch" />
+              <Button
+                  Grid.Column="1"
+                  Classes="secondary"
+                  Content="{Binding PauseOrResumeLabel}"
+                  Command="{Binding PauseOrResumeCommand}" />
+            </Grid>
+            <Button
+                Margin="-7,9,0,0"
+                HorizontalAlignment="Left"
+                Classes="quiet"
+                Foreground="{DynamicResource Brush.Status.Danger}"
+                Content="{DynamicResource String.Action.Discard}"
+                Command="{Binding RequestDiscardCommand}"
+                IsVisible="{Binding ShowRecordingActions}" />
+          </StackPanel>
+        </Border>
+
+        <StackPanel Spacing="10">
+          <TextBlock
+              Text="{DynamicResource String.Recent.Title}"
+              Foreground="{DynamicResource Brush.Text.Primary}"
+              FontSize="15"
+              FontWeight="SemiBold" />
+
+          <Border Classes="card" Padding="16" IsVisible="{Binding !HasRecentRecordings}">
+            <StackPanel Spacing="5">
+              <TextBlock
+                  Text="{DynamicResource String.Recent.Empty.Title}"
+                  Foreground="{DynamicResource Brush.Text.Primary}"
+                  FontWeight="SemiBold" />
+              <TextBlock
+                  Text="{DynamicResource String.Recent.Empty.Description}"
+                  Foreground="{DynamicResource Brush.Text.Secondary}"
+                  FontSize="13"
+                  TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="card" Padding="0" IsVisible="{Binding HasRecentRecordings}">
+            <ItemsControl ItemsSource="{Binding RecentRecordings}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:RecentRecordingItemViewModel">
+                  <Border Padding="14,12" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="0,0,0,1">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="4" Margin="0,0,8,0">
+                        <TextBlock
+                            Text="{Binding SourceLabel}"
+                            Foreground="{DynamicResource Brush.Text.Primary}"
+                            FontWeight="SemiBold"
+                            VerticalAlignment="Center"
+                            TextTrimming="CharacterEllipsis" />
+                        <Button
+                            Grid.Column="1"
+                            Classes="iconQuiet"
+                            Command="{Binding RequestRenameCommand}"
+                            IsVisible="{Binding CanRename}"
+                            AutomationProperties.Name="{DynamicResource String.Action.RenameRecording}"
+                            ToolTip.Tip="{DynamicResource String.Action.RenameRecording}">
+                          <PathIcon
+                              Width="14"
+                              Height="14"
+                              Data="M3,17.25 L3,21 L6.75,21 L17.81,9.94 L14.06,6.19 Z M20.71,7.04 C21.1,6.65 21.1,6.02 20.71,5.63 L18.37,3.29 C17.98,2.9 17.35,2.9 16.96,3.29 L15.13,5.12 L18.88,8.87 Z" />
+                        </Button>
+                      </Grid>
+                      <TextBlock
+                          Grid.Column="1"
+                          Text="{Binding DurationLabel}"
+                          Foreground="{DynamicResource Brush.Text.Secondary}"
+                          FontSize="12" />
+                      <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0" Orientation="Horizontal" Spacing="9">
+                        <TextBlock Text="{Binding TimeLabel}" Foreground="{DynamicResource Brush.Text.Tertiary}" FontSize="11" />
+                        <TextBlock Text="{Binding StatusLabel}" Foreground="{DynamicResource Brush.Accent.Primary}" FontSize="11" />
+                      </StackPanel>
+                      <!-- @spec spec://modules/app/FEAT-015-cloud-transcription-groq-openrouter#behavior.states -->
+                      <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#experience -->
+                      <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#acceleration.resources -->
+                      <StackPanel
+                          Grid.Row="2"
+                          Grid.ColumnSpan="2"
+                          Margin="0,7,0,0"
+                          Spacing="3"
+                          IsVisible="{Binding HasTranscriptionStatus}">
+                        <views:PoliteLiveTextBlock
+                            Text="{Binding TranscriptionStatusLabel}"
+                            Foreground="{DynamicResource Brush.Text.Secondary}"
+                            FontSize="11"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Text="{Binding TranscriptionUsageLabel}"
+                            Foreground="{DynamicResource Brush.Text.Tertiary}"
+                            FontSize="11"
+                            TextWrapping="Wrap"
+                            IsVisible="{Binding HasTranscriptionUsage}" />
+                      </StackPanel>
+                      <ProgressBar
+                          Grid.Row="3"
+                          Grid.ColumnSpan="2"
+                          Margin="0,7,0,0"
+                          Height="4"
+                          Minimum="0"
+                          Maximum="100"
+                          Value="{Binding TranscriptionProgressPercent}"
+                          IsVisible="{Binding HasTranscriptionProgress}" />
+                      <WrapPanel
+                          Grid.Row="4"
+                          Grid.ColumnSpan="2"
+                          Margin="-7,5,0,-4"
+                          Orientation="Horizontal">
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{Binding TranscriptionActionLabel}"
+                            Command="{Binding RequestTranscriptionCommand}"
+                            IsVisible="{Binding CanTranscribe}" />
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{DynamicResource String.Transcription.Action.Cancel}"
+                            Command="{Binding CancelTranscriptionCommand}"
+                            IsVisible="{Binding CanCancelTranscription}" />
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{DynamicResource String.Transcription.Action.ContinueOnBattery}"
+                            Command="{Binding ContinueLocalTranscriptionCommand}"
+                            IsVisible="{Binding CanContinueLocalTranscription}" />
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{DynamicResource String.Transcription.Action.Retry}"
+                            Command="{Binding RetryTranscriptionCommand}"
+                            IsVisible="{Binding CanRetryTranscription}" />
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{DynamicResource String.Action.OpenRecording}"
+                            Command="{Binding OpenRecordingCommand}"
+                            IsVisible="{Binding HasAudioPath}" />
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{DynamicResource String.Action.OpenFolder}"
+                            Command="{Binding OpenFolderCommand}"
+                            IsVisible="{Binding HasArtifactPath}" />
+                        <Button
+                            Classes="quiet"
+                            Margin="0,0,2,0"
+                            Content="{DynamicResource String.Action.OpenTranscript}"
+                            Command="{Binding OpenTranscriptCommand}"
+                            IsVisible="{Binding HasTranscriptPath}" />
+                        <Button
+                            Classes="quiet"
+                            Foreground="{DynamicResource Brush.Status.Danger}"
+                            Content="{DynamicResource String.Action.Remove}"
+                            Command="{Binding RequestRemoveCommand}"
+                            IsVisible="{Binding CanRemove}" />
+                      </WrapPanel>
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,Auto,Auto" VerticalAlignment="Center">
+      <Button
+          Grid.Column="1"
+          Classes="quiet"
+          Content="{DynamicResource String.Action.Settings}"
+          Command="{Binding OpenSettingsCommand}" />
+      <Button
+          Grid.Column="2"
+          Classes="quiet"
+          Content="{DynamicResource String.Action.Help}"
+          Command="{Binding OpenHelpCommand}" />
+    </Grid>
+  </Grid>
+</Window>

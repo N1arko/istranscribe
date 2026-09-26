@@ -1,0 +1,183 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.RecordingOverlayWindow"
+    x:DataType="vm:MainWindowViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{DynamicResource String.RecordingWidget.Title}"
+    Width="228"
+    Height="48"
+    CanResize="False"
+    ShowActivated="False"
+    ShowInTaskbar="False"
+    Topmost="True"
+    WindowDecorations="None"
+    WindowStartupLocation="Manual"
+    TransparencyLevelHint="Transparent"
+    Background="Transparent">
+
+  <!-- @spec spec://modules/app/FEAT-013.A-floating-recording-widget#expanded -->
+  <!-- @spec spec://modules/app/FEAT-013.A-floating-recording-widget#collapsed -->
+  <Window.Styles>
+    <Style Selector="Button.overlay-action">
+      <Setter Property="Width" Value="40" />
+      <Setter Property="Height" Value="40" />
+      <Setter Property="Padding" Value="9" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.overlay-action:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Secondary}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+    <Style Selector="Button.overlay-action:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Soft}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+    <Style Selector="Button.overlay-finish">
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Status.Recording}" />
+    </Style>
+    <Style Selector="Button.overlay-finish:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Status.RecordingSoft}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Status.RecordingHover}" />
+    </Style>
+  </Window.Styles>
+
+  <Border
+      Background="{DynamicResource Brush.Surface.Elevated}"
+      BorderBrush="{DynamicResource Brush.Border.Strong}"
+      BorderThickness="1"
+      CornerRadius="14">
+    <Grid>
+      <Grid
+          x:Name="ExpandedContent"
+          Margin="10,4,4,4"
+          ColumnDefinitions="Auto,Auto,1,Auto,Auto,Auto"
+          ColumnSpacing="4"
+          VerticalAlignment="Center">
+        <Grid Width="14" Height="38">
+          <Ellipse
+              Width="9"
+              Height="9"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Fill="{DynamicResource Brush.Status.Recording}"
+              IsVisible="{Binding IsActiveRecordingRunning}" />
+          <Ellipse
+              Width="9"
+              Height="9"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Fill="{DynamicResource Brush.Status.Warning}"
+              IsVisible="{Binding IsActiveRecordingPaused}" />
+        </Grid>
+
+        <Grid Grid.Column="1" Width="52" Height="38">
+          <TextBlock
+              Text="{Binding ElapsedLabel}"
+              Foreground="{DynamicResource Brush.Status.Recording}"
+              FontSize="13"
+              FontWeight="SemiBold"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              IsVisible="{Binding IsActiveRecordingRunning}" />
+          <TextBlock
+              Text="{Binding ElapsedLabel}"
+              Foreground="{DynamicResource Brush.Status.Warning}"
+              FontSize="13"
+              FontWeight="SemiBold"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              IsVisible="{Binding IsActiveRecordingPaused}" />
+        </Grid>
+
+        <Border
+            Grid.Column="2"
+            Width="1"
+            Height="22"
+            Margin="2,0"
+            Background="{DynamicResource Brush.Border.Subtle}"
+            VerticalAlignment="Center" />
+
+        <Border
+            Grid.ColumnSpan="3"
+            Background="Transparent"
+            Cursor="SizeAll"
+            PointerPressed="DragHandle_OnPointerPressed"
+            ToolTip.Tip="{DynamicResource String.RecordingWidget.Move}"
+            AutomationProperties.Name="{DynamicResource String.RecordingWidget.Move}" />
+
+        <Button
+            Grid.Column="3"
+            Classes="overlay-action"
+            Command="{Binding PauseOrResumeCommand}"
+            ToolTip.Tip="{Binding PauseOrResumeLabel}"
+            AutomationProperties.Name="{Binding PauseOrResumeLabel}">
+          <Grid>
+            <PathIcon
+                Width="18"
+                Height="18"
+                Data="M6,4 H10 V20 H6 Z M14,4 H18 V20 H14 Z"
+                IsVisible="{Binding IsActiveRecordingRunning}" />
+            <PathIcon
+                Width="18"
+                Height="18"
+                Data="M7,4 L20,12 L7,20 Z"
+                IsVisible="{Binding IsActiveRecordingPaused}" />
+          </Grid>
+        </Button>
+
+        <Button
+            Grid.Column="4"
+            Classes="overlay-action overlay-finish"
+            Command="{Binding FinishRecordingCommand}"
+            ToolTip.Tip="{DynamicResource String.Action.Finish}"
+            AutomationProperties.Name="{DynamicResource String.Action.Finish}">
+          <PathIcon Width="17" Height="17" Data="M6,6 H18 V18 H6 Z" />
+        </Button>
+
+        <Button
+            Grid.Column="5"
+            Classes="overlay-action"
+            Padding="7"
+            Click="CollapseButton_OnClick"
+            ToolTip.Tip="{DynamicResource String.RecordingWidget.Collapse}"
+            AutomationProperties.Name="{DynamicResource String.RecordingWidget.Collapse}">
+          <PathIcon Width="16" Height="16" Data="M15.5,4 L7.5,12 L15.5,20 L17,18.5 L10.5,12 L17,5.5 Z" />
+        </Button>
+      </Grid>
+
+      <Button
+          x:Name="CollapsedContent"
+          Classes="overlay-action"
+          IsVisible="False"
+          Width="44"
+          Height="44"
+          Padding="0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          CornerRadius="13"
+          Cursor="SizeAll"
+          Click="ExpandButton_OnClick"
+          ToolTip.Tip="{DynamicResource String.RecordingWidget.Expand}"
+          AutomationProperties.Name="{DynamicResource String.RecordingWidget.Expand}">
+        <Grid>
+          <Ellipse
+              Width="10"
+              Height="10"
+              Fill="{DynamicResource Brush.Status.Recording}"
+              IsVisible="{Binding IsActiveRecordingRunning}" />
+          <Ellipse
+              Width="10"
+              Height="10"
+              Fill="{DynamicResource Brush.Status.Warning}"
+              IsVisible="{Binding IsActiveRecordingPaused}" />
+        </Grid>
+      </Button>
+    </Grid>
+  </Border>
+</Window>

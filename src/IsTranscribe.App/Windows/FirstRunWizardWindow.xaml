@@ -1,0 +1,301 @@
+<ui:FluentWindow x:Class="IsTranscribe.App.Windows.FirstRunWizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:IsTranscribe.App.Windows"
+        xmlns:loc="clr-namespace:IsTranscribe.App.Strings"
+        Title="{loc:Loc Wizard_Window_Title}"
+        Height="700"
+        Width="920"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="860"
+        MinHeight="640"
+        ExtendsContentIntoTitleBar="True">
+  <Grid Background="{DynamicResource AppBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <ui:TitleBar Title="{loc:Loc Wizard_Window_Title}" ShowMaximize="True" ShowMinimize="True" />
+
+    <Border Margin="0,36,0,0" Padding="24" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderBrush}" BorderThickness="0,0,0,1">
+      <DockPanel LastChildFill="True">
+        <StackPanel>
+          <TextBlock FontSize="30" FontWeight="SemiBold" Text="{loc:Loc Wizard_Title}" />
+          <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{loc:Loc Wizard_Subtitle}" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Border DockPanel.Dock="Right" Padding="12,8" Background="{DynamicResource AppAccentBackgroundBrush}" CornerRadius="999">
+          <TextBlock x:Name="StepCounterText" FontWeight="SemiBold" Foreground="{DynamicResource AppAccentBrush}" />
+        </Border>
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Row="1" Margin="24">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="240" />
+        <ColumnDefinition Width="24" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Border Padding="20" Background="{DynamicResource AppSidebarBrush}" CornerRadius="16">
+        <StackPanel>
+          <TextBlock Foreground="{DynamicResource AppSidebarTextBrush}" FontSize="14" Text="{loc:Loc Wizard_Steps_Header}" />
+          <StackPanel Margin="0,20,0,0">
+            <TextBlock x:Name="StepOneLabel" Margin="0,0,0,10" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Wizard_Step_Language}" />
+            <TextBlock x:Name="StepTwoLabel" Margin="0,0,0,10" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Wizard_Step_Storage}" />
+            <TextBlock x:Name="StepThreeLabel" Margin="0,0,0,10" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Wizard_Step_Devices}" />
+            <TextBlock x:Name="StepFourLabel" Margin="0,0,0,10" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Wizard_Step_ApiKey}" />
+            <TextBlock x:Name="StepFiveLabel" Margin="0,0,0,10" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Wizard_Step_RecordingMode}" />
+            <TextBlock x:Name="StepSixLabel" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Wizard_Step_Applications}" />
+          </StackPanel>
+
+          <Border x:Name="DegradedBanner" Margin="0,24,0,0" Padding="14" Background="{DynamicResource AppSidebarSurfaceBrush}" CornerRadius="10" Visibility="Collapsed">
+            <TextBlock x:Name="CapabilityBannerText" Foreground="{DynamicResource AppSurfaceAltBrush}" TextWrapping="Wrap" />
+          </Border>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Column="2" Padding="24" Background="{DynamicResource AppSurfaceBrush}" CornerRadius="16">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+
+          <StackPanel>
+            <TextBlock x:Name="StepTitleText" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Name="StepDescriptionText" Margin="0,8,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" TextWrapping="Wrap" />
+          </StackPanel>
+
+          <TextBlock x:Name="InlineWarningText"
+                     Grid.Row="1"
+                     Margin="0,16,0,0"
+                     Foreground="{DynamicResource AppWarningBrush}"
+                     FontWeight="SemiBold"
+                     TextWrapping="Wrap"
+                     Visibility="Collapsed" />
+
+          <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Grid x:Name="LanguageStepPanel">
+              <StackPanel>
+                <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step0_Language_Label}" />
+                <ComboBox x:Name="LanguageComboBox" Margin="0,8,0,0" SelectionChanged="OnWizardInputChanged" DisplayMemberPath="Label" />
+                <TextBlock Margin="0,16,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Wizard_Step0_Language_Hint}" TextWrapping="Wrap" />
+              </StackPanel>
+            </Grid>
+
+            <Grid x:Name="StorageStepPanel" Visibility="Collapsed">
+              <StackPanel>
+                <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step1_RecordingsFolder_Label}" />
+                <DockPanel Margin="0,8,0,0">
+                  <Button DockPanel.Dock="Right" Width="96" Content="{loc:Loc Common_Browse}" Click="OnBrowseRecordingsClick" />
+                  <TextBox x:Name="RecordingsFolderTextBox" Margin="0,0,12,0" TextChanged="OnWizardInputChanged" />
+                </DockPanel>
+
+                <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Wizard_Step1_TranscriptsFolder_Label}" />
+                <DockPanel Margin="0,8,0,0">
+                  <Button DockPanel.Dock="Right" Width="96" Content="{loc:Loc Common_Browse}" Click="OnBrowseTranscriptsClick" />
+                  <TextBox x:Name="TranscriptsFolderTextBox" Margin="0,0,12,0" TextChanged="OnWizardInputChanged" />
+                </DockPanel>
+
+                <TextBlock Margin="0,20,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Wizard_Step1_FolderCreation_Hint}" TextWrapping="Wrap" />
+              </StackPanel>
+            </Grid>
+
+            <Grid x:Name="DevicesStepPanel" Visibility="Collapsed">
+              <StackPanel>
+                <CheckBox x:Name="AutomaticDeviceSelectionCheckBox" Content="{loc:Loc Wizard_Step2_AutomaticDevices}" Click="OnWizardInputChanged" />
+                <TextBlock x:Name="DevicesModeDescriptionText" Margin="0,10,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" TextWrapping="Wrap" />
+
+                <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step2_OutputDevice_Label}" />
+                <ComboBox x:Name="OutputDeviceComboBox" Margin="0,8,0,0" SelectionChanged="OnWizardInputChanged" DisplayMemberPath="Label" />
+
+                <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Wizard_Step2_Microphone_Label}" />
+                <ComboBox x:Name="MicrophoneComboBox" Margin="0,8,0,0" SelectionChanged="OnWizardInputChanged" DisplayMemberPath="Label" />
+
+                <TextBlock x:Name="DevicesAvailabilityText" Margin="0,20,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" TextWrapping="Wrap" />
+              </StackPanel>
+            </Grid>
+
+            <Grid x:Name="ApiKeyStepPanel" Visibility="Collapsed">
+              <StackPanel>
+                <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step3_ApiKey_Label}" />
+                <Grid Margin="0,8,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+
+                  <Grid>
+                    <PasswordBox x:Name="ApiKeyPasswordBox" PasswordChanged="OnApiKeyPasswordChanged" />
+                    <TextBox x:Name="ApiKeyTextBox" Visibility="Collapsed" TextChanged="OnApiKeyTextChanged" />
+                  </Grid>
+
+                  <Button Grid.Column="1" Margin="12,0,0,0" Width="88" Click="OnToggleApiKeyVisibilityClick">
+                    <TextBlock x:Name="ApiKeyToggleText" Text="{loc:Loc Shell_Settings_Transcription_Show}" />
+                  </Button>
+
+                  <Button x:Name="ApiKeyTestButton" Grid.Column="2" Margin="12,0,0,0" Width="92" Content="{loc:Loc Wizard_Step3_TestKey}" Click="OnTestApiKeyClick" />
+                </Grid>
+
+                <TextBlock x:Name="ApiKeyTestStatusText" Margin="0,12,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" TextWrapping="Wrap" />
+                <TextBlock Margin="0,16,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Wizard_Step3_ApiKey_Hint}" TextWrapping="Wrap" />
+
+                <TextBlock Margin="0,16,0,0">
+                  <Hyperlink x:Name="ApiKeyDocsLink" Click="OnOpenFireworksDocsClick" />
+                </TextBlock>
+              </StackPanel>
+            </Grid>
+
+            <Grid x:Name="RecordingModeStepPanel" Visibility="Collapsed">
+              <StackPanel>
+                <RadioButton x:Name="ModeOffRadio" Margin="0,0,0,14" GroupName="WizardRecordingMode" Checked="OnWizardInputChanged">
+                  <StackPanel>
+                    <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step4_Off}" />
+                    <TextBlock Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Wizard_Step4_Off_Desc}" TextWrapping="Wrap" />
+                  </StackPanel>
+                </RadioButton>
+
+                <RadioButton x:Name="ModeAskRadio" Margin="0,0,0,14" GroupName="WizardRecordingMode" Checked="OnWizardInputChanged">
+                  <StackPanel>
+                    <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step4_Ask}" />
+                    <TextBlock Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Wizard_Step4_Ask_Desc}" TextWrapping="Wrap" />
+                  </StackPanel>
+                </RadioButton>
+
+                <RadioButton x:Name="ModeAutoRadio" GroupName="WizardRecordingMode" Checked="OnWizardInputChanged">
+                  <StackPanel>
+                    <TextBlock FontWeight="SemiBold" Text="{loc:Loc Wizard_Step4_Auto}" />
+                    <TextBlock x:Name="AutoModeDescriptionText" Foreground="{DynamicResource AppTextTertiaryBrush}" TextWrapping="Wrap" />
+                  </StackPanel>
+                </RadioButton>
+              </StackPanel>
+            </Grid>
+
+            <Grid x:Name="ApplicationsStepPanel" Visibility="Collapsed">
+              <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                <StackPanel>
+                  <Border Padding="16" Background="{DynamicResource AppSurfaceSubtleBrush}" BorderBrush="{DynamicResource AppBorderFadedBrush}" BorderThickness="1" CornerRadius="14">
+                    <StackPanel>
+                      <TextBlock FontSize="18" FontWeight="SemiBold" Text="{loc:Loc Wizard_Step5_RecommendedBehavior_Title}" />
+                      <TextBlock Margin="0,8,0,0"
+                                 Foreground="{DynamicResource AppTextSecondaryBrush}"
+                                 Text="{loc:Loc Wizard_Step5_RecommendedBehavior_Desc}"
+                                 TextWrapping="Wrap" />
+                      <CheckBox x:Name="SuggestAppsAutomaticallyCheckBox"
+                                Margin="0,14,0,0"
+                                Content="{loc:Loc Wizard_Step5_SuggestApps}"
+                                Click="OnWizardInputChanged"
+                                IsChecked="True" />
+                      <TextBlock Margin="0,8,0,0"
+                                 Foreground="{DynamicResource AppTextTertiaryBrush}"
+                                 Text="{loc:Loc Wizard_Step5_IgnoredApps_Desc}"
+                                 TextWrapping="Wrap" />
+                    </StackPanel>
+                  </Border>
+
+                  <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderSubtleBrush}" BorderThickness="1" CornerRadius="14">
+                    <StackPanel>
+                      <TextBlock FontSize="18" FontWeight="SemiBold" Text="{loc:Loc Wizard_Step5_KnownApps_Title}" />
+                      <TextBlock Margin="0,8,0,0"
+                                 Foreground="{DynamicResource AppTextSecondaryBrush}"
+                                 Text="{loc:Loc Wizard_Step5_KnownApps_Desc}"
+                                 TextWrapping="Wrap" />
+                      <TextBlock x:Name="KnownApplicationsEmptyText"
+                                 Margin="0,12,0,0"
+                                 Foreground="{DynamicResource AppTextTertiaryBrush}"
+                                 Text="{loc:Loc Wizard_Step5_KnownApps_Empty}"
+                                 TextWrapping="Wrap"
+                                 Visibility="Collapsed" />
+                      <ItemsControl x:Name="KnownApplicationsItemsControl" Margin="0,12,0,0">
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate DataType="{x:Type local:SelectableAppSuggestionItem}">
+                            <Border Margin="0,0,0,8" Padding="12" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="10">
+                              <DockPanel LastChildFill="True">
+                                <CheckBox VerticalAlignment="Top" IsChecked="{Binding IsSelected}" />
+                                <StackPanel Margin="12,0,0,0">
+                                  <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                                  <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{Binding ProcessName}" />
+                                  <TextBlock Margin="0,2,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{Binding StatusLabel}" />
+                                </StackPanel>
+                              </DockPanel>
+                            </Border>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    </StackPanel>
+                  </Border>
+
+                  <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderSubtleBrush}" BorderThickness="1" CornerRadius="14">
+                    <StackPanel>
+                      <TextBlock FontSize="18" FontWeight="SemiBold" Text="{loc:Loc Wizard_Step5_SelectedApps_Title}" />
+                      <TextBlock x:Name="ApplicationsSummaryText"
+                                 Margin="0,8,0,0"
+                                 Foreground="{DynamicResource AppTextSecondaryBrush}"
+                                 TextWrapping="Wrap" />
+                      <TextBlock x:Name="SelectedApplicationsEmptyText"
+                                 Margin="0,12,0,0"
+                                 Foreground="{DynamicResource AppTextTertiaryBrush}"
+                                 Text="{loc:Loc Wizard_Step5_SelectedApps_Empty}"
+                                 TextWrapping="Wrap"
+                                 Visibility="Collapsed" />
+                      <ListBox x:Name="SelectedApplicationsListBox"
+                               Margin="0,12,0,0"
+                               Height="160"
+                               SelectionChanged="OnSelectedApplicationSelectionChanged">
+                        <ListBox.ItemTemplate>
+                          <DataTemplate DataType="{x:Type local:EditableAppRuleItem}">
+                            <Border Margin="0,0,0,8" Padding="10" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="8">
+                              <StackPanel>
+                                <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                                <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{Binding ProcessName}" />
+                              </StackPanel>
+                            </Border>
+                          </DataTemplate>
+                        </ListBox.ItemTemplate>
+                      </ListBox>
+                      <Button x:Name="RemoveSelectedApplicationButton"
+                              Margin="0,12,0,0"
+                              Width="140"
+                              HorizontalAlignment="Left"
+                              Content="{loc:Loc Wizard_Step5_RemoveSelected}"
+                              Click="OnRemoveSelectedApplicationClick" />
+                    </StackPanel>
+                  </Border>
+
+                  <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppWarningPanelBrush}" BorderBrush="{DynamicResource AppWarningPanelBorderBrush}" BorderThickness="1" CornerRadius="14">
+                    <StackPanel>
+                      <TextBlock FontSize="18" FontWeight="SemiBold" Text="{loc:Loc Wizard_Step5_ManualAdd_Title}" />
+                      <TextBlock Margin="0,8,0,0"
+                                 Foreground="{DynamicResource AppWarningDeepBrush}"
+                                 Text="{loc:Loc Wizard_Step5_ManualAdd_Desc}"
+                                 TextWrapping="Wrap" />
+                      <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
+                        <Button Padding="10,6" Content="{loc:Loc Wizard_Step5_AddFromRunning}" Click="OnAddFromRunningClick" />
+                        <Button Margin="12,0,0,0" Padding="10,6" Content="{loc:Loc Wizard_Step5_AddManually}" Click="OnAddApplicationManuallyClick" />
+                      </StackPanel>
+                    </StackPanel>
+                  </Border>
+                </StackPanel>
+              </ScrollViewer>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Border>
+    </Grid>
+
+    <Border Grid.Row="2" Padding="20" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderBrush}" BorderThickness="0,1,0,0">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Padding="14,8" Content="{loc:Loc Wizard_Navigation_Quit}" Click="OnQuitClick" />
+        <Button x:Name="BackButton" Margin="12,0,0,0" Padding="14,8" Content="{loc:Loc Wizard_Navigation_Back}" Click="OnBackClick" />
+        <ui:Button x:Name="NextButton" Appearance="Primary" Margin="12,0,0,0" Padding="14,8" Content="{loc:Loc Wizard_Navigation_Next}" Click="OnNextClick" />
+        <ui:Button x:Name="FinishButton" Appearance="Primary" Margin="12,0,0,0" Padding="14,8" Content="{loc:Loc Wizard_Navigation_Finish}" Click="OnFinishClick" Visibility="Collapsed" />
+      </StackPanel>
+    </Border>
+  </Grid>
+</ui:FluentWindow>

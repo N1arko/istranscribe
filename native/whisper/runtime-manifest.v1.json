@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "istranscribe-whisper-native-v1",
+  "spec": [
+    "spec://modules/app/FEAT-016-local-whisper-transcription#engine.implementation",
+    "spec://modules/app/FEAT-016-local-whisper-transcription#acceleration",
+    "spec://modules/app/FEAT-016-local-whisper-transcription#verification"
+  ],
+  "runtime": {
+    "id": "whisper.cpp",
+    "version": "v1.9.1",
+    "abiVersion": 1,
+    "sampleRate": 16000,
+    "maximumSamplesPerCall": 4800000
+  },
+  "source": {
+    "repository": "https://github.com/ggml-org/whisper.cpp",
+    "tag": "v1.9.1",
+    "commit": "f049fff95a089aa9969deb009cdd4892b3e74916",
+    "archive": {
+      "uri": "https://github.com/ggml-org/whisper.cpp/archive/f049fff95a089aa9969deb009cdd4892b3e74916.tar.gz",
+      "format": "tar.gz",
+      "sizeBytes": 9016232,
+      "sha256": "279af4ce60dbf397362868f3bacc75b56a4332ac2541cae155070093f6aaf0e3",
+      "rootDirectory": "whisper.cpp-f049fff95a089aa9969deb009cdd4892b3e74916"
+    },
+    "tree": {
+      "algorithm": "sha256-utf8-ordinal-path-lf-sha256-lf-size-lf",
+      "sha256": "51acd4d77bcf043f54374010b16f5506d69132105fcc24e8803364a4b6b0d549",
+      "fileCount": 1882,
+      "totalBytes": 36382209
+    },
+    "patches": [
+      {
+        "id": "primary-backend-introspection-v1",
+        "apply": "append-to-src-whisper.cpp",
+        "checkedInPath": "patches/0001-primary-backend-introspection.inc",
+        "sha256": "1454dafbd55dda3a9ac64fc7941b41e4f98ea6eff012badf1d6834247b4e0f22"
+      }
+    ]
+  },
+  "abi": {
+    "header": "include/istranscribe_whisper_v1.h",
+    "callingConvention": "cdecl",
+    "stringEncoding": "utf-8-pointer-length",
+    "requiredSymbols": [
+      "istranscribe_whisper_abi_version_v1",
+      "istranscribe_whisper_context_cancel_v1",
+      "istranscribe_whisper_context_create_v1",
+      "istranscribe_whisper_context_destroy_v1",
+      "istranscribe_whisper_context_get_info_v1",
+      "istranscribe_whisper_context_segment_count_v1",
+      "istranscribe_whisper_context_segment_get_v1",
+      "istranscribe_whisper_context_timings_v1",
+      "istranscribe_whisper_context_transcribe_v1",
+      "istranscribe_whisper_last_error_v1",
+      "istranscribe_whisper_probe_backend_v1"
+    ]
+  },
+  "licenses": [
+    {
+      "component": "whisper.cpp and ggml",
+      "spdx": "MIT",
+      "sourceUri": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/f049fff95a089aa9969deb009cdd4892b3e74916/LICENSE",
+      "sourceCommit": "f049fff95a089aa9969deb009cdd4892b3e74916",
+      "archivePath": "LICENSE",
+      "checkedInPath": "licenses/whisper.cpp-LICENSE.txt",
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d"
+    },
+    {
+      "component": "OpenAI Whisper",
+      "spdx": "MIT",
+      "sourceUri": "https://raw.githubusercontent.com/openai/whisper/5f86d1d86363843179951550570367b37c5d6f78/LICENSE",
+      "sourceCommit": "5f86d1d86363843179951550570367b37c5d6f78",
+      "checkedInPath": "licenses/openai-whisper-LICENSE.txt",
+      "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+    }
+  ],
+  "buildPolicy": {
+    "cmakeMinimumVersion": "3.24.0",
+    "configuration": "Release",
+    "sharedUpstreamLibraries": false,
+    "positionIndependentCode": true,
+    "runtimeUsesSystemPath": false,
+    "forbiddenProductPayloadPatterns": [
+      "*whisper-cli*",
+      "*server*",
+      "*.py",
+      "*python*",
+      "*ffmpeg*",
+      "*curl*",
+      "*cuda*",
+      "*rocm*",
+      "*openvino*",
+      "*.gguf",
+      "*.bin"
+    ],
+    "forcedDisabledOptions": [
+      "BUILD_SHARED_LIBS",
+      "WHISPER_BUILD_TESTS",
+      "WHISPER_BUILD_EXAMPLES",
+      "WHISPER_BUILD_SERVER",
+      "WHISPER_CURL",
+      "WHISPER_SDL2",
+      "WHISPER_COMMON_FFMPEG",
+      "WHISPER_COREML",
+      "WHISPER_OPENVINO",
+      "WHISPER_USE_SYSTEM_GGML",
+      "GGML_BUILD_TESTS",
+      "GGML_BUILD_EXAMPLES",
+      "GGML_NATIVE",
+      "GGML_LTO",
+      "GGML_CCACHE",
+      "GGML_OPENMP",
+      "GGML_BACKEND_DL",
+      "GGML_RPC",
+      "GGML_CUDA",
+      "GGML_HIP",
+      "GGML_MUSA",
+      "GGML_SYCL",
+      "GGML_OPENCL",
+      "GGML_OPENVINO",
+      "GGML_WEBGPU",
+      "GGML_KOMPUTE"
+    ]
+  },
+  "rids": [
+    {
+      "rid": "osx-arm64",
+      "architectures": [
+        "arm64"
+      ],
+      "variants": [
+        {
+          "id": "metal",
+          "required": true,
+          "outputFile": "istranscribe_whisper_v1.dylib",
+          "supportedBackends": [
+            "metal",
+            "cpu"
+          ],
+          "cmakeCache": {
+            "ITW_TARGET_RID": "osx-arm64",
+            "ITW_BACKEND": "metal",
+            "CMAKE_BUILD_TYPE": "Release",
+            "CMAKE_OSX_ARCHITECTURES": "arm64",
+            "CMAKE_OSX_DEPLOYMENT_TARGET": "14.2",
+            "GGML_METAL": "ON",
+            "GGML_METAL_EMBED_LIBRARY": "ON",
+            "GGML_VULKAN": "OFF"
+          },
+          "allowedDependencies": [
+            "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+            "/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit",
+            "/usr/lib/libSystem.B.dylib",
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libobjc.A.dylib"
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "win-x64",
+      "architectures": [
+        "x64"
+      ],
+      "variants": [
+        {
+          "id": "cpu",
+          "required": true,
+          "outputFile": "istranscribe_whisper_v1.dll",
+          "supportedBackends": [
+            "cpu"
+          ],
+          "cmakeCache": {
+            "ITW_TARGET_RID": "win-x64",
+            "ITW_BACKEND": "cpu",
+            "GGML_METAL": "OFF",
+            "GGML_VULKAN": "OFF",
+            "GGML_NATIVE": "OFF",
+            "GGML_SSE42": "OFF",
+            "GGML_AVX": "OFF",
+            "GGML_AVX2": "OFF",
+            "GGML_BMI2": "OFF",
+            "GGML_FMA": "OFF",
+            "GGML_F16C": "OFF"
+          },
+          "allowedDependencies": [
+            "ADVAPI32.dll",
+            "KERNEL32.dll"
+          ]
+        },
+        {
+          "id": "vulkan",
+          "required": false,
+          "outputFile": "istranscribe_whisper_v1_vulkan.dll",
+          "supportedBackends": [
+            "vulkan",
+            "cpu"
+          ],
+          "cmakeCache": {
+            "ITW_TARGET_RID": "win-x64",
+            "ITW_BACKEND": "vulkan",
+            "GGML_METAL": "OFF",
+            "GGML_VULKAN": "ON",
+            "GGML_NATIVE": "OFF",
+            "GGML_SSE42": "OFF",
+            "GGML_AVX": "OFF",
+            "GGML_AVX2": "OFF",
+            "GGML_BMI2": "OFF",
+            "GGML_FMA": "OFF",
+            "GGML_F16C": "OFF"
+          },
+          "allowedDependencies": [
+            "ADVAPI32.dll",
+            "KERNEL32.dll",
+            "vulkan-1.dll"
+          ]
+        }
+      ]
+    }
+  ]
+}

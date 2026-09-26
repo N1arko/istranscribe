@@ -1,0 +1,14 @@
+Microsoft Windows SDK .NET Ref redistribution notice
+
+Package: Microsoft.Windows.SDK.NET.Ref 10.0.26100.84
+Review reference: Microsoft Windows SDK REDIST list, updated 2024-10-21
+Official source: https://learn.microsoft.com/en-us/legal/windows-sdk/redist
+
+Microsoft's REDIST list permits files in the Microsoft.Windows.SDK.NET.Ref
+NuGet package to be distributed unmodified as part of a program that calls
+Windows Runtime (WinRT) APIs. The redistributed package files used by
+isTranscribe are Microsoft.Windows.SDK.NET.dll and WinRT.Runtime.dll.
+
+The two files are redistributed unmodified as part of isTranscribe. This
+notice records the exact reviewed redistribution basis and does not replace
+the Microsoft license terms that govern the Windows SDK package.

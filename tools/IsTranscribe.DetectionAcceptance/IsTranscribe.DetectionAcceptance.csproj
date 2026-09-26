@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.DetectionAcceptance</RootNamespace>
+    <AssemblyName>IsTranscribe.DetectionAcceptance</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\IsTranscribe.Application\IsTranscribe.Application.csproj" />
+    <ProjectReference Include="..\..\src\IsTranscribe.Platform.Windows\IsTranscribe.Platform.Windows.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\specs\evidence-schemas\feat-011-live-v1.schema.json"
+          Link="feat-011-live-v1.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

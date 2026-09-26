@@ -1,0 +1,35 @@
+# @spec spec://modules/platform/INFRA-009-cross-platform-repository-boundaries#repository-baseline
+
+# Repository text is normalized to LF. Windows command files retain CRLF.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.psd1 text eol=crlf
+*.psm1 text eol=crlf
+
+# Binary assets must not be line-ending normalized.
+*.bmp binary
+*.dll binary
+*.dmg binary
+*.eot binary
+*.exe binary
+*.gif binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.m4a binary
+*.mp3 binary
+*.msix binary
+*.msixbundle binary
+*.nupkg binary
+*.ogg binary
+*.pdf binary
+*.png binary
+*.pfx binary
+*.sqlite binary
+*.ttf binary
+*.wav binary
+*.woff binary
+*.woff2 binary
+*.zip binary

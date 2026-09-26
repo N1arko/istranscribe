@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-009-cross-platform-repository-boundaries#structure -->
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.App.MacOS</RootNamespace>
+    <AssemblyName>IsTranscribe.App.MacOS</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IsTranscribe.Application\IsTranscribe.Application.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Core\IsTranscribe.Core.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Desktop\IsTranscribe.Desktop.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Persistence\IsTranscribe.Persistence.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Platform.MacOS\IsTranscribe.Platform.MacOS.csproj" />
+    <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#engine.projects -->
+    <ProjectReference Include="..\IsTranscribe.Transcription.Local\IsTranscribe.Transcription.Local.csproj" />
+  </ItemGroup>
+</Project>

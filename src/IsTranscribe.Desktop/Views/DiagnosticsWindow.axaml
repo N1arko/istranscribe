@@ -1,0 +1,97 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.DiagnosticsWindow"
+    x:DataType="vm:DiagnosticsViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{DynamicResource String.Diagnostics.Title}"
+    Width="520"
+    Height="600"
+    MinWidth="440"
+    MinHeight="500"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterOwner">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#settings -->
+  <!-- @spec spec://modules/app/FEAT-015-cloud-transcription-groq-openrouter#behavior.states -->
+  <!-- @spec spec://modules/app/FEAT-015-cloud-transcription-groq-openrouter#privacy -->
+  <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#experience -->
+  <Grid RowDefinitions="Auto,*,Auto,Auto" Margin="26,22">
+    <Grid ColumnDefinitions="*,Auto">
+      <StackPanel Spacing="4">
+        <TextBlock Text="{DynamicResource String.Diagnostics.Title}" FontSize="27" FontWeight="SemiBold" />
+        <TextBlock
+            Text="{DynamicResource String.Diagnostics.Description}"
+            Foreground="{DynamicResource Brush.Text.Secondary}"
+            FontSize="13" />
+      </StackPanel>
+      <Button
+          Grid.Column="1"
+          Padding="9,6"
+          Background="Transparent"
+          BorderThickness="0"
+          Content="{DynamicResource String.Action.Close}"
+          Command="{Binding CloseCommand}" />
+    </Grid>
+
+    <Border
+        Grid.Row="1"
+        Margin="0,20,0,14"
+        Padding="16,8"
+        CornerRadius="14"
+        Background="{DynamicResource Brush.Surface.Primary}"
+        BorderBrush="{DynamicResource Brush.Border.Subtle}"
+        BorderThickness="1">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Rows}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:DiagnosticRowViewModel">
+              <Grid ColumnDefinitions="150,*" Margin="0,8">
+                <TextBlock Text="{Binding Label}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="12" />
+                <TextBlock
+                    Grid.Column="1"
+                    Text="{Binding Value}"
+                    Foreground="{DynamicResource Brush.Text.Primary}"
+                    FontSize="12"
+                    TextWrapping="Wrap"
+                    TextTrimming="CharacterEllipsis" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </Border>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,*,*" ColumnSpacing="8">
+      <Button
+          Padding="10,9"
+          Content="{DynamicResource String.Diagnostics.CopySummary}"
+          Command="{Binding CopyCommand}" />
+      <Button
+          Grid.Column="1"
+          Padding="10,9"
+          Content="{DynamicResource String.Diagnostics.Export}"
+          Command="{Binding ExportCommand}" />
+      <Button
+          Grid.Column="2"
+          Padding="10,9"
+          Content="{DynamicResource String.Diagnostics.OpenLogs}"
+          Command="{Binding OpenLogsCommand}" />
+    </Grid>
+
+    <Grid Grid.Row="3" Margin="0,12,0,0" MinHeight="20">
+      <TextBlock
+          x:Name="DiagnosticsStatusLiveRegion"
+          Text="{Binding StatusMessage}"
+          Foreground="{DynamicResource Brush.Status.Success}"
+          FontSize="12"
+          IsVisible="{Binding HasStatus}" />
+      <TextBlock
+          x:Name="DiagnosticsErrorLiveRegion"
+          Text="{Binding ErrorMessage}"
+          Foreground="{DynamicResource Brush.Status.Danger}"
+          FontSize="12"
+          IsVisible="{Binding HasError}" />
+    </Grid>
+  </Grid>
+</Window>

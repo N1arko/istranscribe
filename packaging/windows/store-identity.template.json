@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "infra-005-store-identity-v1",
+  "configured": false,
+  "reservedProductName": "<Partner Center reserved product name>",
+  "identityName": "<Package/Identity/Name>",
+  "publisher": "<Package/Identity/Publisher>",
+  "publisherDisplayName": "<Package/Properties/PublisherDisplayName>",
+  "packageFamilyName": "<Package family name>",
+  "applicationId": "App"
+}

@@ -1,0 +1,8 @@
+isTranscribe for macOS — first launch
+
+1. Drag isTranscribe.app to Applications.
+2. Open it from Applications.
+3. If Gatekeeper blocks this private build without Developer ID, open System Settings → Privacy & Security and choose Open Anyway for isTranscribe.
+4. Grant microphone, system audio recording and Accessibility permissions when the app explains why they are needed.
+
+The release uses local ad-hoc executable signatures and has no Developer ID or notarization. No Apple Developer membership is required.

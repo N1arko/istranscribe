@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Models/whisper-model-catalog.v1.json"
+                      LogicalName="IsTranscribe.Transcription.Local.Models.whisper-model-catalog.v1.json" />
+  </ItemGroup>
+</Project>

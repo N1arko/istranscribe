@@ -1,0 +1,14 @@
+<Application
+    x:Class="IsTranscribe.VisualReview.ReviewApplication"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    RequestedThemeVariant="Light">
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#verification -->
+  <Application.Styles>
+    <FluentTheme />
+    <Style Selector="Window">
+      <Setter Property="FontFamily" Value="{DynamicResource Font.Family.UI}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+  </Application.Styles>
+</Application>

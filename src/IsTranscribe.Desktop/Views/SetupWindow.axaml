@@ -1,0 +1,262 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.SetupWindow"
+    x:DataType="vm:SetupViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{DynamicResource String.Brand.WindowTitle}"
+    Width="540"
+    Height="680"
+    MinWidth="440"
+    MinHeight="560"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterScreen">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#first-run -->
+  <Window.Styles>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Primary}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Subtle}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="Padding" Value="18" />
+    </Style>
+    <Style Selector="Button.primary">
+      <Setter Property="MinHeight" Value="44" />
+      <Setter Property="Padding" Value="20,11" />
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Primary}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="TextBlock.section-title">
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="28,24">
+    <StackPanel Spacing="7">
+      <StackPanel Orientation="Horizontal" Spacing="9">
+        <Ellipse Width="8" Height="8" Fill="{DynamicResource Brush.Accent.Primary}" VerticalAlignment="Center" />
+        <TextBlock Text="{DynamicResource String.Brand.Name}" FontSize="15" FontWeight="SemiBold" />
+      </StackPanel>
+      <TextBlock
+          Margin="0,12,0,0"
+          Text="{DynamicResource String.Setup.Title}"
+          Foreground="{DynamicResource Brush.Text.Primary}"
+          FontSize="30"
+          FontWeight="SemiBold"
+          LetterSpacing="-1"
+          TextWrapping="Wrap" />
+      <TextBlock
+          Text="{DynamicResource String.Setup.Description}"
+          Foreground="{DynamicResource Brush.Text.Secondary}"
+          FontSize="14"
+          TextWrapping="Wrap" />
+    </StackPanel>
+
+    <ScrollViewer Grid.Row="1" Margin="0,22,0,18" VerticalScrollBarVisibility="Auto">
+      <StackPanel Spacing="12">
+        <Border Classes="card">
+          <Grid ColumnDefinitions="*,Auto">
+            <StackPanel Spacing="5">
+              <TextBlock Text="{DynamicResource String.Setup.Service.Title}" Classes="section-title" />
+              <TextBlock
+                  Text="{DynamicResource String.Setup.Service.Description}"
+                  Foreground="{DynamicResource Brush.Text.Secondary}"
+                  FontSize="13"
+                  TextWrapping="Wrap" />
+            </StackPanel>
+            <ToggleSwitch
+                Grid.Column="1"
+                Margin="18,0,0,0"
+                IsChecked="{Binding ServiceEnabled}"
+                AutomationProperties.Name="{DynamicResource String.Setup.Service.Title}"
+                OffContent=""
+                OnContent=""
+                VerticalAlignment="Center" />
+          </Grid>
+        </Border>
+
+        <Border Classes="card" IsVisible="{Binding HasPlatformPermissions}">
+          <StackPanel Spacing="12">
+            <StackPanel Spacing="4">
+              <TextBlock Text="{DynamicResource String.Permission.Title}" Classes="section-title" />
+              <TextBlock
+                  Text="{DynamicResource String.Permission.Description}"
+                  Foreground="{DynamicResource Brush.Text.Secondary}"
+                  FontSize="12"
+                  TextWrapping="Wrap" />
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding PlatformPermissions}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:PlatformPermissionOptionViewModel">
+                  <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" Margin="0,3">
+                    <StackPanel Spacing="2" VerticalAlignment="Center">
+                      <TextBlock Text="{Binding Title}" FontSize="13" />
+                      <TextBlock Text="{Binding StateLabel}" Foreground="{DynamicResource Brush.Text.Tertiary}" FontSize="11" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="1"
+                        Padding="10,6"
+                        Content="{Binding RequestActionText}"
+                        Command="{Binding RequestCommand}"
+                        IsVisible="{Binding !IsGranted}" />
+                    <Button
+                        Grid.Column="2"
+                        Padding="10,6"
+                        Content="{Binding OpenSettingsActionText}"
+                        Command="{Binding OpenSettingsCommand}"
+                        IsVisible="{Binding ShowOpenSettings}" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card">
+          <StackPanel Spacing="12">
+            <StackPanel Spacing="4">
+              <TextBlock Text="{DynamicResource String.Setup.Apps.Title}" Classes="section-title" />
+              <TextBlock
+                  Text="{DynamicResource String.Setup.Apps.Description}"
+                  Foreground="{DynamicResource Brush.Text.Secondary}"
+                  FontSize="12"
+                  TextWrapping="Wrap" />
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Applications}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:MeetingApplicationOptionViewModel">
+                  <StackPanel Margin="0,0,14,8" Spacing="2">
+                    <CheckBox
+                        Content="{Binding DisplayName}"
+                        IsChecked="{Binding IsMonitored}" />
+                    <TextBlock
+                        Margin="28,0,0,0"
+                        Width="302"
+                        Text="{DynamicResource String.App.OtherBrowser.Description}"
+                        Foreground="{DynamicResource Brush.Text.Tertiary}"
+                        FontSize="11"
+                        LineHeight="16"
+                        TextWrapping="Wrap"
+                        IsVisible="{Binding IsBrowserFallback}" />
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card">
+          <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+            <TextBlock Text="{DynamicResource String.Setup.Output.Title}" Classes="section-title" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{DynamicResource String.Setup.Output.SystemDefault}"
+                Foreground="{DynamicResource Brush.Text.Secondary}"
+                FontSize="12" />
+            <TextBlock Grid.Row="1" Margin="0,14,0,0" Text="{DynamicResource String.Setup.Microphone.Title}" Classes="section-title" />
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,14,0,0"
+                MinWidth="190"
+                AutomationProperties.Name="{DynamicResource String.Setup.Microphone.Title}"
+                ItemsSource="{Binding MicrophoneChoices}"
+                SelectedItem="{Binding SelectedMicrophone}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:MicrophoneOptionViewModel">
+                  <TextBlock Text="{Binding Label}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,14,0,0" Spacing="6">
+              <TextBlock Text="{DynamicResource String.Setup.Folder.Title}" Classes="section-title" />
+              <Button
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Padding="11,8"
+                  Background="{DynamicResource Brush.Surface.Secondary}"
+                  BorderBrush="{DynamicResource Brush.Border.Subtle}"
+                  BorderThickness="1"
+                  CornerRadius="8"
+                  Content="{Binding RecordingsFolderLabel}"
+                  Command="{Binding ChooseFolderCommand}" />
+            </StackPanel>
+          </Grid>
+        </Border>
+
+        <Border Classes="card">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock
+                Text="{DynamicResource String.Setup.Autostart.Title}"
+                Classes="section-title"
+                VerticalAlignment="Center" />
+            <ToggleSwitch
+                Grid.Column="1"
+                IsChecked="{Binding Autostart}"
+                AutomationProperties.Name="{DynamicResource String.Setup.Autostart.Title}"
+                OffContent=""
+                OnContent="" />
+          </Grid>
+        </Border>
+
+        <Border
+            Padding="14,12"
+            CornerRadius="12"
+            Background="{DynamicResource Brush.Status.WarningSoft}"
+            BorderBrush="{DynamicResource Brush.Status.Warning}"
+            BorderThickness="1"
+            IsVisible="{Binding HasCapabilityNotice}">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="14">
+            <TextBlock
+                x:Name="CapabilityLiveRegion"
+                Text="{Binding CapabilityMessage}"
+                Foreground="{DynamicResource Brush.Text.Primary}"
+                FontSize="12"
+                TextWrapping="Wrap"
+                VerticalAlignment="Center" />
+            <Button
+                Grid.Column="1"
+                MinHeight="36"
+                Padding="12,7"
+                Content="{Binding CapabilityActionText}"
+                Command="{Binding RetryCapabilitiesCommand}" />
+          </Grid>
+        </Border>
+
+        <Border
+            Padding="12,10"
+            CornerRadius="10"
+            Background="{DynamicResource Brush.Status.DangerSoft}"
+            IsVisible="{Binding HasError}">
+          <TextBlock
+              x:Name="SetupErrorLiveRegion"
+              Text="{Binding ErrorMessage}"
+              TextWrapping="Wrap" />
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+      <TextBlock
+          Text="{DynamicResource String.Privacy.LocalAudio}"
+          Foreground="{DynamicResource Brush.Text.Tertiary}"
+          FontSize="11"
+          VerticalAlignment="Center" />
+      <Button
+          Grid.Column="1"
+          Classes="primary"
+          Content="{Binding CompleteActionText}"
+          Command="{Binding CompleteCommand}" />
+    </Grid>
+  </Grid>
+</Window>

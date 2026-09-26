@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Private security report
+    url: https://github.com/N1arko/istranscribe/security/advisories/new
+    about: Report vulnerabilities involving recordings, credentials, or local files privately.

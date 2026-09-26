@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-007-cross-platform-core-and-avalonia-shell#target-structure -->
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.Host</RootNamespace>
+    <IsReleaseArtifact>false</IsReleaseArtifact>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.9" />
+    <!-- @spec spec://modules/platform/INFRA-005.C-deterministic-third-party-notices#decisions.payload -->
+    <PackageReference Include="NAudio.Wasapi" Version="2.3.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IsTranscribe.Application\IsTranscribe.Application.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Persistence\IsTranscribe.Persistence.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Platform.Windows\IsTranscribe.Platform.Windows.csproj" />
+  </ItemGroup>
+</Project>

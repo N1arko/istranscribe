@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-005.A-production-windows-x64-installer#signing -->
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference
+      Include="Microsoft.Windows.SDK.BuildTools"
+      Version="[10.0.28000.1839]"
+      GeneratePathProperty="true"
+      PrivateAssets="all" />
+  </ItemGroup>
+</Project>

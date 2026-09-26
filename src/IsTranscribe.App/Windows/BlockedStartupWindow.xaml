@@ -1,0 +1,29 @@
+<ui:FluentWindow x:Class="IsTranscribe.App.Windows.BlockedStartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:loc="clr-namespace:IsTranscribe.App.Strings"
+        Title="{loc:Loc Dialog_BlockedStartup_WindowTitle}"
+        Height="320"
+        Width="620"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+  <Grid Margin="24">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TextBlock FontSize="26" FontWeight="SemiBold" Text="{loc:Loc Dialog_BlockedStartup_Title}" />
+
+    <Border Grid.Row="1" Margin="0,20,0,20" Padding="16" Background="{DynamicResource AppErrorBackgroundBrush}" CornerRadius="8">
+      <StackPanel>
+        <TextBlock x:Name="SummaryText" FontSize="18" FontWeight="SemiBold" />
+        <TextBlock x:Name="DetailText" Margin="0,12,0,0" TextWrapping="Wrap" />
+      </StackPanel>
+    </Border>
+
+    <ui:Button Grid.Row="2" Appearance="Primary" Width="96" HorizontalAlignment="Right" Padding="12,8" Content="{loc:Loc Dialog_BlockedStartup_Close}" Click="OnCloseClick" />
+  </Grid>
+</ui:FluentWindow>

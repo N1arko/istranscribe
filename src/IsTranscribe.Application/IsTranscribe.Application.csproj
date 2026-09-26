@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-009-cross-platform-repository-boundaries#application-runtime -->
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.Application</RootNamespace>
+    <AssemblyName>IsTranscribe.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IsTranscribe.Core\IsTranscribe.Core.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Persistence\IsTranscribe.Persistence.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Transcription.Local\IsTranscribe.Transcription.Local.csproj" />
+  </ItemGroup>
+</Project>

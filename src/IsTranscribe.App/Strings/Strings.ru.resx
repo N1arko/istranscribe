@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Shell_Window_Title" xml:space="preserve"><value>isTranscribe</value></data>
+  <data name="Wizard_Window_Title" xml:space="preserve"><value>isTranscribe — первоначальная настройка</value></data>
+  <data name="Dialog_BlockedStartup_WindowTitle" xml:space="preserve"><value>isTranscribe — запуск заблокирован</value></data>
+  <data name="Dialog_Recovery_WindowTitle" xml:space="preserve"><value>isTranscribe — восстановление</value></data>
+  <data name="Dialog_AddApplication_WindowTitle" xml:space="preserve"><value>Добавить приложение</value></data>
+  <data name="Dialog_RunningProcessPicker_WindowTitle" xml:space="preserve"><value>Добавить из запущенных процессов</value></data>
+  <data name="Dialog_Prompt_WindowTitle" xml:space="preserve"><value>Значение</value></data>
+  <data name="Shell_Header_BrandName" xml:space="preserve"><value>isTranscribe</value></data>
+  <data name="Shell_Header_Subtitle" xml:space="preserve"><value>Tray-приложение с настройкой, ручным управлением и секционными параметрами.</value></data>
+  <data name="Shell_Tab_Home" xml:space="preserve"><value>Главная</value></data>
+  <data name="Shell_Tab_CurrentRecording" xml:space="preserve"><value>Текущая запись</value></data>
+  <data name="Shell_Tab_Settings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="Shell_Home_HostState_Title" xml:space="preserve"><value>Состояние хоста</value></data>
+  <data name="Shell_Home_Capability_Full" xml:space="preserve"><value>Возможности: полные</value></data>
+  <data name="Shell_Home_Capability_Degraded" xml:space="preserve"><value>Возможности: ограничены</value></data>
+  <data name="Shell_Home_Capability_Blocked" xml:space="preserve"><value>Возможности: заблокированы</value></data>
+  <data name="Shell_Home_Onboarding_Completed" xml:space="preserve"><value>Настройка завершена. Явные запуски открывают окно; автозагрузка остаётся в трее.</value></data>
+  <data name="Shell_Home_Onboarding_Incomplete" xml:space="preserve"><value>Настройка не завершена. Хост перенаправит обратно в мастер, пока настройка не будет пройдена.</value></data>
+  <data name="Shell_Home_RecordingState" xml:space="preserve"><value>Состояние записи: {0}</value></data>
+  <data name="Shell_Home_PrivacyPause" xml:space="preserve"><value>Пауза конфиденциальности: {0}</value></data>
+  <data name="Shell_Home_PrivacyPause_On" xml:space="preserve"><value>Вкл</value></data>
+  <data name="Shell_Home_PrivacyPause_Off" xml:space="preserve"><value>Выкл</value></data>
+  <data name="Shell_Home_LogsPath" xml:space="preserve"><value>Логи: {0}</value></data>
+  <data name="Shell_Home_Paths_Title" xml:space="preserve"><value>Пути и хранение</value></data>
+  <data name="Shell_Home_RecordingsFolder" xml:space="preserve"><value>Папка записей: {0}</value></data>
+  <data name="Shell_Home_TranscriptsFolder" xml:space="preserve"><value>Папка транскриптов: {0}</value></data>
+  <data name="Shell_Home_ApiKey_NotConfigured" xml:space="preserve"><value>API-ключ Fireworks: не настроен</value></data>
+  <data name="Shell_Home_ApiKey_Configured" xml:space="preserve"><value>API-ключ Fireworks: {0}</value></data>
+  <data name="Shell_Home_RecentMeetings_Title" xml:space="preserve"><value>Недавние встречи</value></data>
+  <data name="Shell_Home_RecentMeetings_Empty" xml:space="preserve"><value>Записей ещё нет. Встречи появятся здесь после первой сохранённой сессии.</value></data>
+  <data name="Shell_Home_RecentSessions_None" xml:space="preserve"><value>Недавних сессий пока нет.</value></data>
+  <data name="Shell_Home_RecentSessions_Info" xml:space="preserve"><value>Показано {0} из {1} недавних сессий.</value></data>
+  <data name="Shell_Home_RecentSessions_Loading" xml:space="preserve"><value>Загрузка недавних сессий...</value></data>
+  <data name="Shell_Home_RecentSessions_Error" xml:space="preserve"><value>Не удалось загрузить сессии: {0}</value></data>
+  <data name="Shell_Home_OpenFolder" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="Shell_Home_OpenMarkdown" xml:space="preserve"><value>Открыть Markdown</value></data>
+  <data name="Shell_Home_RetryTranscription" xml:space="preserve"><value>Повторить транскрипцию</value></data>
+  <data name="Shell_Home_LoadMore" xml:space="preserve"><value>Загрузить ещё</value></data>
+  <data name="Shell_Home_ManualActions_Title" xml:space="preserve"><value>Ручные действия</value></data>
+  <data name="Shell_Home_StartForceRecord" xml:space="preserve"><value>Начать принудительную запись</value></data>
+  <data name="Shell_Home_PauseRecording" xml:space="preserve"><value>Приостановить запись</value></data>
+  <data name="Shell_Home_ResumeRecording" xml:space="preserve"><value>Возобновить запись</value></data>
+  <data name="Shell_Home_StopCurrentRecording" xml:space="preserve"><value>Остановить текущую запись</value></data>
+  <data name="Shell_Home_DiscardCurrentRecording" xml:space="preserve"><value>Отменить текущую запись</value></data>
+  <data name="Shell_Home_TogglePrivacyPause" xml:space="preserve"><value>Пауза конфиденциальности</value></data>
+  <data name="Shell_Home_OpenLogsFolder" xml:space="preserve"><value>Открыть папку логов</value></data>
+  <data name="Shell_Home_Quit" xml:space="preserve"><value>Выход</value></data>
+  <data name="Shell_CurrentRecording_Title" xml:space="preserve"><value>Текущая запись</value></data>
+  <data name="Shell_CurrentRecording_NoActive" xml:space="preserve"><value>Сейчас нет активной записи. Нажми «Начать принудительную запись», чтобы начать.</value></data>
+  <data name="Shell_CurrentRecording_AwaitConfirmation" xml:space="preserve"><value>Ожидание подтверждения: {0}</value></data>
+  <data name="Shell_CurrentRecording_State" xml:space="preserve"><value>Состояние: {0}</value></data>
+  <data name="Shell_CurrentRecording_Mode" xml:space="preserve"><value>Режим: {0}</value></data>
+  <data name="Shell_CurrentRecording_Mode_None" xml:space="preserve"><value>нет</value></data>
+  <data name="Shell_CurrentRecording_Duration" xml:space="preserve"><value>Длительность записи: {0}</value></data>
+  <data name="Shell_CurrentRecording_Sources_None" xml:space="preserve"><value>Источники: нет активной записи</value></data>
+  <data name="Shell_CurrentRecording_Sources" xml:space="preserve"><value>Источники: {0}</value></data>
+  <data name="Shell_CurrentRecording_Output_None" xml:space="preserve"><value>Выход: не участвует в текущей сессии</value></data>
+  <data name="Shell_CurrentRecording_Output" xml:space="preserve"><value>Выход: {0}</value></data>
+  <data name="Shell_CurrentRecording_Mic_None" xml:space="preserve"><value>Микрофон: не участвует в текущей сессии</value></data>
+  <data name="Shell_CurrentRecording_Mic" xml:space="preserve"><value>Микрофон: {0}</value></data>
+  <data name="Shell_CurrentRecording_StartForceRecord" xml:space="preserve"><value>Начать принудительную запись</value></data>
+  <data name="Shell_CurrentRecording_Pause" xml:space="preserve"><value>Пауза</value></data>
+  <data name="Shell_CurrentRecording_Resume" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="Shell_CurrentRecording_Stop" xml:space="preserve"><value>Стоп</value></data>
+  <data name="Shell_CurrentRecording_Discard" xml:space="preserve"><value>Отменить</value></data>
+  <data name="Shell_CurrentRecording_PrivacyPause" xml:space="preserve"><value>Пауза конфиденциальности</value></data>
+  <data name="Shell_Device_Active" xml:space="preserve"><value>{0} (активно)</value></data>
+  <data name="Shell_Device_Active_Short" xml:space="preserve"><value>активно</value></data>
+  <data name="Shell_Device_Unavailable" xml:space="preserve"><value>{0} (недоступно)</value></data>
+  <data name="Shell_Device_Unavailable_Short" xml:space="preserve"><value>недоступно</value></data>
+  <data name="Shell_Device_NotInSession" xml:space="preserve"><value>не участвует в текущей сессии</value></data>
+  <data name="Shell_Settings_DegradedBanner" xml:space="preserve"><value>Эта система не поддерживает захват отдельных процессов. Захват системного звука и микрофона остаётся доступным.</value></data>
+  <data name="Shell_Settings_Unsaved" xml:space="preserve"><value>Не сохранено</value></data>
+  <data name="Shell_Settings_General_Tab" xml:space="preserve"><value>Общие</value></data>
+  <data name="Shell_Settings_General_Title" xml:space="preserve"><value>Общие</value></data>
+  <data name="Shell_Settings_General_Autostart" xml:space="preserve"><value>Запускать при старте Windows</value></data>
+  <data name="Shell_Settings_General_MinimizeToTray" xml:space="preserve"><value>Сворачивать в трей вместо закрытия</value></data>
+  <data name="Shell_Settings_General_Notifications" xml:space="preserve"><value>Показывать уведомления</value></data>
+  <data name="Shell_Settings_General_Language_Label" xml:space="preserve"><value>Язык интерфейса</value></data>
+  <data name="Shell_Settings_General_Theme_Label" xml:space="preserve"><value>Тема приложения</value></data>
+  <data name="Shell_Settings_General_Advanced" xml:space="preserve"><value>Расширенные настройки (4 параметра)</value></data>
+  <data name="Shell_Settings_General_Hotkeys_Title" xml:space="preserve"><value>Горячие клавиши</value></data>
+  <data name="Shell_Settings_General_ForceRecordHotkey" xml:space="preserve"><value>Горячая клавиша принудительной записи</value></data>
+  <data name="Shell_Settings_General_PrivacyPauseHotkey" xml:space="preserve"><value>Горячая клавиша паузы конфиденциальности</value></data>
+  <data name="Shell_Settings_General_DiscardRecordingHotkey" xml:space="preserve"><value>Горячая клавиша отмены записи</value></data>
+  <data name="Shell_Settings_General_OpenMainWindowHotkey" xml:space="preserve"><value>Горячая клавиша открытия главного окна</value></data>
+  <data name="Common_Clear" xml:space="preserve"><value>Очистить</value></data>
+  <data name="Common_Save" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="Shell_Settings_Recording_Tab" xml:space="preserve"><value>Запись</value></data>
+  <data name="Shell_Settings_Recording_Title" xml:space="preserve"><value>Запись</value></data>
+  <data name="Shell_Settings_Recording_Mode_Label" xml:space="preserve"><value>Режим записи</value></data>
+  <data name="Shell_Settings_Recording_Preset_Label" xml:space="preserve"><value>Пресет записи</value></data>
+  <data name="Shell_Settings_Recording_PrivacyPausePolicy_Label" xml:space="preserve"><value>Политика паузы конфиденциальности</value></data>
+  <data name="Shell_Settings_Recording_Advanced" xml:space="preserve"><value>Расширенные настройки (9 параметров)</value></data>
+  <data name="Shell_Settings_Recording_Prebuffer_Label" xml:space="preserve"><value>Предзапись</value></data>
+  <data name="Shell_Settings_Recording_Prebuffer_Desc" xml:space="preserve"><value>Секунд аудио, хранящихся в памяти до начала записи</value></data>
+  <data name="Shell_Settings_Recording_SilenceThreshold_Label" xml:space="preserve"><value>Порог тишины</value></data>
+  <data name="Shell_Settings_Recording_SilenceThreshold_Desc" xml:space="preserve"><value>Уровень звука, ниже которого определяется тишина (-60 тише всего, 0 громче всего)</value></data>
+  <data name="Shell_Settings_Recording_StartDelay_Label" xml:space="preserve"><value>Задержка начала (секунды)</value></data>
+  <data name="Shell_Settings_Recording_StartDelay_Desc" xml:space="preserve"><value>Ожидание перед началом новой записи</value></data>
+  <data name="Shell_Settings_Recording_StopDelay_Label" xml:space="preserve"><value>Задержка остановки (секунды)</value></data>
+  <data name="Shell_Settings_Recording_StopDelay_Desc" xml:space="preserve"><value>Ожидание тишины перед остановкой</value></data>
+  <data name="Shell_Settings_Recording_MergeWindow_Label" xml:space="preserve"><value>Окно объединения (секунды)</value></data>
+  <data name="Shell_Settings_Recording_MergeWindow_Desc" xml:space="preserve"><value>Автоматически объединять записи, перезапущенные в пределах этого количества секунд</value></data>
+  <data name="Shell_Settings_Recording_AutoSources_Title" xml:space="preserve"><value>Источники по умолчанию (Авто)</value></data>
+  <data name="Shell_Settings_Recording_CaptureAppAudio" xml:space="preserve"><value>Захват звука приложения</value></data>
+  <data name="Shell_Settings_Recording_CaptureAppAudio_Desc" xml:space="preserve"><value>Записывать аудио непосредственно из целевого приложения</value></data>
+  <data name="Shell_Settings_Recording_CaptureSystemAudio" xml:space="preserve"><value>Захват системного звука</value></data>
+  <data name="Shell_Settings_Recording_CaptureSystemAudio_Desc" xml:space="preserve"><value>Записывать весь звук через устройство вывода</value></data>
+  <data name="Shell_Settings_Recording_CaptureMicrophone" xml:space="preserve"><value>Захват микрофона</value></data>
+  <data name="Shell_Settings_Recording_ForceSources_Title" xml:space="preserve"><value>Источники по умолчанию (Принудительная запись)</value></data>
+  <data name="Shell_Settings_Recording_NoteNextSession" xml:space="preserve"><value>Это изменение вступит в силу со следующей сессии записи.</value></data>
+  <data name="Shell_Settings_Devices_Tab" xml:space="preserve"><value>Устройства</value></data>
+  <data name="Shell_Settings_Devices_Title" xml:space="preserve"><value>Устройства</value></data>
+  <data name="Shell_Settings_Devices_OutputDevice_Label" xml:space="preserve"><value>Устройство вывода</value></data>
+  <data name="Shell_Settings_Devices_FollowSystemOutput" xml:space="preserve"><value>Следовать за системным по умолчанию (выход)</value></data>
+  <data name="Shell_Settings_Devices_Microphone_Label" xml:space="preserve"><value>Микрофон</value></data>
+  <data name="Shell_Settings_Devices_FollowSystemMic" xml:space="preserve"><value>Следовать за системным по умолчанию (микрофон)</value></data>
+  <data name="Shell_Settings_Devices_Advanced" xml:space="preserve"><value>Расширенные настройки (5 параметров)</value></data>
+  <data name="Shell_Settings_Devices_AutoDiscoverOutput" xml:space="preserve"><value>Автообнаружение устройств вывода</value></data>
+  <data name="Shell_Settings_Devices_AutoDiscoverMic" xml:space="preserve"><value>Автообнаружение микрофонов</value></data>
+  <data name="Shell_Settings_Devices_OutputChangePolicy_Label" xml:space="preserve"><value>При смене устройства вывода</value></data>
+  <data name="Shell_Settings_Devices_OutputChangePolicy_Desc" xml:space="preserve"><value>Что происходит при смене аудиоустройства в режиме ожидания</value></data>
+  <data name="Shell_Settings_Devices_MicChangePolicy_Label" xml:space="preserve"><value>При смене микрофона</value></data>
+  <data name="Shell_Settings_Devices_ActiveRecordingPolicy_Label" xml:space="preserve"><value>При смене устройства во время записи</value></data>
+  <data name="Shell_Settings_Devices_UnavailableWarning" xml:space="preserve"><value>Одно или несколько фиксированных устройств сейчас недоступны. Сохранение разрешено, так как устройство может вернуться позже.</value></data>
+  <data name="Shell_Settings_Applications_Tab" xml:space="preserve"><value>Приложения</value></data>
+  <data name="Shell_Settings_Applications_Title" xml:space="preserve"><value>Приложения</value></data>
+  <data name="Shell_Settings_Applications_AutoDiscovery_Label" xml:space="preserve"><value>Политика обнаружения приложений</value></data>
+  <data name="Shell_Settings_Applications_AutoDiscovery_Desc" xml:space="preserve"><value>Известные приложения на этом ПК можно включить ниже. Предложения в рантайме следуют этой политике, а явные отказы перемещаются в «Игнорируемые предложения», чтобы не спрашивать снова и снова.</value></data>
+  <data name="Shell_Settings_Applications_KnownApps_Title" xml:space="preserve"><value>Известные приложения на этом ПК</value></data>
+  <data name="Shell_Settings_Applications_KnownApps_Desc" xml:space="preserve"><value>Здесь можно включать и выключать распространённые приложения для встреч, не ища среди запущенных процессов.</value></data>
+  <data name="Shell_Settings_Applications_KnownApps_Empty" xml:space="preserve"><value>Известных приложений для встреч пока не обнаружено. Можно добавить запущенный процесс или ввести вручную.</value></data>
+  <data name="Shell_Settings_Applications_Whitelist_Title" xml:space="preserve"><value>Список отслеживания для режимов Спросить и Авто</value></data>
+  <data name="Shell_Settings_Applications_Whitelist_Empty" xml:space="preserve"><value>Список отслеживания пуст. Режимы Спросить и Авто будут ожидать, пока не добавишь приложения.</value></data>
+  <data name="Shell_Settings_Applications_Whitelist_Summary" xml:space="preserve"><value>{0} приложений в списке отслеживания. Порядок определяет приоритет, когда совпадают несколько правил.</value></data>
+  <data name="Shell_Settings_Applications_Remove" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Shell_Settings_Applications_MoveUp" xml:space="preserve"><value>Вверх</value></data>
+  <data name="Shell_Settings_Applications_MoveDown" xml:space="preserve"><value>Вниз</value></data>
+  <data name="Shell_Settings_Applications_AddFromRunning" xml:space="preserve"><value>Добавить из запущенных...</value></data>
+  <data name="Shell_Settings_Applications_Advanced" xml:space="preserve"><value>Расширенные настройки (4+ параметра)</value></data>
+  <data name="Shell_Settings_Applications_ManualAdd_Title" xml:space="preserve"><value>Добавление вручную</value></data>
+  <data name="Shell_Settings_Applications_ManualAdd_Desc" xml:space="preserve"><value>Используй запущенные процессы, только когда приложение для встреч уже работает или каталог известных приложений не нашёл нужное.</value></data>
+  <data name="Shell_Settings_Applications_AddManually" xml:space="preserve"><value>Добавить вручную...</value></data>
+  <data name="Shell_Settings_Applications_IgnoredSuggestions_Title" xml:space="preserve"><value>Игнорируемые предложения</value></data>
+  <data name="Shell_Settings_Applications_IgnoredSuggestions_Desc" xml:space="preserve"><value>Приложения, которые были отклонены в рантайме, попадают сюда, чтобы не спрашивать на каждой встрече. Удали запись, чтобы разрешить предложения снова.</value></data>
+  <data name="Shell_Settings_Applications_AllowAgain" xml:space="preserve"><value>Разрешить снова</value></data>
+  <data name="Shell_Settings_Applications_Exclusions_Title" xml:space="preserve"><value>Исключённые приложения</value></data>
+  <data name="Shell_Settings_Applications_Exclusions_Desc" xml:space="preserve"><value>Технические исключения отфильтровывают системные или нерелевантные процессы и хранятся отдельно от пользовательских игнорируемых предложений.</value></data>
+  <data name="Shell_Settings_Applications_AddExclusion" xml:space="preserve"><value>Добавить исключение</value></data>
+  <data name="Shell_Settings_Applications_RemoveExclusion" xml:space="preserve"><value>Удалить исключение</value></data>
+  <data name="Shell_Settings_Storage_Tab" xml:space="preserve"><value>Хранение</value></data>
+  <data name="Shell_Settings_Storage_Title" xml:space="preserve"><value>Хранение</value></data>
+  <data name="Shell_Settings_Storage_RecordingsFolder_Label" xml:space="preserve"><value>Папка записей</value></data>
+  <data name="Shell_Settings_Storage_TranscriptsFolder_Label" xml:space="preserve"><value>Папка транскриптов</value></data>
+  <data name="Common_Browse" xml:space="preserve"><value>Обзор...</value></data>
+  <data name="Shell_Settings_Storage_AudioCompression" xml:space="preserve"><value>Сжатие аудио (Opus) после записи</value></data>
+  <data name="Shell_Settings_Storage_AudioCompression_Desc" xml:space="preserve"><value>Уменьшает размер файла ~10x, требует FFmpeg</value></data>
+  <data name="Shell_Settings_Storage_Advanced" xml:space="preserve"><value>Расширенные настройки (4 параметра)</value></data>
+  <data name="Shell_Settings_Storage_TempFolder_Label" xml:space="preserve"><value>Папка временных файлов</value></data>
+  <data name="Shell_Settings_Storage_FilenameTemplate_Label" xml:space="preserve"><value>Шаблон имени файла</value></data>
+  <data name="Shell_Settings_Storage_FilenamePreview" xml:space="preserve"><value>Предпросмотр: {0}</value></data>
+  <data name="Shell_Settings_Storage_KeepRawAudio" xml:space="preserve"><value>Сохранять исходное аудио после транскрипции</value></data>
+  <data name="Shell_Settings_Storage_TempRetention_Label" xml:space="preserve"><value>Очистка временных файлов через</value></data>
+  <data name="Shell_Settings_Storage_NotePathsChange" xml:space="preserve"><value>Существующие записи и транскрипты останутся в прежних папках. Новые сессии будут использовать сохранённые пути.</value></data>
+  <data name="Shell_Settings_Transcription_Tab" xml:space="preserve"><value>Транскрипция</value></data>
+  <data name="Shell_Settings_Transcription_Title" xml:space="preserve"><value>Транскрипция</value></data>
+  <data name="Shell_Settings_Transcription_ApiKey_Label" xml:space="preserve"><value>API-ключ Fireworks</value></data>
+  <data name="Shell_Settings_Transcription_ApiKey_NotConfigured" xml:space="preserve"><value>Не настроен</value></data>
+  <data name="Shell_Settings_Transcription_Change" xml:space="preserve"><value>Изменить</value></data>
+  <data name="Shell_Settings_Transcription_Remove" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Shell_Settings_Transcription_Show" xml:space="preserve"><value>Показать</value></data>
+  <data name="Shell_Settings_Transcription_Hide" xml:space="preserve"><value>Скрыть</value></data>
+  <data name="Shell_Settings_Transcription_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Shell_Settings_Transcription_Model_Label" xml:space="preserve"><value>Модель транскрипции</value></data>
+  <data name="Shell_Settings_Transcription_Language_Label" xml:space="preserve"><value>Язык транскрипции</value></data>
+  <data name="Shell_Settings_Transcription_Advanced" xml:space="preserve"><value>Расширенные настройки (4 параметра)</value></data>
+  <data name="Shell_Settings_Transcription_Diarization" xml:space="preserve"><value>Разделение по говорящим</value></data>
+  <data name="Shell_Settings_Transcription_Diarization_Desc" xml:space="preserve"><value>Определять разных говорящих в транскрипте</value></data>
+  <data name="Shell_Settings_Transcription_MinSpeakers_Label" xml:space="preserve"><value>Минимум говорящих</value></data>
+  <data name="Shell_Settings_Transcription_MaxSpeakers_Label" xml:space="preserve"><value>Максимум говорящих</value></data>
+  <data name="Shell_Settings_Transcription_AutoRetry" xml:space="preserve"><value>Повторять неудачные транскрипции</value></data>
+  <data name="Shell_Settings_Transcription_RetryCount_Label" xml:space="preserve"><value>Количество попыток</value></data>
+  <data name="Shell_StatusBar_CloseHint" xml:space="preserve"><value>Закрытие сворачивает окно в трей. Используй «Выход» для завершения основного процесса.</value></data>
+  <data name="Validation_General_LanguageRequired" xml:space="preserve"><value>Язык обязателен.</value></data>
+  <data name="Validation_General_UnsupportedHotkey" xml:space="preserve"><value>Неподдерживаемая горячая клавиша: {0}.</value></data>
+  <data name="Validation_General_HotkeyRegisterFailed" xml:space="preserve"><value>Windows не удалось зарегистрировать горячую клавишу {0}. Возможно, она уже используется другим приложением.</value></data>
+  <data name="Validation_Recording_InvalidPrebuffer" xml:space="preserve"><value>Предзапись должна быть 5, 10, 15 или 30 секунд.</value></data>
+  <data name="Validation_Recording_InvalidSilenceThreshold" xml:space="preserve"><value>Порог тишины должен быть от -60 до -20 дБ.</value></data>
+  <data name="Validation_Recording_InvalidStartDelay" xml:space="preserve"><value>Задержка начала должна быть от 1 до 10 секунд.</value></data>
+  <data name="Validation_Recording_InvalidStopDelay" xml:space="preserve"><value>Задержка остановки должна быть от 5 до 120 секунд.</value></data>
+  <data name="Validation_Recording_InvalidMergeWindow" xml:space="preserve"><value>Окно объединения должно быть от 0 до 300 секунд.</value></data>
+  <data name="Validation_Recording_NoSources" xml:space="preserve"><value>Необходим хотя бы один источник для Авто и Принудительной записи.</value></data>
+  <data name="Validation_Recording_ProcessOutputUnavailable" xml:space="preserve"><value>Захват процесса недоступен в ограниченном режиме.</value></data>
+  <data name="Validation_Applications_DuplicateRule" xml:space="preserve"><value>Дублирующееся правило: {0}.</value></data>
+  <data name="Validation_Storage_MissingSessionId" xml:space="preserve"><value>Шаблон имени файла должен содержать {SessionId}.</value></data>
+  <data name="Validation_Storage_NotWritable" xml:space="preserve"><value>{0} должна указывать на записываемую директорию. {1}</value></data>
+  <data name="Validation_Transcription_ApiKeyRequired" xml:space="preserve"><value>API-ключ необходим для транскрипции.</value></data>
+  <data name="Validation_Transcription_InvalidSpeakerLimits" xml:space="preserve"><value>Лимиты говорящих должны быть от 1 до 20.</value></data>
+  <data name="Validation_Transcription_MinExceedsMax" xml:space="preserve"><value>Минимум говорящих не может превышать максимум.</value></data>
+  <data name="Validation_Transcription_InvalidRetryCount" xml:space="preserve"><value>Количество попыток должно быть от 1 до 10.</value></data>
+  <data name="Dialog_RemoveApiKey_Message" xml:space="preserve"><value>Удалить сохранённый API-ключ Fireworks?</value></data>
+  <data name="Dialog_RemoveApiKey_Title" xml:space="preserve"><value>Удалить API-ключ</value></data>
+  <data name="Dialog_RemoveApiKey_Failed" xml:space="preserve"><value>Не удалось удалить API-ключ.</value></data>
+  <data name="Dialog_UnsavedChanges_Message" xml:space="preserve"><value>Сохранить изменения?\nДа = Сохранить, Нет = Отменить, Отмена = Остаться в этом разделе.</value></data>
+  <data name="Dialog_UnsavedChanges_Title" xml:space="preserve"><value>Несохранённые изменения</value></data>
+  <data name="Dialog_SaveError_General" xml:space="preserve"><value>Не удалось сохранить общие настройки.</value></data>
+  <data name="Dialog_SaveError_Recording" xml:space="preserve"><value>Не удалось сохранить настройки записи.</value></data>
+  <data name="Dialog_SaveError_Devices" xml:space="preserve"><value>Не удалось сохранить настройки устройств.</value></data>
+  <data name="Dialog_SaveError_Applications" xml:space="preserve"><value>Не удалось сохранить настройки приложений.</value></data>
+  <data name="Dialog_SaveError_Storage" xml:space="preserve"><value>Не удалось сохранить настройки хранения.</value></data>
+  <data name="Dialog_SaveError_Transcription" xml:space="preserve"><value>Не удалось сохранить настройки транскрипции.</value></data>
+  <data name="Dialog_RetryFailed" xml:space="preserve"><value>Повтор не удался.</value></data>
+  <data name="Dialog_RetryTranscription_Title" xml:space="preserve"><value>Повтор транскрипции</value></data>
+  <data name="Dialog_AddExclusion_Title" xml:space="preserve"><value>Добавить исключение</value></data>
+  <data name="Dialog_AddExclusion_Prompt" xml:space="preserve"><value>Введи имя процесса (.exe):</value></data>
+  <data name="Dialog_Prompt_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Dialog_Prompt_OK" xml:space="preserve"><value>ОК</value></data>
+  <data name="Common_SystemDefault" xml:space="preserve"><value>По умолчанию</value></data>
+  <data name="Option_Language_Russian" xml:space="preserve"><value>Русский</value></data>
+  <data name="Option_Language_English" xml:space="preserve"><value>Английский</value></data>
+  <data name="Option_Theme_System" xml:space="preserve"><value>Системная</value></data>
+  <data name="Option_Theme_Light" xml:space="preserve"><value>Светлая</value></data>
+  <data name="Option_Theme_Dark" xml:space="preserve"><value>Тёмная</value></data>
+  <data name="Option_RecordingMode_Off" xml:space="preserve"><value>Выкл</value></data>
+  <data name="Option_RecordingMode_Ask" xml:space="preserve"><value>Спросить</value></data>
+  <data name="Option_RecordingMode_Auto" xml:space="preserve"><value>Авто</value></data>
+  <data name="Option_Preset_Meetings" xml:space="preserve"><value>Встречи</value></data>
+  <data name="Option_Preset_MeetingsMic" xml:space="preserve"><value>Встречи + Микрофон</value></data>
+  <data name="Option_Preset_QuickNotes" xml:space="preserve"><value>Быстрые заметки</value></data>
+  <data name="Option_Preset_Custom" xml:space="preserve"><value>Свой</value></data>
+  <data name="Option_Prebuffer_5s" xml:space="preserve"><value>5 с</value></data>
+  <data name="Option_Prebuffer_10s" xml:space="preserve"><value>10 с</value></data>
+  <data name="Option_Prebuffer_15s" xml:space="preserve"><value>15 с</value></data>
+  <data name="Option_Prebuffer_30s" xml:space="preserve"><value>30 с</value></data>
+  <data name="Option_PrivacyPause_Pause" xml:space="preserve"><value>Пауза</value></data>
+  <data name="Option_PrivacyPause_Finish" xml:space="preserve"><value>Завершить</value></data>
+  <data name="Option_DevicePolicy_SeamlessSwitch" xml:space="preserve"><value>Бесшовное переключение</value></data>
+  <data name="Option_DevicePolicy_EndAndStartNew" xml:space="preserve"><value>Завершить и начать новую</value></data>
+  <data name="Option_DevicePolicy_Ask" xml:space="preserve"><value>Спросить</value></data>
+  <data name="Option_AutoDiscovery_AutoAdd" xml:space="preserve"><value>Добавлять автоматически</value></data>
+  <data name="Option_AutoDiscovery_AskToAdd" xml:space="preserve"><value>Спрашивать</value></data>
+  <data name="Option_AutoDiscovery_Off" xml:space="preserve"><value>Выкл</value></data>
+  <data name="Option_TempRetention_1Day" xml:space="preserve"><value>1 день</value></data>
+  <data name="Option_TempRetention_3Days" xml:space="preserve"><value>3 дня</value></data>
+  <data name="Option_TempRetention_7Days" xml:space="preserve"><value>7 дней</value></data>
+  <data name="Option_TempRetention_14Days" xml:space="preserve"><value>14 дней</value></data>
+  <data name="Option_TempRetention_30Days" xml:space="preserve"><value>30 дней</value></data>
+  <data name="Option_TempRetention_Never" xml:space="preserve"><value>Никогда</value></data>
+  <data name="Wizard_Title" xml:space="preserve"><value>Настройка isTranscribe</value></data>
+  <data name="Wizard_Subtitle" xml:space="preserve"><value>Пройди мастер первого запуска один раз — и tray-приложение сможет работать без ручного редактирования файлов.</value></data>
+  <data name="Wizard_Steps_Header" xml:space="preserve"><value>Шаги настройки</value></data>
+  <data name="Wizard_Step_Language" xml:space="preserve"><value>1. Язык приложения</value></data>
+  <data name="Wizard_Step_Storage" xml:space="preserve"><value>2. Папки хранения</value></data>
+  <data name="Wizard_Step_Devices" xml:space="preserve"><value>3. Устройства</value></data>
+  <data name="Wizard_Step_ApiKey" xml:space="preserve"><value>4. API-ключ Fireworks</value></data>
+  <data name="Wizard_Step_RecordingMode" xml:space="preserve"><value>5. Режим записи</value></data>
+  <data name="Wizard_Step_Applications" xml:space="preserve"><value>6. Приложения</value></data>
+  <data name="Wizard_StepCounter" xml:space="preserve"><value>Шаг {0} из {1}</value></data>
+  <data name="Wizard_Step0_Title" xml:space="preserve"><value>Язык приложения</value></data>
+  <data name="Wizard_Step0_Desc" xml:space="preserve"><value>Выбери язык интерфейса перед началом настройки.</value></data>
+  <data name="Wizard_Step0_Language_Label" xml:space="preserve"><value>Язык приложения</value></data>
+  <data name="Wizard_Step0_Language_Hint" xml:space="preserve"><value>Первый шаг — выбор языка интерфейса, чтобы остальные шаги были на родном языке. Список языков будет расширяться.</value></data>
+  <data name="Wizard_Step1_Title" xml:space="preserve"><value>Папки хранения</value></data>
+  <data name="Wizard_Step1_Desc" xml:space="preserve"><value>Выбери записываемые папки для записей и транскриптов.</value></data>
+  <data name="Wizard_Step1_RecordingsFolder_Label" xml:space="preserve"><value>Папка записей</value></data>
+  <data name="Wizard_Step1_TranscriptsFolder_Label" xml:space="preserve"><value>Папка транскриптов</value></data>
+  <data name="Wizard_Step1_FolderCreation_Hint" xml:space="preserve"><value>Если папка ещё не существует, мастер предложит создать её перед продолжением.</value></data>
+  <data name="Wizard_Step2_Title" xml:space="preserve"><value>Устройства</value></data>
+  <data name="Wizard_Step2_Desc" xml:space="preserve"><value>Используй автоматическое определение устройств или укажи конкретное устройство вывода и микрофон.</value></data>
+  <data name="Wizard_Step2_AutomaticDevices" xml:space="preserve"><value>Определять устройства автоматически</value></data>
+  <data name="Wizard_Step2_OutputDevice_Label" xml:space="preserve"><value>Устройство вывода</value></data>
+  <data name="Wizard_Step2_Microphone_Label" xml:space="preserve"><value>Микрофон</value></data>
+  <data name="Wizard_Step2_DeviceMode_Automatic" xml:space="preserve"><value>В автоматическом режиме приложение следует за устройствами, которые использует приложение для встреч или система, поэтому переключение наушников или микрофонов не привязывает к первой выбранной паре.</value></data>
+  <data name="Wizard_Step2_DeviceMode_Manual" xml:space="preserve"><value>Ручной режим привязывает запись к указанным ниже устройствам. Выбери это, только если хочешь, чтобы записи оставались на конкретном оборудовании.</value></data>
+  <data name="Wizard_Step2_DevicesAvailable" xml:space="preserve"><value>Мастер использует текущие аудиоустройства Windows.</value></data>
+  <data name="Wizard_Step2_DevicesUnavailable" xml:space="preserve"><value>Один или несколько классов устройств сейчас недоступны. Можно продолжить, следуя за системными по умолчанию, и настроить устройства позже.</value></data>
+  <data name="Wizard_Step2_SystemDefaultFollow" xml:space="preserve"><value>По умолчанию (следовать)</value></data>
+  <data name="Wizard_Step3_Title" xml:space="preserve"><value>API-ключ Fireworks</value></data>
+  <data name="Wizard_Step3_Desc" xml:space="preserve"><value>Укажи ключ Fireworks, который будет храниться в защищённом локальном хранилище.</value></data>
+  <data name="Wizard_Step3_ApiKey_Label" xml:space="preserve"><value>API-ключ Fireworks</value></data>
+  <data name="Wizard_Step3_ApiKey_Hint" xml:space="preserve"><value>Ключ хранится только в защищённом DPAPI локальном хранилище. Тестирование необязательно и не блокирует мастер.</value></data>
+  <data name="Wizard_Step3_ApiKey_DocsLink" xml:space="preserve"><value>Где получить API-ключ?</value></data>
+  <data name="Wizard_Step3_TestKey" xml:space="preserve"><value>Проверить ключ</value></data>
+  <data name="Wizard_Step3_Testing" xml:space="preserve"><value>Проверка API-ключа Fireworks...</value></data>
+  <data name="Wizard_Step3_TestSuccess" xml:space="preserve"><value>API Fireworks ответил успешно.</value></data>
+  <data name="Wizard_Step3_TestFailed" xml:space="preserve"><value>Проверка API-ключа Fireworks не удалась.</value></data>
+  <data name="Wizard_Step4_Title" xml:space="preserve"><value>Режим записи</value></data>
+  <data name="Wizard_Step4_Desc" xml:space="preserve"><value>Выбери, как приложение будет начинать запись новых сессий.</value></data>
+  <data name="Wizard_Step4_Off" xml:space="preserve"><value>Выкл</value></data>
+  <data name="Wizard_Step4_Off_Desc" xml:space="preserve"><value>Автоматическое обнаружение отключено. Можно настроить источники и включить захват позже в настройках.</value></data>
+  <data name="Wizard_Step4_Ask" xml:space="preserve"><value>Спросить</value></data>
+  <data name="Wizard_Step4_Ask_Desc" xml:space="preserve"><value>Обнаружение встречи спрашивает перед записью. Проигнорированные запросы по умолчанию отклоняются по истечении таймаута.</value></data>
+  <data name="Wizard_Step4_Auto" xml:space="preserve"><value>Авто</value></data>
+  <data name="Wizard_Step4_Auto_Desc_Full" xml:space="preserve"><value>Встречи обнаруживаются и записываются автоматически на основе настроенных сигналов обнаружения и списка отслеживания.</value></data>
+  <data name="Wizard_Step4_Auto_Desc_Degraded" xml:space="preserve"><value>Встречи всё ещё могут обнаруживаться через системный звук и микрофон, но пока-процессный захват недоступен на этой машине.</value></data>
+  <data name="Wizard_Step5_Title" xml:space="preserve"><value>Приложения</value></data>
+  <data name="Wizard_Step5_Desc" xml:space="preserve"><value>Реши, должно ли приложение предлагать новые обнаруженные приложения для встреч позже.</value></data>
+  <data name="Wizard_Step5_RecommendedBehavior_Title" xml:space="preserve"><value>Рекомендуемое поведение</value></data>
+  <data name="Wizard_Step5_RecommendedBehavior_Desc" xml:space="preserve"><value>Выбери, должен ли isTranscribe предлагать новые обнаруженные приложения для встреч. Выбранные ниже приложения также определят первый список отслеживания.</value></data>
+  <data name="Wizard_Step5_SuggestApps" xml:space="preserve"><value>Предлагать новые приложения для встреч автоматически</value></data>
+  <data name="Wizard_Step5_IgnoredApps_Desc" xml:space="preserve"><value>Если ты отклонишь предложение позже, это приложение попадёт в список игнорируемых и не будет спрашивать при каждой встрече. Сбросить можно в настройках.</value></data>
+  <data name="Wizard_Step5_KnownApps_Title" xml:space="preserve"><value>Известные приложения для встреч на этом ПК</value></data>
+  <data name="Wizard_Step5_KnownApps_Desc" xml:space="preserve"><value>Эти рекомендуемые приложения — основной путь настройки. Оставь те, которые isTranscribe должен распознавать автоматически.</value></data>
+  <data name="Wizard_Step5_KnownApps_Empty" xml:space="preserve"><value>Известных установленных приложений для встреч пока не найдено. Можно добавить запущенный процесс или ввести вручную.</value></data>
+  <data name="Wizard_Step5_SelectedApps_Title" xml:space="preserve"><value>Приложения для начального списка отслеживания</value></data>
+  <data name="Wizard_Step5_SelectedApps_Empty" xml:space="preserve"><value>Приложения ещё не выбраны.</value></data>
+  <data name="Wizard_Step5_RemoveSelected" xml:space="preserve"><value>Удалить выбранное</value></data>
+  <data name="Wizard_Step5_ManualAdd_Title" xml:space="preserve"><value>Дополнительное добавление вручную</value></data>
+  <data name="Wizard_Step5_ManualAdd_Desc" xml:space="preserve"><value>Используй запущенные процессы, только если приложение для встреч уже работает или каталог известных приложений не нашёл нужное.</value></data>
+  <data name="Wizard_Step5_AddFromRunning" xml:space="preserve"><value>Добавить из запущенных...</value></data>
+  <data name="Wizard_Step5_AddManually" xml:space="preserve"><value>Добавить вручную...</value></data>
+  <data name="Wizard_Navigation_Quit" xml:space="preserve"><value>Выход</value></data>
+  <data name="Wizard_Navigation_Back" xml:space="preserve"><value>Назад</value></data>
+  <data name="Wizard_Navigation_Next" xml:space="preserve"><value>Далее</value></data>
+  <data name="Wizard_Navigation_Finish" xml:space="preserve"><value>Завершить</value></data>
+  <data name="Wizard_Validation_IncompleteFields" xml:space="preserve"><value>Заполни обязательные поля перед продолжением.</value></data>
+  <data name="Wizard_Validation_Title" xml:space="preserve"><value>Проверка</value></data>
+  <data name="Dialog_CreateFolder_Prompt" xml:space="preserve"><value>{0} ещё не существует. Создать сейчас?\n\n{1}</value></data>
+  <data name="Dialog_CreateFolder_Title" xml:space="preserve"><value>Создание папки</value></data>
+  <data name="Dialog_CreateFolder_Error" xml:space="preserve"><value>Не удалось создать папку:\n{0}</value></data>
+  <data name="Wizard_DegradedBanner_Full" xml:space="preserve"><value>Эта система поддерживает полный набор возможностей захвата, включая захват отдельных процессов.</value></data>
+  <data name="Wizard_DegradedBanner_Degraded" xml:space="preserve"><value>Захват отдельных процессов недоступен в этой системе. Захват системного звука и микрофона остаётся доступным.</value></data>
+  <data name="Wizard_Warning_AutoCaptureDegraded" xml:space="preserve"><value>Авто-режим доступен, но захват отдельных процессов недоступен на этой системе.</value></data>
+  <data name="Wizard_Error_CompletionUnavailable" xml:space="preserve"><value>Обратный вызов завершения мастера недоступен.</value></data>
+  <data name="Wizard_Error_Title" xml:space="preserve"><value>Ошибка</value></data>
+  <data name="Wizard_Error_SaveFailed" xml:space="preserve"><value>Не удалось сохранить данные настройки.</value></data>
+  <data name="Wizard_Error_MessageBox_Title" xml:space="preserve"><value>Ошибка мастера</value></data>
+  <data name="Wizard_KnownApp_Recommended" xml:space="preserve"><value>Рекомендовано для первого запуска</value></data>
+  <data name="Wizard_KnownApp_RecommendedAndIncluded" xml:space="preserve"><value>Рекомендовано и уже добавлено</value></data>
+  <data name="Wizard_DeviceSystemDefault" xml:space="preserve"><value>(по умолчанию)</value></data>
+  <data name="Dialog_BlockedStartup_Title" xml:space="preserve"><value>Запуск заблокирован</value></data>
+  <data name="Dialog_BlockedStartup_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="Dialog_Recovery_Title" xml:space="preserve"><value>Восстановление после сбоя</value></data>
+  <data name="Dialog_Recovery_Quit" xml:space="preserve"><value>Выход</value></data>
+  <data name="Dialog_Recovery_OpenApp" xml:space="preserve"><value>Открыть приложение</value></data>
+  <data name="Dialog_AddApplication_Title" xml:space="preserve"><value>Добавить правило приложения вручную</value></data>
+  <data name="Dialog_AddApplication_DisplayName_Label" xml:space="preserve"><value>Отображаемое имя</value></data>
+  <data name="Dialog_AddApplication_ProcessName_Label" xml:space="preserve"><value>Имя процесса (.exe)</value></data>
+  <data name="Dialog_AddApplication_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Dialog_AddApplication_Add" xml:space="preserve"><value>Добавить</value></data>
+  <data name="Validation_AddApplication_ProcessNameRequired" xml:space="preserve"><value>Имя процесса обязательно.</value></data>
+  <data name="Validation_AddApplication_Title" xml:space="preserve"><value>Проверка</value></data>
+  <data name="Dialog_RunningProcessPicker_Title" xml:space="preserve"><value>Запущенные процессы с аудиоактивностью</value></data>
+  <data name="Dialog_RunningProcessPicker_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Dialog_RunningProcessPicker_Add" xml:space="preserve"><value>Добавить выбранные</value></data>
+  <data name="Tray_StartForceRecord" xml:space="preserve"><value>Начать принудительную запись</value></data>
+  <data name="Tray_StopCurrentRecording" xml:space="preserve"><value>Остановить текущую запись</value></data>
+  <data name="Tray_PrivacyPause_Off" xml:space="preserve"><value>Пауза конфиденциальности: Выкл</value></data>
+  <data name="Tray_PrivacyPause_On" xml:space="preserve"><value>Пауза конфиденциальности: Вкл</value></data>
+  <data name="Tray_OpenApp" xml:space="preserve"><value>Открыть приложение</value></data>
+  <data name="Tray_Quit" xml:space="preserve"><value>Выход</value></data>
+  <data name="Tray_Tooltip_Default" xml:space="preserve"><value>isTranscribe</value></data>
+  <data name="Tray_Status_PrivacyPause" xml:space="preserve"><value>isTranscribe: пауза конфиденциальности</value></data>
+  <data name="Tray_Status_AwaitingConfirmation" xml:space="preserve"><value>isTranscribe: ожидание подтверждения</value></data>
+  <data name="Tray_Status_Recording" xml:space="preserve"><value>isTranscribe: запись</value></data>
+  <data name="Tray_Status_Paused" xml:space="preserve"><value>isTranscribe: пауза</value></data>
+  <data name="Tray_Status_Stopping" xml:space="preserve"><value>isTranscribe: остановка</value></data>
+  <data name="Tray_Status_SetupRequired" xml:space="preserve"><value>isTranscribe: требуется настройка</value></data>
+  <data name="Prompt_Title_UnknownMeeting" xml:space="preserve"><value>Обнаружена новая встреча</value></data>
+  <data name="Prompt_Title_DeviceChanged" xml:space="preserve"><value>Устройство записи изменилось</value></data>
+  <data name="Prompt_Title_KnownMeeting" xml:space="preserve"><value>Слышу встречу — записывать?</value></data>
+  <data name="Prompt_Countdown" xml:space="preserve"><value>Окно закроется через {0} с.</value></data>
+  <data name="Prompt_AddAndStart" xml:space="preserve"><value>Добавить и начать</value></data>
+  <data name="Prompt_StartOnce" xml:space="preserve"><value>Начать один раз</value></data>
+  <data name="Prompt_NotNow" xml:space="preserve"><value>Не сейчас</value></data>
+  <data name="Prompt_IgnoreThisApp" xml:space="preserve"><value>Игнорировать это приложение</value></data>
+  <data name="Prompt_SwitchNow" xml:space="preserve"><value>Переключить сейчас</value></data>
+  <data name="Prompt_FinishAndStartNew" xml:space="preserve"><value>Завершить и начать новую</value></data>
+  <data name="Prompt_KeepCurrentIfPossible" xml:space="preserve"><value>Оставить текущее, если возможно</value></data>
+  <data name="Prompt_StartRecording" xml:space="preserve"><value>Начать запись</value></data>
+  <data name="Prompt_No" xml:space="preserve"><value>Нет</value></data>
+  <data name="Shell_Settings_KnownApp_Installed" xml:space="preserve"><value>Установлено на этом ПК</value></data>
+  <data name="Shell_Settings_KnownApp_InstalledAndWhitelisted" xml:space="preserve"><value>Установлено на этом ПК и уже в списке отслеживания</value></data>
+  <data name="Dialog_BlockedStartup_DefaultDetail" xml:space="preserve"><value>Хост настольного приложения не может войти в рабочее состояние на этом компьютере.</value></data>
+  <data name="Dialog_Recovery_DefaultDetail" xml:space="preserve"><value>Дополнительные сведения о восстановлении не указаны.</value></data>
+  <data name="Wizard_Apps_WhitelistWarning" xml:space="preserve"><value>Без приложений в списке автоматическое обнаружение не будет работать. Вы можете добавить их позже в настройках.</value></data>
+  <data name="Wizard_Apps_NoAppsSelected" xml:space="preserve"><value>Пока не выбрано ни одного приложения для встреч.</value></data>
+  <data name="Wizard_Apps_SelectionSummary" xml:space="preserve"><value>{0} приложение(-я) будет добавлено в начальный список.</value></data>
+  <data name="Hotkey_UnsupportedGesture" xml:space="preserve"><value>Неподдерживаемая горячая клавиша: {0}.</value></data>
+  <data name="Hotkey_RegistrationFailed" xml:space="preserve"><value>Windows не удалось зарегистрировать горячую клавишу {0}. Возможно, она уже используется другим приложением.</value></data>
+  <data name="Host_QuitConfirm_Message" xml:space="preserve"><value>Запись ещё активна. Остановить текущую запись и выйти?</value></data>
+  <data name="Host_QuitConfirm_Title" xml:space="preserve"><value>Выход из isTranscribe</value></data>
+  <data name="Host_CapabilityUnavailable" xml:space="preserve"><value>Состояние возможностей недоступно.</value></data>
+  <data name="Host_SaveNote_NextRecording" xml:space="preserve"><value>Изменение вступит в силу со следующей записи.</value></data>
+  <data name="Host_MeetingSessionsUnavailable" xml:space="preserve"><value>Хранилище сессий встреч недоступно.</value></data>
+  <data name="Host_RetryUnavailable" xml:space="preserve"><value>Повторная попытка для этой сессии недоступна.</value></data>
+  <data name="Host_AppRulesUnavailable" xml:space="preserve"><value>Хранилище правил приложений недоступно.</value></data>
+  <data name="Host_Hotkey_ForceRecord_Title" xml:space="preserve"><value>Принудительная запись</value></data>
+  <data name="Host_Hotkey_ForceRecord_Stopping" xml:space="preserve"><value>Текущая запись уже останавливается.</value></data>
+  <data name="Host_Hotkey_ForceRecord_AwaitingConfirmation" xml:space="preserve"><value>Встреча ожидает подтверждения.</value></data>
+  <data name="Host_Hotkey_ForceRecord_OnboardingBlocked" xml:space="preserve"><value>Завершите первоначальную настройку перед началом записи.</value></data>
+  <data name="Host_Hotkey_ForceRecord_Unavailable" xml:space="preserve"><value>Принудительная запись сейчас недоступна.</value></data>
+  <data name="Host_Hotkey_ForceRecord_CannotRun" xml:space="preserve"><value>Принудительная запись не может работать в текущем состоянии.</value></data>
+  <data name="Host_Hotkey_Discard_Title" xml:space="preserve"><value>Удалить запись</value></data>
+  <data name="Host_Hotkey_Discard_NoRecording" xml:space="preserve"><value>Нет активной записи для удаления.</value></data>
+  <data name="Host_Hotkey_Discard_Unavailable" xml:space="preserve"><value>Удаление записи сейчас недоступно.</value></data>
+  <data name="Host_Discard_Confirm_Message" xml:space="preserve"><value>Удалить текущую запись? Записанное аудио этой сессии будет удалено.</value></data>
+  <data name="Host_Discard_Confirm_Title" xml:space="preserve"><value>Удалить запись</value></data>
+</root>

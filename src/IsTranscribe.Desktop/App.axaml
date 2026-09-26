@@ -1,0 +1,35 @@
+<Application
+    x:Class="IsTranscribe.Desktop.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    RequestedThemeVariant="Default">
+  <Application.Styles>
+    <FluentTheme />
+    <Style Selector="Window">
+      <Setter Property="FontFamily" Value="{DynamicResource Font.Family.UI}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+  </Application.Styles>
+
+  <!-- @spec spec://modules/app/FEAT-010.A-release-v2-localization#surfaces -->
+  <TrayIcon.Icons>
+    <TrayIcons>
+      <TrayIcon ToolTipText="isTranscribe" IsVisible="False" Clicked="TrayIcon_OnClicked">
+        <TrayIcon.Menu>
+          <NativeMenu>
+            <NativeMenuItem Header="{DynamicResource String.Service.Paused}" Click="TrayServiceMenuItem_OnClick" />
+            <NativeMenuItemSeparator />
+            <NativeMenuItem Header="{DynamicResource String.Action.RecordNow}" Click="TrayRecordMenuItem_OnClick" />
+            <NativeMenuItem Header="{DynamicResource String.Action.Pause}" Click="TrayPauseResumeMenuItem_OnClick" IsVisible="False" />
+            <NativeMenuItem Header="{DynamicResource String.Action.Finish}" Click="TrayFinishMenuItem_OnClick" IsVisible="False" />
+            <NativeMenuItemSeparator />
+            <NativeMenuItem Header="{DynamicResource String.Action.OpenApp}" Click="OpenMenuItem_OnClick" />
+            <NativeMenuItem Header="{DynamicResource String.Action.Settings}" Click="SettingsMenuItem_OnClick" />
+            <NativeMenuItemSeparator />
+            <NativeMenuItem Header="{DynamicResource String.Action.Quit}" Click="QuitMenuItem_OnClick" />
+          </NativeMenu>
+        </TrayIcon.Menu>
+      </TrayIcon>
+    </TrayIcons>
+  </TrayIcon.Icons>
+</Application>

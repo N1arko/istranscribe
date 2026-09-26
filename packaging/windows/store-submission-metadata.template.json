@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "infra-005-store-submission-metadata-v1",
+  "configured": false,
+  "fixture": false,
+  "product": {
+    "name": "isTranscribe",
+    "publisherDisplayName": "<Partner Center publisher display name>"
+  },
+  "package": {
+    "semanticVersion": "<release semantic version>",
+    "sha256": "<unsigned Store MSIX SHA-256>"
+  },
+  "pricingAvailability": {
+    "basePrice": "Free",
+    "markets": "all",
+    "audience": "private",
+    "discoverability": "direct-link",
+    "publishingHold": "manual"
+  },
+  "properties": {
+    "category": "Productivity",
+    "personalInformationAccessed": true,
+    "privacyPolicyUrl": "<https://your-domain.example/privacy>",
+    "websiteUrl": "<https://your-domain.example/isTranscribe>",
+    "supportContact": "<https://your-domain.example/support or support email>"
+  },
+  "privacy": {
+    "microphoneAudio": true,
+    "systemAudio": true,
+    "localStorage": true,
+    "transcriptionEnabled": true,
+    "externalAudioTransfer": true,
+    "telemetryEnabled": false,
+    "retention": "User-controlled; recordings and transcripts remain locally until the user deletes them. A selected transcription service handles uploaded audio under its own policy.",
+    "deletion": "Delete recordings and transcripts from their selected folders. Saved provider keys can be deleted in the app. Uninstall does not remove user recordings."
+  },
+  "ageRatings": {
+    "questionnaireCompleted": false,
+    "reference": "<Partner Center age-rating reference>"
+  },
+  "systemRequirements": {
+    "runtimeIdentifier": "win-x64",
+    "minimumWindowsVersion": "10.0.19041.0",
+    "architecture": "x64",
+    "additionalMinimumHardware": [],
+    "additionalRecommendedHardware": []
+  },
+  "listings": [
+    {
+      "language": "ru-RU",
+      "productName": "isTranscribe",
+      "description": "Приложение для записи и транскрибации созвонов на Windows. isTranscribe замечает признаки встречи в популярных приложениях и браузерах и спрашивает, нужно ли начать запись. Звук собеседников и микрофон сохраняется локально в MP3. Для транскрибации можно подключить собственный API-ключ Groq или OpenRouter. Фрагменты аудио отправляются выбранному сервису после ручной команды или отдельного согласия на автоматическую транскрибацию; сервис может списывать оплату по своему тарифу.",
+      "shortDescription": "isTranscribe записывает созвоны локально в MP3 и по вашему действию создаёт транскрипт через Groq или OpenRouter с собственным API-ключом.",
+      "features": [
+        "Определяет признаки встречи в популярных приложениях и браузерах",
+        "Спрашивает разрешение перед записью",
+        "Записывает звук собеседников и микрофон в один MP3-файл",
+        "Сохраняет записи и готовые транскрипты локально",
+        "Подключает Groq или OpenRouter с вашим API-ключом и явным согласием на отправку аудио",
+        "Поддерживает ручной запуск, паузу и управление из трея",
+        "Работает на русском и английском"
+      ],
+      "keywords": [
+        "запись встреч",
+        "запись созвонов",
+        "транскрибация встреч",
+        "Zoom",
+        "Google Meet",
+        "Teams",
+        "MP3"
+      ],
+      "screenshots": [
+        "<ru-RU/suspected.png>",
+        "<ru-RU/recording.png>",
+        "<ru-RU/ready.png>",
+        "<ru-RU/ask.png>"
+      ]
+    },
+    {
+      "language": "en-US",
+      "productName": "isTranscribe",
+      "description": "A meeting recorder and transcription app for Windows. isTranscribe watches for signs of a call in popular apps and browsers and asks before recording. Participant and microphone audio is saved locally as MP3. You can connect your own Groq or OpenRouter API key for transcription. Audio chunks are sent to the selected service after a manual command or separate consent for automatic transcription, and the service may charge your account under its terms.",
+      "shortDescription": "isTranscribe records meetings locally as MP3 and creates transcripts through Groq or OpenRouter with your own API key after you opt in.",
+      "features": [
+        "Detects signs of meetings in popular apps and browsers",
+        "Asks for permission before recording",
+        "Records participant audio and microphone into one MP3 file",
+        "Stores recordings and completed transcripts locally",
+        "Connects Groq or OpenRouter with your API key and explicit consent for audio transfer",
+        "Supports manual start, pause, and tray controls",
+        "Available in English and Russian"
+      ],
+      "keywords": [
+        "meeting recorder",
+        "call recording",
+        "meeting transcription",
+        "Zoom",
+        "Google Meet",
+        "Teams",
+        "MP3"
+      ],
+      "screenshots": [
+        "<en-US/suspected.png>",
+        "<en-US/recording.png>",
+        "<en-US/ready.png>",
+        "<en-US/ask.png>"
+      ]
+    }
+  ],
+  "submissionOptions": {
+    "notesForCertification": "Recording requires no account or network service. Complete first-run setup, play audio in a browser or meeting app, and choose Record manually from the main window or tray. The app asks before any meeting-triggered recording and writes MP3 files to the selected local folder. Optional cloud transcription is disabled by default and requires the tester to select Groq or OpenRouter, save their own provider API key, accept the audio-transfer disclosure, and start transcription manually or enable the separate automatic toggle. StartupTask is disabled by default. The app remains available in the tray while running.",
+    "restrictedCapabilities": [
+      {
+        "name": "runFullTrust",
+        "justification": "isTranscribe is a packaged .NET/Avalonia desktop recorder. It uses Windows desktop APIs to enumerate audio sessions and processes, capture process or system loopback and microphone audio after explicit user consent, write local MP3 files to a user-selected folder, and provide tray and single-instance behavior. It does not install a service, elevate, inject input, or capture before consent."
+      }
+    ]
+  },
+  "review": {
+    "accountType": "<Individual or Company>",
+    "partnerCenterProductId": "<Partner Center product ID>",
+    "storeId": "<Microsoft Store ID>",
+    "privacyPolicyReviewed": false,
+    "metadataReviewed": false,
+    "reviewedBy": "<reviewer>",
+    "reviewedUtc": "<ISO-8601 UTC timestamp>"
+  }
+}

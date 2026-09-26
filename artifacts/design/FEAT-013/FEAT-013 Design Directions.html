@@ -1,0 +1,912 @@
+<!doctype html>
+<!--
+  FEAT-013 visual direction canvas
+
+  Shared product constraints:
+  - Desktop companion footprint: 460 × 620 logical pixels.
+  - One morphing activity area, recent recordings, compact settings access.
+  - No sidebar, nested tabs, technical badges, decorative gradients, or fake data.
+  - Type: Segoe UI Variable / Segoe UI, 12 / 13 / 15 / 20 / 32 / 42.
+  - Spacing: 4 / 8 / 12 / 16 / 20 / 24 / 32.
+  - Motion: 140–220 ms, ease-out; disabled by prefers-reduced-motion.
+
+  Direction A · Calm Instrument
+  - Dieter Rams restraint × Fluent 2 spacing.
+  - Functional surfaces, soft graphite, violet only for primary intent.
+
+  Direction B · Quiet Paper
+  - Kenya Hara whitespace × Granola's calm meeting-tool character.
+  - Warm paper, typographic hierarchy, very few containers.
+
+  Direction C · Signal Desk
+  - Swiss editorial structure × current Raycast density.
+  - Strong rules, compact rhythm, cobalt signal rail.
+-->
+<html lang="ru" data-theme="dark" data-state="listening">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>isTranscribe · FEAT-013 design directions</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      color-scheme: light dark;
+      font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+      background: #e7e4df;
+      color: #20201f;
+      font-synthesis: none;
+    }
+
+    html[data-theme="dark"] { background: #111210; color: #f2f1ed; }
+
+    body {
+      margin: 0;
+      min-width: 360px;
+      min-height: 100vh;
+      background: inherit;
+      color: inherit;
+    }
+
+    button { font: inherit; }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #5b7cfa;
+      outline-offset: 3px;
+    }
+
+    .review-bar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) auto auto;
+      align-items: center;
+      gap: 20px;
+      min-height: 76px;
+      padding: 14px 24px;
+      border-bottom: 1px solid rgba(32, 32, 31, 0.14);
+      background: rgba(244, 242, 238, 0.96);
+      backdrop-filter: blur(18px);
+    }
+
+    html[data-theme="dark"] .review-bar {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(20, 21, 19, 0.96);
+    }
+
+    .review-title h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    .review-title p {
+      margin: 3px 0 0;
+      color: currentColor;
+      font-size: 12px;
+      opacity: 0.58;
+    }
+
+    .state-switch {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid rgba(32, 32, 31, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    html[data-theme="dark"] .state-switch {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .state-switch button,
+    .theme-toggle {
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .state-switch button[aria-pressed="true"] {
+      background: #20201f;
+      color: #fff;
+    }
+
+    html[data-theme="dark"] .state-switch button[aria-pressed="true"] {
+      background: #f0eee8;
+      color: #181816;
+    }
+
+    .theme-toggle {
+      min-width: 96px;
+      border: 1px solid rgba(32, 32, 31, 0.14);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    html[data-theme="dark"] .theme-toggle {
+      border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .canvas {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(480px, 1fr));
+      gap: 28px;
+      width: min(1700px, 100%);
+      margin: 0 auto;
+      padding: 32px 28px 48px;
+    }
+
+    .direction {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(32, 32, 31, 0.13);
+      border-radius: 18px;
+      background: #f5f3ef;
+      box-shadow: 0 20px 48px rgba(28, 27, 24, 0.08);
+    }
+
+    html[data-theme="dark"] .direction {
+      border-color: rgba(255, 255, 255, 0.11);
+      background: #191a18;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+    }
+
+    .direction.is-selected { border-color: rgba(102, 86, 217, 0.52); }
+    html[data-theme="dark"] .direction.is-selected { border-color: rgba(139, 124, 255, 0.58); }
+
+    .selection-mark {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      margin-left: 8px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: rgba(102, 86, 217, 0.12);
+      color: #5546c6;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      vertical-align: 1px;
+    }
+
+    html[data-theme="dark"] .selection-mark {
+      background: rgba(139, 124, 255, 0.15);
+      color: #b8adff;
+    }
+
+    .direction-label {
+      min-height: 96px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(32, 32, 31, 0.11);
+    }
+
+    html[data-theme="dark"] .direction-label { border-color: rgba(255, 255, 255, 0.1); }
+
+    .direction-label h2 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+    }
+
+    .direction-label p {
+      max-width: 52ch;
+      margin: 7px 0 0;
+      font-size: 13px;
+      line-height: 1.4;
+      opacity: 0.62;
+      text-wrap: pretty;
+    }
+
+    .mock-stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 684px;
+      padding: 28px 16px 36px;
+      background-color: #dedbd5;
+      background-image: linear-gradient(rgba(20, 20, 18, 0.035) 1px, transparent 1px);
+      background-size: 100% 8px;
+    }
+
+    html[data-theme="dark"] .mock-stage {
+      background-color: #10110f;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    }
+
+    .mock-window {
+      --bg: #f3f2ef;
+      --surface: #fbfaf7;
+      --surface-2: #eeece7;
+      --text: #1e1e1c;
+      --muted: #74726d;
+      --border: rgba(30, 30, 28, 0.12);
+      --accent: #6656d9;
+      --accent-soft: rgba(102, 86, 217, 0.12);
+      --record: #cf4148;
+      --success: #2f7f57;
+      --warning: #a65d22;
+      position: relative;
+      width: 460px;
+      height: 620px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg);
+      color: var(--text);
+      box-shadow: 0 22px 52px rgba(24, 23, 20, 0.16), 0 2px 8px rgba(24, 23, 20, 0.08);
+      pointer-events: none;
+    }
+
+    html[data-theme="dark"] .mock-window {
+      --bg: #151513;
+      --surface: #1d1d1a;
+      --surface-2: #252521;
+      --text: #f3f1eb;
+      --muted: #9e9b94;
+      --border: rgba(255, 255, 255, 0.11);
+      --accent: #9185ff;
+      --accent-soft: rgba(145, 133, 255, 0.13);
+      --record: #ff676d;
+      --success: #65b88b;
+      --warning: #e6a261;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.38), 0 2px 8px rgba(0, 0, 0, 0.24);
+    }
+
+    .window-b {
+      --bg: #f2eee4;
+      --surface: #f8f4ea;
+      --surface-2: #e9e3d6;
+      --text: #2a2823;
+      --muted: #7d786e;
+      --border: rgba(54, 50, 42, 0.15);
+      --accent: #6d6253;
+      --accent-soft: rgba(109, 98, 83, 0.12);
+      --record: #bd4337;
+      --success: #467359;
+      border-radius: 7px;
+    }
+
+    html[data-theme="dark"] .window-b {
+      --bg: #191815;
+      --surface: #211f1b;
+      --surface-2: #292620;
+      --text: #eee9dd;
+      --muted: #aaa297;
+      --border: rgba(238, 233, 221, 0.13);
+      --accent: #c6b9a4;
+      --accent-soft: rgba(198, 185, 164, 0.11);
+      --record: #e8695b;
+      --success: #80a98c;
+    }
+
+    .window-c {
+      --bg: #f4f5f2;
+      --surface: #ffffff;
+      --surface-2: #e9ebe7;
+      --text: #151718;
+      --muted: #686d70;
+      --border: rgba(21, 23, 24, 0.16);
+      --accent: #2459d5;
+      --accent-soft: rgba(36, 89, 213, 0.11);
+      --record: #d62632;
+      --success: #19704d;
+      border-radius: 10px;
+    }
+
+    html[data-theme="dark"] .window-c {
+      --bg: #111315;
+      --surface: #191c1f;
+      --surface-2: #22262a;
+      --text: #f3f5f5;
+      --muted: #9ba2a8;
+      --border: rgba(255, 255, 255, 0.14);
+      --accent: #78a0ff;
+      --accent-soft: rgba(120, 160, 255, 0.13);
+      --record: #ff5964;
+      --success: #62bd91;
+    }
+
+    .titlebar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      height: 34px;
+      padding-left: 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      user-select: none;
+    }
+
+    .window-b .titlebar { border-bottom-style: dashed; }
+
+    .window-controls { display: flex; height: 100%; }
+
+    .window-controls span {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      font-family: "Segoe UI Symbol", sans-serif;
+      font-size: 10px;
+    }
+
+    .app-shell {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+      gap: 18px;
+      height: calc(100% - 34px);
+      padding: 20px 22px 18px;
+    }
+
+    .window-b .app-shell { gap: 20px; padding: 24px 26px 20px; }
+    .window-c .app-shell { gap: 14px; padding: 18px 18px 16px 30px; }
+
+    .signal-rail {
+      display: none;
+      position: absolute;
+      inset: 18px auto 16px 12px;
+      width: 4px;
+      border-radius: 2px;
+      background: var(--surface-2);
+    }
+
+    .window-c .signal-rail { display: block; }
+    .window-c[data-state="recording"] .signal-rail { background: var(--record); }
+    .window-c[data-state="processing"] .signal-rail { background: var(--accent); }
+    .window-c[data-state="ready"] .signal-rail { background: var(--success); }
+
+    .product-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 28px;
+      font-size: 18px;
+      font-weight: 680;
+      letter-spacing: -0.025em;
+    }
+
+    .window-b .brand { font-size: 15px; font-weight: 620; letter-spacing: 0.01em; }
+    .window-c .brand { font-size: 16px; letter-spacing: -0.01em; text-transform: lowercase; }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+    }
+
+    .mock-window[data-state="recording"] .status-indicator {
+      background: var(--record);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--record), transparent 86%);
+      animation: status-pulse 1.8s ease-out infinite;
+    }
+
+    .mock-window[data-state="ready"] .status-indicator { background: var(--success); }
+    .mock-window[data-state="paused"] .status-indicator,
+    .mock-window[data-state="attention"] .status-indicator { background: var(--warning); }
+
+    .service-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .window-b .service-pill { padding: 0; border: 0; border-radius: 0; }
+    .window-c .service-pill { border-radius: 7px; }
+
+    .switch {
+      position: relative;
+      width: 27px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .mock-window[data-state="paused"] .switch { background: var(--surface-2); }
+    .mock-window[data-state="paused"] .switch::after { right: 14px; background: var(--muted); }
+
+    .activity {
+      position: relative;
+      min-height: 206px;
+      padding: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+    }
+
+    .window-b .activity {
+      min-height: 220px;
+      padding: 12px 0 24px;
+      border-width: 0 0 1px;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .window-c .activity { min-height: 206px; border-radius: 12px; }
+
+    .activity-kicker {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .window-b .activity-kicker { color: var(--muted); font-weight: 600; }
+    .window-c .activity-kicker { font-family: "Cascadia Mono", Consolas, monospace; }
+
+    .activity h3 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 680;
+      letter-spacing: -0.045em;
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+
+    .window-b .activity h3 { max-width: 10ch; font-size: 42px; font-weight: 520; letter-spacing: -0.055em; }
+    .window-c .activity h3 { font-size: 30px; letter-spacing: -0.035em; }
+
+    .activity-description {
+      max-width: 34ch;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+
+    .activity-detail {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .timer {
+      color: var(--text);
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 24px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.04em;
+    }
+
+    .actions { display: flex; gap: 8px; margin-top: 20px; }
+
+    .action {
+      display: inline-grid;
+      place-items: center;
+      min-height: 38px;
+      padding: 0 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .action.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
+    html[data-theme="dark"] .action.primary { color: #151513; }
+    .action.finish { border-color: var(--record); background: var(--record); color: #fff; }
+    .window-b .action { border-radius: 2px; }
+    .window-c .action { border-radius: 7px; }
+
+    .progress-track {
+      height: 5px;
+      margin-top: 22px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: var(--surface-2);
+    }
+
+    .progress-track span { display: block; width: 68%; height: 100%; background: var(--accent); }
+
+    .recent {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .section-head h4 { margin: 0; font-size: 14px; font-weight: 650; }
+    .window-b .section-head h4 { font-size: 12px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
+    .window-c .section-head h4 { font-family: "Cascadia Mono", Consolas, monospace; font-size: 11px; text-transform: uppercase; }
+
+    .section-head span { color: var(--muted); font-size: 11px; }
+
+    .recent-list {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .window-b .recent-list { border-width: 1px 0 0; border-radius: 0; background: transparent; }
+    .window-c .recent-list { border-radius: 8px; }
+
+    .recent-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px 12px;
+      min-height: 58px;
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .recent-row:last-child { border-bottom: 0; }
+    .window-b .recent-row { min-height: 60px; padding: 12px 0; }
+    .window-c .recent-row { min-height: 54px; padding: 9px 11px; }
+
+    .recent-title { overflow: hidden; font-size: 13px; font-weight: 620; text-overflow: ellipsis; white-space: nowrap; }
+    .recent-duration { color: var(--muted); font-family: "Cascadia Mono", Consolas, monospace; font-size: 11px; }
+    .recent-meta { color: var(--muted); font-size: 11px; }
+    .recent-status { color: var(--success); font-size: 11px; }
+    .recent-status.processing { color: var(--accent); }
+
+    .app-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-links { display: flex; gap: 16px; }
+    .footer-link { color: inherit; }
+    .privacy-note { font-size: 11px; opacity: 0.78; }
+
+    .ask-prompt {
+      position: absolute;
+      z-index: 4;
+      right: 16px;
+      bottom: 14px;
+      display: none;
+      width: 320px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
+    }
+
+    .mock-window[data-state="awaiting"] .ask-prompt { display: block; }
+    .window-b .ask-prompt { border-radius: 4px; }
+    .window-c .ask-prompt { border-radius: 8px; }
+
+    .prompt-caption {
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .ask-prompt h5 { margin: 0; font-size: 15px; }
+    .ask-prompt p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .ask-prompt .actions { margin-top: 14px; }
+    .countdown { margin-left: auto; color: var(--muted); font-family: "Cascadia Mono", Consolas, monospace; font-size: 11px; }
+
+    .references {
+      width: min(1100px, calc(100% - 48px));
+      margin: 0 auto 56px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(32, 32, 31, 0.14);
+      color: currentColor;
+      font-size: 12px;
+      line-height: 1.65;
+      opacity: 0.62;
+    }
+
+    html[data-theme="dark"] .references { border-color: rgba(255, 255, 255, 0.12); }
+    .references a { color: inherit; }
+
+    @keyframes status-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(0.72); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+
+    @media (max-width: 1280px) {
+      .review-bar { grid-template-columns: 1fr auto; }
+      .state-switch { grid-column: 1 / -1; justify-content: flex-start; order: 3; }
+      .canvas { grid-template-columns: minmax(480px, 560px); justify-content: center; }
+    }
+
+    @media (max-width: 560px) {
+      .review-bar { padding: 12px; }
+      .theme-toggle { min-width: 76px; }
+      .canvas { display: block; padding: 16px 0 32px; }
+      .direction { margin-bottom: 18px; border-right: 0; border-left: 0; border-radius: 0; }
+      .mock-stage { overflow: auto; place-items: start center; padding-inline: 8px; }
+      .mock-window { transform: scale(0.88); transform-origin: top center; margin-bottom: -74px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="review-bar">
+    <div class="review-title">
+      <h1>isTranscribe · три направления</h1>
+      <p>Одинаковые состояния, разные характер и плотность. Рабочий размер окна 460 × 620.</p>
+    </div>
+
+    <nav class="state-switch" aria-label="Состояние приложения">
+      <button type="button" data-state-choice="listening">Слушаю</button>
+      <button type="button" data-state-choice="suspected">Проверяю</button>
+      <button type="button" data-state-choice="awaiting">Вопрос</button>
+      <button type="button" data-state-choice="recording">Запись</button>
+      <button type="button" data-state-choice="processing">Обработка</button>
+      <button type="button" data-state-choice="ready">Готово</button>
+      <button type="button" data-state-choice="attention">Проверка</button>
+      <button type="button" data-state-choice="paused">Пауза</button>
+    </nav>
+
+    <button class="theme-toggle" id="theme-toggle" type="button">Тема: тёмная</button>
+  </header>
+
+  <main class="canvas">
+    <section class="direction is-selected">
+      <header class="direction-label">
+        <h2>A · Calm Instrument <span class="selection-mark">выбрано</span></h2>
+        <p>Основа продукта: структура состояний и мягкие функциональные поверхности. Типографический ритм и воздух берём из Quiet Paper.</p>
+      </header>
+      <div class="mock-stage"><article class="mock-window window-a" data-direction="a"></article></div>
+    </section>
+
+    <section class="direction">
+      <header class="direction-label">
+        <h2>B · Quiet Paper</h2>
+        <p>Самое тихое направление. Тёплый фон, почти нет карточек, крупное состояние и ощущение личного рабочего инструмента.</p>
+      </header>
+      <div class="mock-stage"><article class="mock-window window-b" data-direction="b"></article></div>
+    </section>
+
+    <section class="direction">
+      <header class="direction-label">
+        <h2>C · Signal Desk</h2>
+        <p>Более собранный цифровой характер. Строгая сетка, сигнал состояния слева, компактная история и высокая сканируемость.</p>
+      </header>
+      <div class="mock-stage"><article class="mock-window window-c" data-direction="c"></article></div>
+    </section>
+  </main>
+
+  <footer class="references">
+    Актуальные ориентиры: Fluent 2 — адаптивная сетка, 4px-ритм и доступная иерархия;
+    Granola (2024+) — спокойный meeting companion, который живёт рядом с работой;
+    Raycast redesign (2026) — плотная desktop-подача и внимание к повседневным мелочам.
+    Это самостоятельные направления для isTranscribe, без копирования чужих экранов.
+    <a href="https://fluent2.microsoft.design/layout">Fluent 2 Layout</a> ·
+    <a href="https://www.granola.ai/blog/announcement">Granola launch</a> ·
+    <a href="https://www.raycast.com/blog/the-new-raycast">The New Raycast</a>
+  </footer>
+
+  <script>
+    const STATE_CONTENT = {
+      listening: {
+        kicker: "Готов к встрече",
+        title: "Слушаю",
+        description: "Спрошу, когда замечу встречу. Звук остаётся на этом компьютере.",
+        detail: "",
+        primary: "Записать сейчас",
+        secondary: ""
+      },
+      suspected: {
+        kicker: "Тихая проверка",
+        title: "Похоже на встречу",
+        description: "Сверяю звук и приложение. Решение появится только при уверенном совпадении.",
+        detail: "Google Meet · Zen",
+        primary: "Записать сейчас",
+        secondary: ""
+      },
+      awaiting: {
+        kicker: "Нужно решение",
+        title: "Встреча найдена",
+        description: "Основное окно остаётся спокойным. Ответить можно в небольшом отдельном окне.",
+        detail: "Google Meet · Zen",
+        primary: "Записать сейчас",
+        secondary: ""
+      },
+      recording: {
+        kicker: "Запись идёт",
+        title: "Дизайн-синк",
+        description: "Системный звук и микрофон сохраняются локально.",
+        detail: "Google Meet · оба источника",
+        primary: "Завершить",
+        secondary: "Пауза",
+        timer: "24:18"
+      },
+      processing: {
+        kicker: "Можно закрыть окно",
+        title: "Готовлю запись",
+        description: "Смешиваю дорожки и создаю один компактный аудиофайл.",
+        detail: "68%",
+        primary: "",
+        secondary: "",
+        progress: true
+      },
+      ready: {
+        kicker: "Сохранено локально",
+        title: "Запись готова",
+        description: "Дизайн-синк · сегодня, 14:32 · 38 минут.",
+        detail: "M4A · 34 МБ",
+        primary: "Открыть запись",
+        secondary: "Открыть папку"
+      },
+      attention: {
+        kicker: "Исходный звук сохранён",
+        title: "Запись ждёт проверки",
+        description: "Готовый файл пока не собран. Исходные дорожки доступны и останутся на месте.",
+        detail: "Дизайн-синк · сегодня, 14:32",
+        primary: "Открыть сохранённое аудио",
+        secondary: "Подробнее"
+      },
+      paused: {
+        kicker: "Встречи не отслеживаются",
+        title: "Сервис на паузе",
+        description: "Включить прослушивание можно в любой момент. Ручная запись тоже доступна.",
+        detail: "",
+        primary: "Включить",
+        secondary: "Записать сейчас"
+      }
+    };
+
+    const RECENT_ROWS = [
+      ["Дизайн-синк", "сегодня, 14:32", "38:12", "Готово", ""],
+      ["Zoom Meetings", "вчера, 11:19", "1:00:44", "Готово", ""],
+      ["Продуктовый созвон", "8 июля, 16:48", "0:07", "Обрабатывается", "processing"]
+    ];
+
+    function actionsMarkup(content, state) {
+      if (!content.primary && !content.secondary) return "";
+      const primaryClass = state === "recording" ? "action finish" : "action primary";
+      return `<div class="actions">
+        ${content.secondary ? `<span class="action">${content.secondary}</span>` : ""}
+        ${content.primary ? `<span class="${primaryClass}">${content.primary}</span>` : ""}
+      </div>`;
+    }
+
+    function recentMarkup() {
+      return RECENT_ROWS.map(([title, meta, duration, status, statusClass]) => `
+        <div class="recent-row">
+          <span class="recent-title">${title}</span>
+          <span class="recent-duration">${duration}</span>
+          <span class="recent-meta">${meta}</span>
+          <span class="recent-status ${statusClass}">${status}</span>
+        </div>`).join("");
+    }
+
+    function windowMarkup(direction, state) {
+      const content = STATE_CONTENT[state];
+      const serviceLabel = state === "paused" ? "Выключен" : "Включён";
+      const timer = content.timer ? `<span class="timer">${content.timer}</span>` : "";
+      const detail = content.detail ? `<div class="activity-detail">${timer}<span>${content.detail}</span></div>` : "";
+      const progress = content.progress ? `<div class="progress-track" aria-label="Готово на 68 процентов"><span></span></div>` : "";
+      const productName = direction === "c" ? "istranscribe" : "isTranscribe";
+
+      return `
+        <div class="titlebar">
+          <span>${productName}</span>
+          <span class="window-controls" aria-hidden="true"><span>—</span><span>□</span><span>×</span></span>
+        </div>
+        <div class="app-shell">
+          <span class="signal-rail" aria-hidden="true"></span>
+          <header class="product-head">
+            <div class="brand"><span class="status-indicator" aria-hidden="true"></span>${productName}</div>
+            <div class="service-pill"><span>${serviceLabel}</span><span class="switch" aria-hidden="true"></span></div>
+          </header>
+          <section class="activity">
+            <p class="activity-kicker">${content.kicker}</p>
+            <h3>${content.title}</h3>
+            <p class="activity-description">${content.description}</p>
+            ${detail}
+            ${progress}
+            ${actionsMarkup(content, state)}
+          </section>
+          <section class="recent">
+            <header class="section-head"><h4>Последние записи</h4><span>Все записи</span></header>
+            <div class="recent-list">${recentMarkup()}</div>
+          </section>
+          <footer class="app-footer">
+            <span class="privacy-note">Записи хранятся локально</span>
+            <span class="footer-links"><span class="footer-link">Настройки</span><span class="footer-link">Помощь</span></span>
+          </footer>
+          <aside class="ask-prompt" aria-label="Вопрос о записи встречи">
+            <div class="prompt-caption">Отдельное окно</div>
+            <h5>Похоже, началась встреча</h5>
+            <p>Google Meet · Zen</p>
+            <div class="actions">
+              <span class="action">Пропустить</span>
+              <span class="action primary">Записать</span>
+              <span class="countdown">0:09</span>
+            </div>
+          </aside>
+        </div>`;
+    }
+
+    function applyState(nextState) {
+      document.documentElement.dataset.state = nextState;
+      localStorage.setItem("feat013-state", nextState);
+      document.querySelectorAll("[data-state-choice]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.stateChoice === nextState));
+      });
+      document.querySelectorAll(".mock-window").forEach((windowElement) => {
+        windowElement.dataset.state = nextState;
+        windowElement.innerHTML = windowMarkup(windowElement.dataset.direction, nextState);
+      });
+    }
+
+    function applyTheme(nextTheme) {
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem("feat013-theme", nextTheme);
+      document.getElementById("theme-toggle").textContent = nextTheme === "dark" ? "Тема: тёмная" : "Тема: светлая";
+    }
+
+    document.querySelectorAll("[data-state-choice]").forEach((button) => {
+      button.addEventListener("click", () => applyState(button.dataset.stateChoice));
+    });
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    const initialState = localStorage.getItem("feat013-state") || "listening";
+    const initialTheme = localStorage.getItem("feat013-theme") || "dark";
+    applyTheme(initialTheme);
+    applyState(initialState);
+  </script>
+</body>
+</html>

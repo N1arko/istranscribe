@@ -1,0 +1,516 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spec://evidence-schemas/feat-011-live-v1",
+  "title": "FEAT-011 Windows x64 live acceptance evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "scenario_id",
+    "generated_at_utc",
+    "target",
+    "build",
+    "subject",
+    "observation",
+    "outcome"
+  ],
+  "properties": {
+    "schema_version": { "const": "feat-011-live-v1" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "scenario_id": {
+      "enum": [
+        "zoom.desktop.positive",
+        "microsoft-teams.desktop.positive",
+        "microsoft-teams.browser.positive",
+        "google-meet.browser.positive",
+        "yandex-telemost.desktop.positive",
+        "yandex-telemost.browser.positive",
+        "kontur-talk.desktop.positive",
+        "kontur-talk.browser.positive"
+      ]
+    },
+    "generated_at_utc": { "type": "string", "format": "date-time" },
+    "target": { "$ref": "#/$defs/target" },
+    "build": { "$ref": "#/$defs/build" },
+    "subject": { "$ref": "#/$defs/subject" },
+    "observation": { "$ref": "#/$defs/observation" },
+    "outcome": { "$ref": "#/$defs/outcome" }
+  },
+  "$defs": {
+    "nullableString": {
+      "type": ["string", "null"]
+    },
+    "nullableInteger": {
+      "type": ["integer", "null"]
+    },
+    "checkStatus": {
+      "enum": ["pass", "fail", "not_observed"]
+    },
+    "valueStatus": {
+      "enum": ["observed", "not_observed", "not_exposed", "unavailable"]
+    },
+    "observedValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "value", "source", "reason"],
+      "properties": {
+        "status": { "$ref": "#/$defs/valueStatus" },
+        "value": { "$ref": "#/$defs/nullableString" },
+        "source": { "$ref": "#/$defs/nullableString" },
+        "reason": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os_build", "os_description", "architecture"],
+      "properties": {
+        "os_build": { "type": "string", "minLength": 1 },
+        "os_description": { "type": "string", "minLength": 1 },
+        "architecture": { "type": "string", "minLength": 1 }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "informational_version",
+        "runtime_assembly_sha256",
+        "runner_assembly_sha256",
+        "dependency_sha256",
+        "source_revision"
+      ],
+      "properties": {
+        "informational_version": { "type": "string", "minLength": 1 },
+        "runtime_assembly_sha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "runner_assembly_sha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "dependency_sha256": {
+          "type": "object",
+          "propertyNames": { "minLength": 1 },
+          "additionalProperties": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        },
+        "source_revision": { "$ref": "#/$defs/observedValue" }
+      }
+    },
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["process_id", "process_name", "version", "executable_sha256"],
+      "properties": {
+        "process_id": { "type": ["integer", "null"], "minimum": 1 },
+        "process_name": { "$ref": "#/$defs/nullableString" },
+        "version": { "$ref": "#/$defs/observedValue" },
+        "executable_sha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_id", "surface", "client", "service_version"],
+      "properties": {
+        "profile_id": {
+          "enum": ["zoom", "microsoft-teams", "google-meet", "yandex-telemost", "kontur-talk"]
+        },
+        "surface": { "enum": ["desktop", "browser"] },
+        "client": { "$ref": "#/$defs/client" },
+        "service_version": { "$ref": "#/$defs/observedValue" }
+      }
+    },
+    "activityReady": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "source", "at_utc"],
+      "properties": {
+        "status": { "$ref": "#/$defs/checkStatus" },
+        "source": { "$ref": "#/$defs/nullableString" },
+        "at_utc": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "format": "date-time" }
+          ]
+        }
+      }
+    },
+    "ask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "elapsed_milliseconds", "limit_milliseconds"],
+      "properties": {
+        "status": { "$ref": "#/$defs/checkStatus" },
+        "elapsed_milliseconds": { "$ref": "#/$defs/nullableInteger" },
+        "limit_milliseconds": { "const": 15000 }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "published",
+        "candidate_id",
+        "observed_profile_id",
+        "activity_state",
+        "confidence_score"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/checkStatus" },
+        "published": { "type": ["boolean", "null"] },
+        "candidate_id": { "$ref": "#/$defs/nullableString" },
+        "observed_profile_id": { "$ref": "#/$defs/nullableString" },
+        "activity_state": { "$ref": "#/$defs/nullableString" },
+        "confidence_score": { "$ref": "#/$defs/nullableInteger" }
+      }
+    },
+    "preconfirmationAudio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "capture_start_count",
+        "unexpected_file_count",
+        "meeting_session_count",
+        "scanned_roots"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/checkStatus" },
+        "capture_start_count": { "$ref": "#/$defs/nullableInteger" },
+        "unexpected_file_count": { "$ref": "#/$defs/nullableInteger" },
+        "meeting_session_count": { "$ref": "#/$defs/nullableInteger" },
+        "scanned_roots": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "detection_log_schema_valid",
+        "raw_window_title_match_count",
+        "audio_payload_field_count",
+        "managed_http_request_count"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/checkStatus" },
+        "detection_log_schema_valid": { "type": ["boolean", "null"] },
+        "raw_window_title_match_count": { "$ref": "#/$defs/nullableInteger" },
+        "audio_payload_field_count": { "$ref": "#/$defs/nullableInteger" },
+        "managed_http_request_count": { "$ref": "#/$defs/nullableInteger" }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activity_ready", "ask", "prompt", "preconfirmation_audio", "privacy"],
+      "properties": {
+        "activity_ready": { "$ref": "#/$defs/activityReady" },
+        "ask": { "$ref": "#/$defs/ask" },
+        "prompt": { "$ref": "#/$defs/prompt" },
+        "preconfirmation_audio": { "$ref": "#/$defs/preconfirmationAudio" },
+        "privacy": { "$ref": "#/$defs/privacy" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason_code"],
+      "properties": {
+        "status": { "enum": ["passed", "failed", "blocked", "not_run"] },
+        "reason_code": { "$ref": "#/$defs/nullableString" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "status": { "const": "passed" } },
+            "required": ["status"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "properties": { "architecture": { "const": "x64" } }
+          },
+          "build": {
+            "properties": {
+              "runtime_assembly_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "runner_assembly_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "dependency_sha256": {
+                "required": [
+                  "IsTranscribe.Core.dll",
+                  "IsTranscribe.Host.dll",
+                  "IsTranscribe.Persistence.dll",
+                  "IsTranscribe.Platform.Windows.dll",
+                  "IsTranscribe.DetectionAcceptance.dll",
+                  "feat-011-live-v1.schema.json"
+                ]
+              }
+            }
+          },
+          "subject": {
+            "properties": {
+              "client": {
+                "properties": {
+                  "process_id": { "type": "integer", "minimum": 1 },
+                  "version": {
+                    "properties": {
+                      "status": { "const": "observed" },
+                      "value": { "type": "string", "minLength": 1 }
+                    }
+                  },
+                  "executable_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+                }
+              }
+            }
+          },
+          "observation": {
+            "properties": {
+              "activity_ready": {
+                "properties": {
+                  "status": { "const": "pass" },
+                  "source": { "const": "operator_confirmation" },
+                  "at_utc": { "type": "string", "format": "date-time" }
+                }
+              },
+              "ask": {
+                "properties": {
+                  "status": { "const": "pass" },
+                  "elapsed_milliseconds": { "type": "integer", "minimum": 0, "maximum": 15000 },
+                  "limit_milliseconds": { "const": 15000 }
+                }
+              },
+              "prompt": {
+                "properties": {
+                  "status": { "const": "pass" },
+                  "published": { "const": true },
+                  "candidate_id": { "type": "string", "minLength": 1 },
+                  "observed_profile_id": { "type": "string", "minLength": 1 },
+                  "activity_state": { "const": "awaiting_confirmation" },
+                  "confidence_score": { "type": "integer", "minimum": 0, "maximum": 100 }
+                }
+              },
+              "preconfirmation_audio": {
+                "properties": {
+                  "status": { "const": "pass" },
+                  "capture_start_count": { "const": 0 },
+                  "unexpected_file_count": { "const": 0 },
+                  "meeting_session_count": { "const": 0 },
+                  "scanned_roots": { "minItems": 2 }
+                }
+              },
+              "privacy": {
+                "properties": {
+                  "status": { "const": "pass" },
+                  "detection_log_schema_valid": { "const": true },
+                  "raw_window_title_match_count": { "const": 0 },
+                  "audio_payload_field_count": { "const": 0 },
+                  "managed_http_request_count": { "const": 0 }
+                }
+              }
+            }
+          },
+          "outcome": {
+            "properties": { "reason_code": { "type": "null" } }
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "scenario_id": { "const": "zoom.desktop.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "zoom" },
+                      "surface": { "const": "desktop" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "zoom" },
+                          "candidate_id": { "pattern": ":desktop:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "microsoft-teams.desktop.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "microsoft-teams" },
+                      "surface": { "const": "desktop" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "microsoft-teams" },
+                          "candidate_id": { "pattern": ":desktop:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "microsoft-teams.browser.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "microsoft-teams" },
+                      "surface": { "const": "browser" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "microsoft-teams" },
+                          "candidate_id": { "pattern": "^browser:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "google-meet.browser.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "google-meet" },
+                      "surface": { "const": "browser" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "google-meet" },
+                          "candidate_id": { "pattern": "^browser:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "yandex-telemost.desktop.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "yandex-telemost" },
+                      "surface": { "const": "desktop" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "yandex-telemost" },
+                          "candidate_id": { "pattern": ":desktop:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "yandex-telemost.browser.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "yandex-telemost" },
+                      "surface": { "const": "browser" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "yandex-telemost" },
+                          "candidate_id": { "pattern": "^browser:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "kontur-talk.desktop.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "kontur-talk" },
+                      "surface": { "const": "desktop" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "kontur-talk" },
+                          "candidate_id": { "pattern": ":desktop:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "scenario_id": { "const": "kontur-talk.browser.positive" },
+                  "subject": {
+                    "properties": {
+                      "profile_id": { "const": "kontur-talk" },
+                      "surface": { "const": "browser" }
+                    }
+                  },
+                  "observation": {
+                    "properties": {
+                      "prompt": {
+                        "properties": {
+                          "observed_profile_id": { "const": "kontur-talk" },
+                          "candidate_id": { "pattern": "^browser:" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

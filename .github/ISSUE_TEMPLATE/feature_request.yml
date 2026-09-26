@@ -1,0 +1,15 @@
+name: Idea / Предложение
+description: A change that would make isTranscribe more useful.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would this help you do?
+      description: Describe the situation or task. English or Russian is welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Your idea
+      description: How could the app help? Examples or sketches are welcome.

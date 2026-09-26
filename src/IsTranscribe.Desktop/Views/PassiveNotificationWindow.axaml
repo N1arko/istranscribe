@@ -1,0 +1,53 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.PassiveNotificationWindow"
+    x:DataType="vm:PassiveNotificationViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{Binding Title}"
+    Width="360"
+    SizeToContent="Height"
+    CanResize="False"
+    ShowActivated="False"
+    ShowInTaskbar="False"
+    Topmost="True"
+    WindowDecorations="BorderOnly"
+    WindowStartupLocation="Manual"
+    Background="{DynamicResource Brush.Window.Background}">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#tray -->
+  <Border Padding="18" Background="{DynamicResource Brush.Surface.Elevated}">
+    <Grid RowDefinitions="Auto,Auto,Auto">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <Ellipse Width="8" Height="8" Fill="{DynamicResource Brush.Accent.Primary}" VerticalAlignment="Center" />
+        <TextBlock Grid.Column="1" Margin="9,0,0,0" Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" />
+        <Button
+            Grid.Column="2"
+            Margin="8,-5,-7,0"
+            Width="30"
+            Height="30"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            Content="×"
+            Command="{Binding DismissCommand}"
+            AutomationProperties.Name="{Binding DismissActionText}" />
+      </Grid>
+      <TextBlock
+          Grid.Row="1"
+          Margin="17,8,0,0"
+          Text="{Binding Body}"
+          Foreground="{DynamicResource Brush.Text.Secondary}"
+          FontSize="13"
+          TextWrapping="Wrap" />
+      <Button
+          Grid.Row="2"
+          Margin="17,13,0,0"
+          HorizontalAlignment="Left"
+          Padding="12,7"
+          CornerRadius="8"
+          Content="{Binding OpenActionText}"
+          Command="{Binding OpenCommand}" />
+    </Grid>
+  </Border>
+</Window>

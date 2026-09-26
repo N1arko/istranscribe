@@ -1,0 +1,231 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theming="using:IsTranscribe.Desktop.Theming">
+  <!-- Calm Instrument restraint with Quiet Paper warmth and typographic rhythm. -->
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#design-gate -->
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#visual-system -->
+
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+      <Color x:Key="Color.Window.Background">#F4F3EF</Color>
+      <Color x:Key="Color.Surface.Primary">#FCFBF8</Color>
+      <Color x:Key="Color.Surface.Secondary">#EBE9E3</Color>
+      <Color x:Key="Color.Surface.Elevated">#FFFFFF</Color>
+      <Color x:Key="Color.Border.Subtle">#D8D5CD</Color>
+      <Color x:Key="Color.Border.Strong">#B6B1A7</Color>
+      <Color x:Key="Color.Text.Primary">#1B191F</Color>
+      <Color x:Key="Color.Text.Secondary">#625E68</Color>
+      <Color x:Key="Color.Text.Tertiary">#6B6670</Color>
+      <Color x:Key="Color.Text.OnAccent">#FFFFFF</Color>
+      <Color x:Key="Color.Accent.Primary">#6757E5</Color>
+      <Color x:Key="Color.Accent.Hover">#5949D7</Color>
+      <Color x:Key="Color.Accent.Pressed">#493ABF</Color>
+      <Color x:Key="Color.Accent.Soft">#E8E4FF</Color>
+      <Color x:Key="Color.Status.Recording">#C63B45</Color>
+      <Color x:Key="Color.Status.RecordingHover">#B93641</Color>
+      <Color x:Key="Color.Status.RecordingPressed">#A9313B</Color>
+      <Color x:Key="Color.Status.RecordingSoft">#FBE5E7</Color>
+      <Color x:Key="Color.Status.Success">#267A52</Color>
+      <Color x:Key="Color.Status.SuccessSoft">#DFF3E9</Color>
+      <Color x:Key="Color.Status.Warning">#93570A</Color>
+      <Color x:Key="Color.Status.WarningSoft">#F7E9CE</Color>
+      <Color x:Key="Color.Status.Danger">#BA3542</Color>
+      <Color x:Key="Color.Status.DangerSoft">#F8E1E4</Color>
+      <Color x:Key="Color.Focus.Ring">#6757E5</Color>
+      <Color x:Key="Color.Overlay.Scrim">#661B191F</Color>
+
+      <SolidColorBrush x:Key="Brush.Window.Background" Color="{StaticResource Color.Window.Background}" />
+      <SolidColorBrush x:Key="Brush.Surface.Primary" Color="{StaticResource Color.Surface.Primary}" />
+      <SolidColorBrush x:Key="Brush.Surface.Secondary" Color="{StaticResource Color.Surface.Secondary}" />
+      <SolidColorBrush x:Key="Brush.Surface.Elevated" Color="{StaticResource Color.Surface.Elevated}" />
+      <SolidColorBrush x:Key="Brush.Border.Subtle" Color="{StaticResource Color.Border.Subtle}" />
+      <SolidColorBrush x:Key="Brush.Border.Strong" Color="{StaticResource Color.Border.Strong}" />
+      <SolidColorBrush x:Key="Brush.Text.Primary" Color="{StaticResource Color.Text.Primary}" />
+      <SolidColorBrush x:Key="Brush.Text.Secondary" Color="{StaticResource Color.Text.Secondary}" />
+      <SolidColorBrush x:Key="Brush.Text.Tertiary" Color="{StaticResource Color.Text.Tertiary}" />
+      <SolidColorBrush x:Key="Brush.Text.OnAccent" Color="{StaticResource Color.Text.OnAccent}" />
+      <SolidColorBrush x:Key="Brush.Accent.Primary" Color="{StaticResource Color.Accent.Primary}" />
+      <SolidColorBrush x:Key="Brush.Accent.Hover" Color="{StaticResource Color.Accent.Hover}" />
+      <SolidColorBrush x:Key="Brush.Accent.Pressed" Color="{StaticResource Color.Accent.Pressed}" />
+      <SolidColorBrush x:Key="Brush.Accent.Soft" Color="{StaticResource Color.Accent.Soft}" />
+      <SolidColorBrush x:Key="Brush.Status.Recording" Color="{StaticResource Color.Status.Recording}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingHover" Color="{StaticResource Color.Status.RecordingHover}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingPressed" Color="{StaticResource Color.Status.RecordingPressed}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingSoft" Color="{StaticResource Color.Status.RecordingSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Success" Color="{StaticResource Color.Status.Success}" />
+      <SolidColorBrush x:Key="Brush.Status.SuccessSoft" Color="{StaticResource Color.Status.SuccessSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Warning" Color="{StaticResource Color.Status.Warning}" />
+      <SolidColorBrush x:Key="Brush.Status.WarningSoft" Color="{StaticResource Color.Status.WarningSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Danger" Color="{StaticResource Color.Status.Danger}" />
+      <SolidColorBrush x:Key="Brush.Status.DangerSoft" Color="{StaticResource Color.Status.DangerSoft}" />
+      <SolidColorBrush x:Key="Brush.Focus.Ring" Color="{StaticResource Color.Focus.Ring}" />
+      <SolidColorBrush x:Key="Brush.Overlay.Scrim" Color="{StaticResource Color.Overlay.Scrim}" />
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Dark">
+      <Color x:Key="Color.Window.Background">#121115</Color>
+      <Color x:Key="Color.Surface.Primary">#1B1A20</Color>
+      <Color x:Key="Color.Surface.Secondary">#232229</Color>
+      <Color x:Key="Color.Surface.Elevated">#29282F</Color>
+      <Color x:Key="Color.Border.Subtle">#35333C</Color>
+      <Color x:Key="Color.Border.Strong">#4D4A55</Color>
+      <Color x:Key="Color.Text.Primary">#F4F1F7</Color>
+      <Color x:Key="Color.Text.Secondary">#B8B3C0</Color>
+      <Color x:Key="Color.Text.Tertiary">#948E9C</Color>
+      <Color x:Key="Color.Text.OnAccent">#171421</Color>
+      <Color x:Key="Color.Accent.Primary">#9D90FF</Color>
+      <Color x:Key="Color.Accent.Hover">#AEA4FF</Color>
+      <Color x:Key="Color.Accent.Pressed">#8879F0</Color>
+      <Color x:Key="Color.Accent.Soft">#302B56</Color>
+      <Color x:Key="Color.Status.Recording">#FF6B75</Color>
+      <Color x:Key="Color.Status.RecordingHover">#F85F6A</Color>
+      <Color x:Key="Color.Status.RecordingPressed">#E85460</Color>
+      <Color x:Key="Color.Status.RecordingSoft">#4B252A</Color>
+      <Color x:Key="Color.Status.Success">#63C995</Color>
+      <Color x:Key="Color.Status.SuccessSoft">#203D31</Color>
+      <Color x:Key="Color.Status.Warning">#F0B65A</Color>
+      <Color x:Key="Color.Status.WarningSoft">#45351E</Color>
+      <Color x:Key="Color.Status.Danger">#FF7A85</Color>
+      <Color x:Key="Color.Status.DangerSoft">#4D272D</Color>
+      <Color x:Key="Color.Focus.Ring">#AEA4FF</Color>
+      <Color x:Key="Color.Overlay.Scrim">#99000000</Color>
+
+      <SolidColorBrush x:Key="Brush.Window.Background" Color="{StaticResource Color.Window.Background}" />
+      <SolidColorBrush x:Key="Brush.Surface.Primary" Color="{StaticResource Color.Surface.Primary}" />
+      <SolidColorBrush x:Key="Brush.Surface.Secondary" Color="{StaticResource Color.Surface.Secondary}" />
+      <SolidColorBrush x:Key="Brush.Surface.Elevated" Color="{StaticResource Color.Surface.Elevated}" />
+      <SolidColorBrush x:Key="Brush.Border.Subtle" Color="{StaticResource Color.Border.Subtle}" />
+      <SolidColorBrush x:Key="Brush.Border.Strong" Color="{StaticResource Color.Border.Strong}" />
+      <SolidColorBrush x:Key="Brush.Text.Primary" Color="{StaticResource Color.Text.Primary}" />
+      <SolidColorBrush x:Key="Brush.Text.Secondary" Color="{StaticResource Color.Text.Secondary}" />
+      <SolidColorBrush x:Key="Brush.Text.Tertiary" Color="{StaticResource Color.Text.Tertiary}" />
+      <SolidColorBrush x:Key="Brush.Text.OnAccent" Color="{StaticResource Color.Text.OnAccent}" />
+      <SolidColorBrush x:Key="Brush.Accent.Primary" Color="{StaticResource Color.Accent.Primary}" />
+      <SolidColorBrush x:Key="Brush.Accent.Hover" Color="{StaticResource Color.Accent.Hover}" />
+      <SolidColorBrush x:Key="Brush.Accent.Pressed" Color="{StaticResource Color.Accent.Pressed}" />
+      <SolidColorBrush x:Key="Brush.Accent.Soft" Color="{StaticResource Color.Accent.Soft}" />
+      <SolidColorBrush x:Key="Brush.Status.Recording" Color="{StaticResource Color.Status.Recording}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingHover" Color="{StaticResource Color.Status.RecordingHover}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingPressed" Color="{StaticResource Color.Status.RecordingPressed}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingSoft" Color="{StaticResource Color.Status.RecordingSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Success" Color="{StaticResource Color.Status.Success}" />
+      <SolidColorBrush x:Key="Brush.Status.SuccessSoft" Color="{StaticResource Color.Status.SuccessSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Warning" Color="{StaticResource Color.Status.Warning}" />
+      <SolidColorBrush x:Key="Brush.Status.WarningSoft" Color="{StaticResource Color.Status.WarningSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Danger" Color="{StaticResource Color.Status.Danger}" />
+      <SolidColorBrush x:Key="Brush.Status.DangerSoft" Color="{StaticResource Color.Status.DangerSoft}" />
+      <SolidColorBrush x:Key="Brush.Focus.Ring" Color="{StaticResource Color.Focus.Ring}" />
+      <SolidColorBrush x:Key="Brush.Overlay.Scrim" Color="{StaticResource Color.Overlay.Scrim}" />
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="{x:Static theming:CalmInstrumentThemeVariants.HighContrast}">
+      <Color x:Key="Color.Window.Background">#000000</Color>
+      <Color x:Key="Color.Surface.Primary">#000000</Color>
+      <Color x:Key="Color.Surface.Secondary">#111111</Color>
+      <Color x:Key="Color.Surface.Elevated">#000000</Color>
+      <Color x:Key="Color.Border.Subtle">#FFFFFF</Color>
+      <Color x:Key="Color.Border.Strong">#FFFFFF</Color>
+      <Color x:Key="Color.Text.Primary">#FFFFFF</Color>
+      <Color x:Key="Color.Text.Secondary">#FFFFFF</Color>
+      <Color x:Key="Color.Text.Tertiary">#FFFFFF</Color>
+      <Color x:Key="Color.Text.OnAccent">#000000</Color>
+      <Color x:Key="Color.Accent.Primary">#00FFFF</Color>
+      <Color x:Key="Color.Accent.Hover">#FFFF00</Color>
+      <Color x:Key="Color.Accent.Pressed">#FFFFFF</Color>
+      <Color x:Key="Color.Accent.Soft">#002B2B</Color>
+      <Color x:Key="Color.Status.Recording">#FF6B6B</Color>
+      <Color x:Key="Color.Status.RecordingHover">#FF8585</Color>
+      <Color x:Key="Color.Status.RecordingPressed">#FF9C9C</Color>
+      <Color x:Key="Color.Status.RecordingSoft">#3A0000</Color>
+      <Color x:Key="Color.Status.Success">#00FF9D</Color>
+      <Color x:Key="Color.Status.SuccessSoft">#00331F</Color>
+      <Color x:Key="Color.Status.Warning">#FFFF00</Color>
+      <Color x:Key="Color.Status.WarningSoft">#332E00</Color>
+      <Color x:Key="Color.Status.Danger">#FF7A7A</Color>
+      <Color x:Key="Color.Status.DangerSoft">#3A0000</Color>
+      <Color x:Key="Color.Focus.Ring">#FFFF00</Color>
+      <Color x:Key="Color.Overlay.Scrim">#CC000000</Color>
+
+      <SolidColorBrush x:Key="Brush.Window.Background" Color="{StaticResource Color.Window.Background}" />
+      <SolidColorBrush x:Key="Brush.Surface.Primary" Color="{StaticResource Color.Surface.Primary}" />
+      <SolidColorBrush x:Key="Brush.Surface.Secondary" Color="{StaticResource Color.Surface.Secondary}" />
+      <SolidColorBrush x:Key="Brush.Surface.Elevated" Color="{StaticResource Color.Surface.Elevated}" />
+      <SolidColorBrush x:Key="Brush.Border.Subtle" Color="{StaticResource Color.Border.Subtle}" />
+      <SolidColorBrush x:Key="Brush.Border.Strong" Color="{StaticResource Color.Border.Strong}" />
+      <SolidColorBrush x:Key="Brush.Text.Primary" Color="{StaticResource Color.Text.Primary}" />
+      <SolidColorBrush x:Key="Brush.Text.Secondary" Color="{StaticResource Color.Text.Secondary}" />
+      <SolidColorBrush x:Key="Brush.Text.Tertiary" Color="{StaticResource Color.Text.Tertiary}" />
+      <SolidColorBrush x:Key="Brush.Text.OnAccent" Color="{StaticResource Color.Text.OnAccent}" />
+      <SolidColorBrush x:Key="Brush.Accent.Primary" Color="{StaticResource Color.Accent.Primary}" />
+      <SolidColorBrush x:Key="Brush.Accent.Hover" Color="{StaticResource Color.Accent.Hover}" />
+      <SolidColorBrush x:Key="Brush.Accent.Pressed" Color="{StaticResource Color.Accent.Pressed}" />
+      <SolidColorBrush x:Key="Brush.Accent.Soft" Color="{StaticResource Color.Accent.Soft}" />
+      <SolidColorBrush x:Key="Brush.Status.Recording" Color="{StaticResource Color.Status.Recording}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingHover" Color="{StaticResource Color.Status.RecordingHover}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingPressed" Color="{StaticResource Color.Status.RecordingPressed}" />
+      <SolidColorBrush x:Key="Brush.Status.RecordingSoft" Color="{StaticResource Color.Status.RecordingSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Success" Color="{StaticResource Color.Status.Success}" />
+      <SolidColorBrush x:Key="Brush.Status.SuccessSoft" Color="{StaticResource Color.Status.SuccessSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Warning" Color="{StaticResource Color.Status.Warning}" />
+      <SolidColorBrush x:Key="Brush.Status.WarningSoft" Color="{StaticResource Color.Status.WarningSoft}" />
+      <SolidColorBrush x:Key="Brush.Status.Danger" Color="{StaticResource Color.Status.Danger}" />
+      <SolidColorBrush x:Key="Brush.Status.DangerSoft" Color="{StaticResource Color.Status.DangerSoft}" />
+      <SolidColorBrush x:Key="Brush.Focus.Ring" Color="{StaticResource Color.Focus.Ring}" />
+      <SolidColorBrush x:Key="Brush.Overlay.Scrim" Color="{StaticResource Color.Overlay.Scrim}" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+
+  <FontFamily x:Key="Font.Family.UI">avares://Avalonia.Fonts.Inter/Assets#Inter</FontFamily>
+  <x:Double x:Key="Font.Size.Caption">11</x:Double>
+  <x:Double x:Key="Font.Size.Label">12</x:Double>
+  <x:Double x:Key="Font.Size.Body">14</x:Double>
+  <x:Double x:Key="Font.Size.BodyLarge">15</x:Double>
+  <x:Double x:Key="Font.Size.SectionTitle">17</x:Double>
+  <x:Double x:Key="Font.Size.Title">22</x:Double>
+  <x:Double x:Key="Font.Size.State">30</x:Double>
+  <x:Double x:Key="Font.Size.Display">34</x:Double>
+  <x:Double x:Key="Font.LineHeight.Body">20</x:Double>
+  <x:Double x:Key="Font.LineHeight.Description">21</x:Double>
+  <x:Double x:Key="Font.LineHeight.State">36</x:Double>
+
+  <x:Double x:Key="Metric.Window.Width">460</x:Double>
+  <x:Double x:Key="Metric.Window.Height">620</x:Double>
+  <x:Double x:Key="Metric.Window.MinWidth">420</x:Double>
+  <x:Double x:Key="Metric.Window.MinHeight">520</x:Double>
+  <x:Double x:Key="Metric.Space.XXSmall">2</x:Double>
+  <x:Double x:Key="Metric.Space.XSmall">4</x:Double>
+  <x:Double x:Key="Metric.Space.Small">8</x:Double>
+  <x:Double x:Key="Metric.Space.Medium">12</x:Double>
+  <x:Double x:Key="Metric.Space.Large">16</x:Double>
+  <x:Double x:Key="Metric.Space.XLarge">24</x:Double>
+  <x:Double x:Key="Metric.Space.XXLarge">32</x:Double>
+  <x:Double x:Key="Metric.Space.XXXLarge">40</x:Double>
+  <x:Double x:Key="Metric.Control.Height.Compact">32</x:Double>
+  <x:Double x:Key="Metric.Control.Height.Standard">40</x:Double>
+  <x:Double x:Key="Metric.Control.Height.Prominent">44</x:Double>
+  <x:Double x:Key="Metric.Control.HitTarget">40</x:Double>
+  <x:Double x:Key="Metric.Border.Hairline">1</x:Double>
+  <x:Double x:Key="Metric.Icon.Small">16</x:Double>
+  <x:Double x:Key="Metric.Icon.Medium">20</x:Double>
+  <x:Double x:Key="Metric.Icon.Large">24</x:Double>
+
+  <CornerRadius x:Key="Radius.Subtle">6</CornerRadius>
+  <CornerRadius x:Key="Radius.Small">8</CornerRadius>
+  <CornerRadius x:Key="Radius.Medium">12</CornerRadius>
+  <CornerRadius x:Key="Radius.Large">18</CornerRadius>
+  <CornerRadius x:Key="Radius.XLarge">24</CornerRadius>
+  <CornerRadius x:Key="Radius.Pill">999</CornerRadius>
+
+  <Thickness x:Key="Inset.Window">24</Thickness>
+  <Thickness x:Key="Inset.Card">18</Thickness>
+  <Thickness x:Key="Inset.Control">16,10</Thickness>
+  <Thickness x:Key="Inset.Control.Compact">12,8</Thickness>
+
+  <x:Double x:Key="Motion.Duration.Fast">120</x:Double>
+  <x:Double x:Key="Motion.Duration.Normal">180</x:Double>
+  <x:Double x:Key="Motion.Duration.Slow">240</x:Double>
+  <x:Double x:Key="Opacity.Muted">0.64</x:Double>
+  <x:Double x:Key="Opacity.Disabled">0.38</x:Double>
+  <x:Double x:Key="Opacity.Hover">0.06</x:Double>
+</ResourceDictionary>

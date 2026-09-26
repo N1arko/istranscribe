@@ -1,0 +1,55 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.HelpWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{DynamicResource String.Action.Help}"
+    Width="440"
+    Height="430"
+    MinWidth="400"
+    MinHeight="380"
+    CanResize="False"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterOwner">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#primary-window.hierarchy -->
+  <Grid RowDefinitions="Auto,*,Auto" Margin="26,22">
+    <StackPanel Spacing="5">
+      <TextBlock Text="{DynamicResource String.Action.Help}" FontSize="26" FontWeight="SemiBold" />
+      <TextBlock Text="{DynamicResource String.Brand.Tagline}" Foreground="{DynamicResource Brush.Text.Secondary}" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Margin="0,22,0,18" Spacing="10">
+      <Border Padding="16" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+        <StackPanel Spacing="5">
+          <TextBlock Text="{DynamicResource String.Setup.Service.Title}" FontWeight="SemiBold" />
+          <TextBlock Text="{DynamicResource String.Setup.Service.Description}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+      <Border Padding="16" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+        <StackPanel Spacing="5">
+          <TextBlock Text="{DynamicResource String.Ask.Title}" FontWeight="SemiBold" />
+          <TextBlock Text="{DynamicResource String.Ask.Reason.AudioAndApplication}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+      <Border Padding="16" CornerRadius="14" Background="{DynamicResource Brush.Surface.Primary}" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+        <StackPanel Spacing="5">
+          <TextBlock Text="{DynamicResource String.Recent.Title}" FontWeight="SemiBold" />
+          <TextBlock Text="{DynamicResource String.Privacy.LocalAudio}" Foreground="{DynamicResource Brush.Text.Secondary}" FontSize="13" TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+      <Button
+          Padding="16,9"
+          CornerRadius="9"
+          Content="{DynamicResource String.Action.PrivacyPolicy}"
+          Click="PrivacyPolicyButton_OnClick" />
+      <Button
+          Padding="16,9"
+          CornerRadius="9"
+          Content="{DynamicResource String.Action.Close}"
+          Click="CloseButton_OnClick" />
+    </StackPanel>
+  </Grid>
+</Window>

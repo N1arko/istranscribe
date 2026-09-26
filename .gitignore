@@ -1,0 +1,66 @@
+# @spec spec://modules/platform/INFRA-009-cross-platform-repository-boundaries#repository-baseline
+
+# Build outputs and package caches
+**/bin/
+**/obj/
+**/publish/
+**/AppPackages/
+packages/
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# IDE and user-local state
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Machine-local configuration and secrets
+.env
+.env.*
+!.env.example
+secrets.bin
+*.pfx
+*.snk
+*.key
+
+# Local application data, recordings, and databases
+.local/
+recordings/
+transcripts/
+*.db
+*.db-shm
+*.db-wal
+
+# Diagnostics and profiling
+*.log
+*.dmp
+*.nettrace
+*.nettrace.etlx
+*.etl
+
+# Generated release and local acceptance evidence
+artifacts/acceptance/
+artifacts/audio-smoke/
+artifacts/design-qa/
+artifacts/infra-007/
+artifacts/infra-009/
+artifacts/installer/
+artifacts/release/
+artifacts/visual-review/
+artifacts/*-live.png
+tools/artifacts/
+
+# OS metadata and temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+~$*
+specs/.me

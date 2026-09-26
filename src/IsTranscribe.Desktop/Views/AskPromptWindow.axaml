@@ -1,0 +1,131 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.AskPromptWindow"
+    x:DataType="vm:AskPromptViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:automation="using:Avalonia.Automation"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{Binding Title}"
+    Width="392"
+    MinWidth="360"
+    MaxWidth="440"
+    SizeToContent="Height"
+    CanResize="False"
+    ShowActivated="False"
+    ShowInTaskbar="False"
+    Topmost="True"
+    WindowDecorations="BorderOnly"
+    WindowStartupLocation="Manual"
+    Background="{DynamicResource Brush.Window.Background}"
+    automation:AutomationProperties.Name="{Binding AutomationName}">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#ask-prompt -->
+  <Window.Styles>
+    <Style Selector="Border.prompt-shell">
+      <Setter Property="Padding" Value="20" />
+      <Setter Property="Background" Value="{DynamicResource Brush.Surface.Elevated}" />
+    </Style>
+    <Style Selector="TextBlock.prompt-title">
+      <Setter Property="FontSize" Value="20" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Button.prompt-action">
+      <Setter Property="MinHeight" Value="42" />
+      <Setter Property="Padding" Value="18,10" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.prompt-more">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.prompt-primary">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Primary}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+  </Window.Styles>
+
+  <Border Classes="prompt-shell">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+      <Grid ColumnDefinitions="*,Auto">
+        <StackPanel Spacing="5">
+          <TextBlock Classes="prompt-title"
+                     Text="{Binding Title}"
+                     automation:AutomationProperties.HeadingLevel="1" />
+          <TextBlock Text="{Binding AppLine}"
+                     FontSize="14"
+                     Foreground="{DynamicResource Brush.Text.Secondary}"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Button Grid.Column="1"
+                Classes="prompt-more"
+                Margin="12,0,0,0"
+                Content="⋯"
+                TabIndex="2"
+                ToolTip.Tip="{Binding MoreActionText}"
+                automation:AutomationProperties.Name="{Binding MoreActionText}">
+          <Button.Flyout>
+            <MenuFlyout Placement="BottomEdgeAlignedRight">
+              <MenuItem Header="{Binding IgnoreApplicationText}"
+                        Command="{Binding IgnoreApplicationCommand}" />
+              <MenuItem Header="{Binding WhyShownText}"
+                        IsEnabled="False"
+                        IsVisible="{Binding ShowAdvancedDiagnostics}" />
+              <MenuItem Header="{Binding DecisionReasonText}"
+                        IsEnabled="False"
+                        IsVisible="{Binding ShowAdvancedDiagnostics}" />
+            </MenuFlyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+
+      <TextBlock Grid.Row="1"
+                 x:Name="CountdownLiveRegion"
+                 Margin="0,16,0,0"
+                 Text="{Binding CountdownText}"
+                 FontSize="12"
+                 Foreground="{DynamicResource Brush.Text.Tertiary}"
+                 automation:AutomationProperties.Name="{Binding CountdownAutomationText}" />
+
+      <Border Grid.Row="2"
+              Margin="0,12,0,0"
+              Padding="10,8"
+              CornerRadius="10"
+              Background="{DynamicResource Brush.Status.WarningSoft}"
+              IsVisible="{Binding HasResolutionError}">
+        <TextBlock x:Name="ResolutionErrorLiveRegion"
+                   Text="{Binding ResolutionErrorText}"
+                   FontSize="12"
+                   TextWrapping="Wrap" />
+      </Border>
+
+      <Grid Grid.Row="3"
+            Margin="0,18,0,0"
+            ColumnDefinitions="*,*"
+            ColumnSpacing="10">
+        <Button Classes="prompt-action"
+                Content="{Binding SkipActionText}"
+                Command="{Binding SkipCommand}"
+                IsCancel="True"
+                IsEnabled="{Binding IsInteractionEnabled}"
+                TabIndex="1"
+                automation:AutomationProperties.Name="{Binding SkipActionText}"
+                automation:AutomationProperties.AcceleratorKey="Escape" />
+        <Button Grid.Column="1"
+                Classes="prompt-action prompt-primary"
+                Content="{Binding RecordActionText}"
+                Command="{Binding RecordCommand}"
+                IsDefault="True"
+                IsEnabled="{Binding IsInteractionEnabled}"
+                TabIndex="0"
+                automation:AutomationProperties.Name="{Binding RecordActionText}"
+                automation:AutomationProperties.AcceleratorKey="Enter" />
+      </Grid>
+    </Grid>
+  </Border>
+</Window>

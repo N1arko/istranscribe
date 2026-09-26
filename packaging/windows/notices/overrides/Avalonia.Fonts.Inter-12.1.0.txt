@@ -1,0 +1,9 @@
+Inter font attribution supplement
+
+Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+
+The six Inter font resources embedded in Avalonia.Fonts.Inter.dll are licensed
+under the SIL Open Font License, Version 1.1. The complete OFL-1.1 text is
+included as a separate canonical notice section.
+
+Official OFL text: https://openfontlicense.org/open-font-license-official-text/

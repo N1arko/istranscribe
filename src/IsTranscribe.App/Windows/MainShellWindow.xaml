@@ -1,0 +1,657 @@
+<ui:FluentWindow x:Class="IsTranscribe.App.Windows.MainShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:IsTranscribe.App.Windows"
+        xmlns:loc="clr-namespace:IsTranscribe.App.Strings"
+        Title="{loc:Loc Shell_Window_Title}"
+        Height="760"
+        Width="1160"
+        MinWidth="1080"
+        MinHeight="700"
+        WindowStartupLocation="CenterScreen"
+        ExtendsContentIntoTitleBar="True">
+
+  <ui:FluentWindow.Resources>
+    <Style x:Key="CardBorder" TargetType="Border">
+      <Setter Property="Padding" Value="18" />
+      <Setter Property="Background" Value="{DynamicResource AppSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AppBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="14" />
+    </Style>
+    <!-- Ensure standard WPF controls inherit dark background instead of white -->
+    <Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource AppTextPrimaryBrush}" />
+    </Style>
+    <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource AppTextPrimaryBrush}" />
+    </Style>
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource {x:Type ScrollViewer}}">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+  </ui:FluentWindow.Resources>
+
+  <Grid Background="{DynamicResource AppBackgroundBrush}" TextElement.Foreground="{DynamicResource AppTextPrimaryBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <ui:TitleBar x:Name="TitleBar" Title="{loc:Loc Shell_Window_Title}" ShowMaximize="True" ShowMinimize="True" />
+
+    <!-- @spec spec://modules/app/FEAT-008-modern-ui-design-system#behavior.windows.main-shell -->
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <!-- Sidebar navigation -->
+      <Border Width="220" Background="{DynamicResource AppSidebarBrush}" BorderBrush="{DynamicResource AppBorderBrush}" BorderThickness="0,0,1,0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top" Margin="14,8,14,16">
+            <TextBlock Style="{StaticResource AppSubheadingStyle}" Foreground="{DynamicResource AppSidebarTextBrush}" Text="{loc:Loc Shell_Header_BrandName}" />
+            <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Text="{loc:Loc Shell_Header_Subtitle}" />
+          </StackPanel>
+          <StackPanel DockPanel.Dock="Bottom" Margin="8,0,8,8">
+            <Button Margin="0,4" Padding="10,8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Click="OnOpenLogsClick">
+              <StackPanel Orientation="Horizontal">
+                <ui:SymbolIcon Symbol="FolderOpen24" Margin="0,0,10,0" Foreground="{DynamicResource AppSidebarTextMutedBrush}" />
+                <TextBlock Text="{loc:Loc Shell_Home_OpenLogsFolder}" />
+              </StackPanel>
+            </Button>
+            <Button Margin="0,4" Padding="10,8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Foreground="{DynamicResource AppSidebarTextMutedBrush}" Click="OnQuitClick">
+              <StackPanel Orientation="Horizontal">
+                <ui:SymbolIcon Symbol="Power24" Margin="0,0,10,0" Foreground="{DynamicResource AppSidebarTextMutedBrush}" />
+                <TextBlock Text="{loc:Loc Shell_Home_Quit}" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+          <ListBox x:Name="RootNavListBox" Margin="8,0" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource AppSidebarTextBrush}" SelectionChanged="OnRootNavigationChanged">
+            <ListBoxItem Tag="Home" IsSelected="True" Padding="10,10" Foreground="{DynamicResource AppSidebarTextBrush}">
+              <StackPanel Orientation="Horizontal">
+                <ui:SymbolIcon Symbol="Home24" Margin="0,0,10,0" Foreground="{DynamicResource AppSidebarTextBrush}" />
+                <TextBlock Text="{loc:Loc Shell_Tab_Home}" />
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Tag="CurrentRecording" Padding="10,10" Foreground="{DynamicResource AppSidebarTextBrush}">
+              <StackPanel Orientation="Horizontal">
+                <ui:SymbolIcon Symbol="Record24" Margin="0,0,10,0" Foreground="{DynamicResource AppSidebarTextBrush}" />
+                <TextBlock Text="{loc:Loc Shell_Tab_CurrentRecording}" />
+              </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Tag="Settings" Padding="10,10" Foreground="{DynamicResource AppSidebarTextBrush}">
+              <StackPanel Orientation="Horizontal">
+                <ui:SymbolIcon Symbol="Settings24" Margin="0,0,10,0" Foreground="{DynamicResource AppSidebarTextBrush}" />
+                <TextBlock Text="{loc:Loc Shell_Tab_Settings}" />
+              </StackPanel>
+            </ListBoxItem>
+          </ListBox>
+        </DockPanel>
+      </Border>
+
+      <!-- Content area -->
+      <DockPanel Grid.Column="1" Margin="16,8,16,0" Background="{DynamicResource AppBackgroundBrush}">
+        <Border DockPanel.Dock="Top" Padding="0,4,0,12">
+          <DockPanel>
+            <Border DockPanel.Dock="Right" Padding="10,5" Background="{DynamicResource AppAccentBackgroundBrush}" CornerRadius="999" VerticalAlignment="Center">
+              <TextBlock x:Name="CapabilityStateText" FontWeight="SemiBold" Foreground="{DynamicResource AppAccentBrush}" Style="{StaticResource AppCaptionStyle}" />
+            </Border>
+            <TextBlock x:Name="NavigationHeaderText" Style="{StaticResource AppHeadingStyle}" VerticalAlignment="Center" />
+          </DockPanel>
+        </Border>
+
+        <Grid>
+        <!-- Home page -->
+        <ScrollViewer x:Name="HomePanel" VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+          <StackPanel Margin="0,0,0,16">
+
+            <!-- Quick actions -->
+            <Border Style="{StaticResource CardBorder}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Home_ManualActions_Title}" />
+                <WrapPanel Margin="0,14,0,0">
+                  <ui:Button x:Name="HomeStartForceRecordButton" Appearance="Primary" Margin="0,0,8,8" Padding="14,8" Content="{loc:Loc Shell_Home_StartForceRecord}" Click="OnStartForceRecordClick" />
+                  <ui:Button x:Name="HomeStopButton" Appearance="Danger" Margin="0,0,8,8" Padding="14,8" Content="{loc:Loc Shell_Home_StopCurrentRecording}" Click="OnStopClick" />
+                  <ui:Button x:Name="HomePauseButton" Margin="0,0,8,8" Padding="14,8" Content="{loc:Loc Shell_Home_PauseRecording}" Click="OnPauseClick" />
+                  <ui:Button x:Name="HomeResumeButton" Margin="0,0,8,8" Padding="14,8" Content="{loc:Loc Shell_Home_ResumeRecording}" Click="OnResumeClick" />
+                  <ui:Button x:Name="HomeDiscardButton" Appearance="Danger" Margin="0,0,8,8" Padding="14,8" Content="{loc:Loc Shell_Home_DiscardCurrentRecording}" Click="OnDiscardClick" />
+                  <ui:Button Margin="0,0,8,8" Padding="14,8" Content="{loc:Loc Shell_Home_TogglePrivacyPause}" Click="OnTogglePrivacyPauseClick" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Status -->
+            <Border Margin="0,16,0,0" Style="{StaticResource CardBorder}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Home_HostState_Title}" />
+                <WrapPanel Margin="0,12,0,0">
+                  <Border Padding="8,4" Margin="0,0,8,8" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="999">
+                    <TextBlock x:Name="RecordingStateText" Style="{StaticResource AppCaptionStyle}" />
+                  </Border>
+                  <Border Padding="8,4" Margin="0,0,8,8" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="999">
+                    <TextBlock x:Name="PrivacyPauseText" Style="{StaticResource AppCaptionStyle}" />
+                  </Border>
+                </WrapPanel>
+                <TextBlock x:Name="CapabilitySummaryText" Margin="0,4,0,0" TextWrapping="Wrap" />
+                <TextBlock x:Name="OnboardingText" Margin="0,8,0,0" TextWrapping="Wrap" />
+                <TextBlock x:Name="LogsPathText" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{DynamicResource AppTextSecondaryBrush}" />
+              </StackPanel>
+            </Border>
+
+            <!-- Recent Meetings -->
+            <Border Margin="0,16,0,0" Style="{StaticResource CardBorder}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Home_RecentMeetings_Title}" />
+                <TextBlock x:Name="HomeMeetingsStatusText" Margin="0,8,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" TextWrapping="Wrap" />
+                <TextBlock x:Name="HomeMeetingsEmptyText" Margin="0,8,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Home_RecentMeetings_Empty}" TextWrapping="Wrap" Visibility="Collapsed" />
+                <ListBox x:Name="HomeMeetingsListBox" Margin="0,8,0,0" Height="280" Background="Transparent" BorderThickness="0" SelectionChanged="OnHomeMeetingsSelectionChanged">
+                  <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:HomeMeetingSessionItem}">
+                      <Border Margin="0,0,0,6" Padding="12" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="10">
+                        <DockPanel>
+                          <StackPanel DockPanel.Dock="Right" VerticalAlignment="Top" Margin="16,0,0,0">
+                            <TextBlock HorizontalAlignment="Right" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{Binding DurationLabel}" />
+                            <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right" Text="{Binding RecordingStatus}" />
+                            <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right" Text="{Binding TranscriptionStatus}" />
+                          </StackPanel>
+                          <StackPanel>
+                            <TextBlock FontWeight="SemiBold" Text="{Binding SourceApp}" />
+                            <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{Binding StartedAtLabel}" />
+                            <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource AppWarningContrastBrush}" TextWrapping="Wrap" Text="{Binding ErrorLabel}" />
+                          </StackPanel>
+                        </DockPanel>
+                      </Border>
+                    </DataTemplate>
+                  </ListBox.ItemTemplate>
+                </ListBox>
+                <WrapPanel Margin="0,10,0,0">
+                  <Button x:Name="HomeOpenFolderButton" Padding="10,6" Content="{loc:Loc Shell_Home_OpenFolder}" Click="OnHomeOpenFolderClick" />
+                  <Button x:Name="HomeOpenMarkdownButton" Margin="8,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Home_OpenMarkdown}" Click="OnHomeOpenMarkdownClick" />
+                  <Button x:Name="HomeRetryTranscriptionButton" Margin="8,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Home_RetryTranscription}" Click="OnHomeRetryTranscriptionClick" />
+                  <Button x:Name="HomeLoadMoreButton" Margin="8,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Home_LoadMore}" Click="OnHomeLoadMoreClick" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Paths & Info -->
+            <Expander Margin="0,16,0,0" IsExpanded="False" Background="Transparent">
+              <Expander.Header>
+                <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Home_Paths_Title}" />
+              </Expander.Header>
+              <StackPanel Margin="0,8,0,0">
+                <TextBlock x:Name="HomeRecordingsFolderText" TextWrapping="Wrap" />
+                <TextBlock x:Name="HomeTranscriptsFolderText" Margin="0,6,0,0" TextWrapping="Wrap" />
+                <TextBlock x:Name="HomeApiKeyStatusText" Margin="0,6,0,0" TextWrapping="Wrap" />
+              </StackPanel>
+            </Expander>
+
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- Current Recording page -->
+        <ScrollViewer x:Name="CurrentRecordingPanel" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+          <StackPanel Margin="0,0,0,16">
+
+            <!-- Empty state -->
+            <TextBlock x:Name="CurrentRecordingEmptyStateText" Foreground="{DynamicResource AppTextSecondaryBrush}" TextWrapping="Wrap" />
+
+            <!-- Timer & status -->
+            <Border Style="{StaticResource CardBorder}">
+              <StackPanel HorizontalAlignment="Center">
+                <TextBlock x:Name="CurrentRecordingTimerText" FontSize="48" FontWeight="Light" HorizontalAlignment="Center" Margin="0,8,0,0" />
+                <WrapPanel Margin="0,12,0,0" HorizontalAlignment="Center">
+                  <Border Padding="10,5" Margin="0,0,8,4" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="999">
+                    <TextBlock x:Name="CurrentRecordingStatusText" Style="{StaticResource AppCaptionStyle}" FontWeight="SemiBold" />
+                  </Border>
+                  <Border Padding="10,5" Margin="0,0,8,4" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="999">
+                    <TextBlock x:Name="CurrentRecordingModeText" Style="{StaticResource AppCaptionStyle}" />
+                  </Border>
+                  <Border Padding="10,5" Margin="0,0,0,4" Background="{DynamicResource AppWarningBackgroundBrush}" CornerRadius="999">
+                    <TextBlock x:Name="CurrentRecordingPrivacyText" Style="{StaticResource AppCaptionStyle}" />
+                  </Border>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Source info -->
+            <UniformGrid Columns="2" Margin="0,16,0,0">
+              <Border Style="{StaticResource CardBorder}" Margin="0,0,8,0">
+                <TextBlock x:Name="CurrentRecordingOutputText" TextWrapping="Wrap" />
+              </Border>
+              <Border Style="{StaticResource CardBorder}" Margin="8,0,0,0">
+                <TextBlock x:Name="CurrentRecordingMicText" TextWrapping="Wrap" />
+              </Border>
+            </UniformGrid>
+
+            <!-- Additional info -->
+            <TextBlock x:Name="CurrentRecordingSourcesText" Margin="0,12,0,0" TextWrapping="Wrap" Foreground="{DynamicResource AppTextSecondaryBrush}" />
+            <TextBlock x:Name="CurrentRecordingBlockingReasonText" Margin="0,8,0,0" Foreground="{DynamicResource AppWarningContrastBrush}" TextWrapping="Wrap" />
+
+            <!-- Action buttons -->
+            <Border Margin="0,16,0,0" Style="{StaticResource CardBorder}">
+              <WrapPanel>
+                <ui:Button x:Name="CurrentRecordingStartButton" Appearance="Primary" Padding="14,8" Margin="0,0,8,8" Content="{loc:Loc Shell_Home_StartForceRecord}" Click="OnStartForceRecordClick" />
+                <ui:Button x:Name="CurrentRecordingStopButton" Appearance="Danger" Padding="14,8" Margin="0,0,8,8" Content="{loc:Loc Shell_CurrentRecording_Stop}" Click="OnStopClick" />
+                <ui:Button x:Name="CurrentRecordingPauseButton" Padding="14,8" Margin="0,0,8,8" Content="{loc:Loc Shell_CurrentRecording_Pause}" Click="OnPauseClick" />
+                <ui:Button x:Name="CurrentRecordingResumeButton" Padding="14,8" Margin="0,0,8,8" Content="{loc:Loc Shell_CurrentRecording_Resume}" Click="OnResumeClick" />
+                <ui:Button x:Name="CurrentRecordingDiscardButton" Appearance="Danger" Padding="14,8" Margin="0,0,8,8" Content="{loc:Loc Shell_CurrentRecording_Discard}" Click="OnDiscardClick" />
+                <ui:Button Padding="14,8" Margin="0,0,8,8" Content="{loc:Loc Shell_CurrentRecording_PrivacyPause}" Click="OnTogglePrivacyPauseClick" />
+              </WrapPanel>
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- Settings page -->
+        <Grid x:Name="SettingsPanel" Visibility="Collapsed">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border x:Name="SettingsDegradedBanner" Padding="14" Background="{DynamicResource AppWarningBackgroundBrush}" CornerRadius="10" Visibility="Collapsed">
+              <TextBlock Text="{loc:Loc Shell_Settings_DegradedBanner}" TextWrapping="Wrap" />
+            </Border>
+
+            <TabControl x:Name="SettingsSectionTabControl" Grid.Row="1" Margin="0,16,0,0" Background="Transparent" BorderBrush="{DynamicResource AppBorderBrush}" SelectionChanged="OnSettingsSectionTabChanged">
+              <TabItem x:Name="GeneralTab" Tag="General" Header="{loc:Loc Shell_Settings_General_Tab}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                  <StackPanel Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Style="{StaticResource AppHeadingStyle}" Text="{loc:Loc Shell_Settings_General_Title}" />
+                      <TextBlock x:Name="GeneralDirtyText" Margin="12,3,0,0" Foreground="{DynamicResource AppWarningBrush}" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <CheckBox x:Name="GeneralAutostartCheckBox" Margin="0,20,0,0" Content="{loc:Loc Shell_Settings_General_Autostart}" Click="OnGeneralInputChanged" />
+                    <CheckBox x:Name="GeneralMinimizeCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_General_MinimizeToTray}" Click="OnGeneralInputChanged" />
+                    <CheckBox x:Name="GeneralNotificationsCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_General_Notifications}" Click="OnGeneralInputChanged" />
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_General_Language_Label}" />
+                    <ComboBox x:Name="GeneralLanguageComboBox" Margin="0,8,0,0" SelectionChanged="OnGeneralInputChanged" DisplayMemberPath="Label" />
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_General_Theme_Label}" />
+                    <ComboBox x:Name="GeneralThemeComboBox" Margin="0,8,0,0" SelectionChanged="OnGeneralInputChanged" DisplayMemberPath="Label" />
+
+                    <Expander Margin="0,24,0,0" IsExpanded="False">
+                      <Expander.Header>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_General_Advanced}" />
+                      </Expander.Header>
+                      <StackPanel Margin="0,12,0,0">
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_General_Hotkeys_Title}" />
+                        <Grid Margin="0,12,0,0">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                          </Grid.RowDefinitions>
+                          <TextBlock Margin="0,8,0,0" Text="{loc:Loc Shell_Settings_General_ForceRecordHotkey}" />
+                          <TextBox x:Name="ForceRecordHotkeyTextBox" Grid.Column="1" Margin="0,0,12,0" IsReadOnly="True" PreviewKeyDown="OnHotkeyPreviewKeyDown" Tag="force_record_toggle" />
+                          <Button Grid.Column="2" Padding="10,6" Content="{loc:Loc Common_Clear}" Click="OnClearHotkeyClick" Tag="force_record_toggle" />
+                          <TextBlock Grid.Row="1" Margin="0,18,0,0" Text="{loc:Loc Shell_Settings_General_PrivacyPauseHotkey}" />
+                          <TextBox x:Name="PrivacyPauseHotkeyTextBox" Grid.Row="1" Grid.Column="1" Margin="0,10,12,0" IsReadOnly="True" PreviewKeyDown="OnHotkeyPreviewKeyDown" Tag="privacy_pause_toggle" />
+                          <Button Grid.Row="1" Grid.Column="2" Margin="0,10,0,0" Padding="10,6" Content="{loc:Loc Common_Clear}" Click="OnClearHotkeyClick" Tag="privacy_pause_toggle" />
+                          <TextBlock Grid.Row="2" Margin="0,18,0,0" Text="{loc:Loc Shell_Settings_General_DiscardRecordingHotkey}" />
+                          <TextBox x:Name="DiscardHotkeyTextBox" Grid.Row="2" Grid.Column="1" Margin="0,10,12,0" IsReadOnly="True" PreviewKeyDown="OnHotkeyPreviewKeyDown" Tag="discard_current" />
+                          <Button Grid.Row="2" Grid.Column="2" Margin="0,10,0,0" Padding="10,6" Content="{loc:Loc Common_Clear}" Click="OnClearHotkeyClick" Tag="discard_current" />
+                          <TextBlock Grid.Row="3" Margin="0,18,0,0" Text="{loc:Loc Shell_Settings_General_OpenMainWindowHotkey}" />
+                          <TextBox x:Name="OpenMainWindowHotkeyTextBox" Grid.Row="3" Grid.Column="1" Margin="0,10,12,0" IsReadOnly="True" PreviewKeyDown="OnHotkeyPreviewKeyDown" Tag="open_main_window" />
+                          <Button Grid.Row="3" Grid.Column="2" Margin="0,10,0,0" Padding="10,6" Content="{loc:Loc Common_Clear}" Click="OnClearHotkeyClick" Tag="open_main_window" />
+                        </Grid>
+                      </StackPanel>
+                    </Expander>
+
+                    <TextBlock x:Name="GeneralValidationText" Margin="0,16,0,0" Foreground="{DynamicResource AppErrorBrush}" TextWrapping="Wrap" />
+                    <ui:Button x:Name="GeneralSaveButton" Appearance="Primary" Margin="0,20,0,0" Width="120" Padding="12,8" HorizontalAlignment="Left" Content="{loc:Loc Common_Save}" Click="OnGeneralSaveClick" />
+                  </StackPanel>
+                </ScrollViewer>
+              </TabItem>
+
+              <TabItem x:Name="RecordingTab" Tag="Recording" Header="{loc:Loc Shell_Settings_Recording_Tab}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                  <StackPanel Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Style="{StaticResource AppHeadingStyle}" Text="{loc:Loc Shell_Settings_Recording_Title}" />
+                      <TextBlock x:Name="RecordingDirtyText" Margin="12,3,0,0" Foreground="{DynamicResource AppWarningBrush}" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_Mode_Label}" />
+                    <ComboBox x:Name="RecordingModeComboBox" Margin="0,8,0,0" SelectionChanged="OnRecordingInputChanged" DisplayMemberPath="Label" />
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_Preset_Label}" />
+                    <ComboBox x:Name="RecordingPresetComboBox" Margin="0,8,0,0" SelectionChanged="OnRecordingPresetChanged" DisplayMemberPath="Label" />
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_PrivacyPausePolicy_Label}" />
+                    <ComboBox x:Name="PrivacyPausePolicyComboBox" Margin="0,8,0,0" SelectionChanged="OnRecordingInputChanged" DisplayMemberPath="Label" />
+
+                    <Expander Margin="0,24,0,0" IsExpanded="False">
+                      <Expander.Header>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Recording_Advanced}" />
+                      </Expander.Header>
+                      <StackPanel Margin="0,12,0,0">
+                        <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_Prebuffer_Label}" />
+                        <ComboBox x:Name="PrebufferComboBox" Margin="0,8,0,0" SelectionChanged="OnRecordingInputChanged" DisplayMemberPath="Label" />
+                        <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_Prebuffer_Desc}" />
+
+                        <UniformGrid Margin="0,16,0,0" Columns="2">
+                          <StackPanel Margin="0,0,12,0">
+                            <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_SilenceThreshold_Label}" />
+                            <TextBox x:Name="SilenceThresholdTextBox" Margin="0,8,0,0" TextChanged="OnRecordingInputChanged" />
+                            <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_SilenceThreshold_Desc}" />
+                          </StackPanel>
+                          <StackPanel>
+                            <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_StartDelay_Label}" />
+                            <TextBox x:Name="StartDelayTextBox" Margin="0,8,0,0" TextChanged="OnRecordingInputChanged" />
+                            <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_StartDelay_Desc}" />
+                          </StackPanel>
+                        </UniformGrid>
+                        <UniformGrid Margin="0,16,0,0" Columns="2">
+                          <StackPanel Margin="0,0,12,0">
+                            <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_StopDelay_Label}" />
+                            <TextBox x:Name="StopDelayTextBox" Margin="0,8,0,0" TextChanged="OnRecordingInputChanged" />
+                            <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_StopDelay_Desc}" />
+                          </StackPanel>
+                          <StackPanel>
+                            <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Recording_MergeWindow_Label}" />
+                            <TextBox x:Name="MergeWindowTextBox" Margin="0,8,0,0" TextChanged="OnRecordingInputChanged" />
+                            <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_MergeWindow_Desc}" />
+                          </StackPanel>
+                        </UniformGrid>
+
+                        <TextBlock Margin="0,20,0,0" Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Recording_AutoSources_Title}" />
+                        <CheckBox x:Name="AutoSourceProcessOutputCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_Recording_CaptureAppAudio}" Click="OnRecordingInputChanged" />
+                        <TextBlock Margin="20,2,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_CaptureAppAudio_Desc}" />
+                        <CheckBox x:Name="AutoSourceDeviceLoopbackCheckBox" Margin="0,6,0,0" Content="{loc:Loc Shell_Settings_Recording_CaptureSystemAudio}" Click="OnRecordingInputChanged" />
+                        <TextBlock Margin="20,2,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Recording_CaptureSystemAudio_Desc}" />
+                        <CheckBox x:Name="AutoSourceMicCheckBox" Margin="0,6,0,0" Content="{loc:Loc Shell_Settings_Recording_CaptureMicrophone}" Click="OnRecordingInputChanged" />
+
+                        <TextBlock Margin="0,20,0,0" Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Recording_ForceSources_Title}" />
+                        <CheckBox x:Name="ForceSourceDeviceLoopbackCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_Recording_CaptureSystemAudio}" Click="OnRecordingInputChanged" />
+                        <CheckBox x:Name="ForceSourceMicCheckBox" Margin="0,6,0,0" Content="{loc:Loc Shell_Settings_Recording_CaptureMicrophone}" Click="OnRecordingInputChanged" />
+                      </StackPanel>
+                    </Expander>
+
+                    <TextBlock x:Name="RecordingValidationText" Margin="0,16,0,0" Foreground="{DynamicResource AppErrorBrush}" TextWrapping="Wrap" />
+                    <TextBlock x:Name="RecordingNoteText" Margin="0,10,0,0" Foreground="{DynamicResource AppWarningContrastBrush}" TextWrapping="Wrap" />
+                    <ui:Button x:Name="RecordingSaveButton" Appearance="Primary" Margin="0,20,0,0" Width="120" Padding="12,8" HorizontalAlignment="Left" Content="{loc:Loc Common_Save}" Click="OnRecordingSaveClick" />
+                  </StackPanel>
+                </ScrollViewer>
+              </TabItem>
+
+              <TabItem x:Name="DevicesTab" Tag="Devices" Header="{loc:Loc Shell_Settings_Devices_Tab}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                  <StackPanel Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Style="{StaticResource AppHeadingStyle}" Text="{loc:Loc Shell_Settings_Devices_Title}" />
+                      <TextBlock x:Name="DevicesDirtyText" Margin="12,3,0,0" Foreground="{DynamicResource AppWarningBrush}" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Devices_OutputDevice_Label}" />
+                    <ComboBox x:Name="DevicesOutputComboBox" Margin="0,8,0,0" SelectionChanged="OnDevicesInputChanged" DisplayMemberPath="Label" />
+                    <CheckBox x:Name="DevicesFollowOutputCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_Devices_FollowSystemOutput}" Click="OnDevicesInputChanged" />
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Devices_Microphone_Label}" />
+                    <ComboBox x:Name="DevicesMicComboBox" Margin="0,8,0,0" SelectionChanged="OnDevicesInputChanged" DisplayMemberPath="Label" />
+                    <CheckBox x:Name="DevicesFollowMicCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_Devices_FollowSystemMic}" Click="OnDevicesInputChanged" />
+
+                    <Expander Margin="0,24,0,0" IsExpanded="False">
+                      <Expander.Header>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Devices_Advanced}" />
+                      </Expander.Header>
+                      <StackPanel Margin="0,12,0,0">
+                        <CheckBox x:Name="DevicesAutoDiscoverOutputCheckBox" Content="{loc:Loc Shell_Settings_Devices_AutoDiscoverOutput}" Click="OnDevicesInputChanged" />
+                        <CheckBox x:Name="DevicesAutoDiscoverMicCheckBox" Margin="0,10,0,0" Content="{loc:Loc Shell_Settings_Devices_AutoDiscoverMic}" Click="OnDevicesInputChanged" />
+                        <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Devices_OutputChangePolicy_Label}" />
+                        <ComboBox x:Name="OutputChangePolicyComboBox" Margin="0,8,0,0" SelectionChanged="OnDevicesInputChanged" DisplayMemberPath="Label" />
+                        <TextBlock Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Devices_OutputChangePolicy_Desc}" />
+                        <TextBlock Margin="0,16,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Devices_MicChangePolicy_Label}" />
+                        <ComboBox x:Name="MicChangePolicyComboBox" Margin="0,8,0,0" SelectionChanged="OnDevicesInputChanged" DisplayMemberPath="Label" />
+                        <TextBlock Margin="0,16,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Devices_ActiveRecordingPolicy_Label}" />
+                        <ComboBox x:Name="ActiveRecordingPolicyComboBox" Margin="0,8,0,0" SelectionChanged="OnDevicesInputChanged" DisplayMemberPath="Label" />
+                      </StackPanel>
+                    </Expander>
+
+                    <TextBlock x:Name="DevicesWarningText" Margin="0,16,0,0" Foreground="{DynamicResource AppWarningContrastBrush}" TextWrapping="Wrap" />
+                    <ui:Button x:Name="DevicesSaveButton" Appearance="Primary" Margin="0,20,0,0" Width="120" Padding="12,8" HorizontalAlignment="Left" Content="{loc:Loc Common_Save}" Click="OnDevicesSaveClick" />
+                  </StackPanel>
+                </ScrollViewer>
+              </TabItem>
+
+              <TabItem x:Name="ApplicationsTab" Tag="Applications" Header="{loc:Loc Shell_Settings_Applications_Tab}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                  <StackPanel Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Style="{StaticResource AppHeadingStyle}" Text="{loc:Loc Shell_Settings_Applications_Title}" />
+                      <TextBlock x:Name="ApplicationsDirtyText" Margin="12,3,0,0" Foreground="{DynamicResource AppWarningBrush}" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <Border Margin="0,20,0,0" Padding="16" Background="{DynamicResource AppSurfaceSubtleBrush}" BorderBrush="{DynamicResource AppBorderFadedBrush}" BorderThickness="1" CornerRadius="14">
+                      <StackPanel>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_AutoDiscovery_Label}" />
+                        <ComboBox x:Name="ApplicationsAutoDiscoveryComboBox" Margin="0,12,0,0" SelectionChanged="OnApplicationsInputChanged" DisplayMemberPath="Label" />
+                        <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{loc:Loc Shell_Settings_Applications_AutoDiscovery_Desc}" TextWrapping="Wrap" />
+                      </StackPanel>
+                    </Border>
+                    <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderSubtleBrush}" BorderThickness="1" CornerRadius="14">
+                      <StackPanel>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_KnownApps_Title}" />
+                        <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{loc:Loc Shell_Settings_Applications_KnownApps_Desc}" TextWrapping="Wrap" />
+                        <TextBlock x:Name="KnownApplicationsEmptyText" Margin="0,12,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Applications_KnownApps_Empty}" TextWrapping="Wrap" Visibility="Collapsed" />
+                        <ItemsControl x:Name="KnownApplicationsItemsControl" Margin="0,12,0,0">
+                          <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:SelectableAppSuggestionItem}">
+                              <Border Margin="0,0,0,8" Padding="12" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="10">
+                                <DockPanel LastChildFill="True">
+                                  <CheckBox VerticalAlignment="Top" IsChecked="{Binding IsSelected}" />
+                                  <StackPanel Margin="12,0,0,0">
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                                    <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{Binding ProcessName}" />
+                                    <TextBlock Margin="0,2,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{Binding StatusLabel}" />
+                                  </StackPanel>
+                                </DockPanel>
+                              </Border>
+                            </DataTemplate>
+                          </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                      </StackPanel>
+                    </Border>
+                    <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderSubtleBrush}" BorderThickness="1" CornerRadius="14">
+                      <StackPanel>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_Whitelist_Title}" />
+                        <TextBlock x:Name="WhitelistSummaryText" Margin="0,8,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" TextWrapping="Wrap" />
+                        <ListBox x:Name="WhitelistListBox" Margin="0,12,0,0" Height="220" Background="Transparent" BorderThickness="0">
+                          <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:EditableAppRuleItem}">
+                              <Border Margin="0,0,0,8" Padding="10" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="8">
+                                <DockPanel LastChildFill="True">
+                                  <CheckBox VerticalAlignment="Top" IsChecked="{Binding Enabled}" Click="OnApplicationsInputChanged" />
+                                  <StackPanel Margin="12,0,0,0">
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                                    <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource AppTextSecondaryBrush}" Text="{Binding ProcessName}" />
+                                  </StackPanel>
+                                </DockPanel>
+                              </Border>
+                            </DataTemplate>
+                          </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
+                          <Button Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_Remove}" Click="OnRemoveWhitelistRuleClick" />
+                          <Button Margin="12,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_MoveUp}" Click="OnMoveWhitelistRuleUpClick" />
+                          <Button Margin="12,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_MoveDown}" Click="OnMoveWhitelistRuleDownClick" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Border>
+                    <StackPanel Margin="0,16,0,0" Orientation="Horizontal">
+                      <Button Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_AddFromRunning}" Click="OnAddRunningApplicationsClick" />
+                    </StackPanel>
+
+                    <Expander Margin="0,24,0,0" IsExpanded="False">
+                      <Expander.Header>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_Advanced}" />
+                      </Expander.Header>
+                      <StackPanel Margin="0,12,0,0">
+                        <Border Padding="16" Background="{DynamicResource AppWarningPanelBrush}" BorderBrush="{DynamicResource AppWarningPanelBorderBrush}" BorderThickness="1" CornerRadius="14">
+                          <StackPanel>
+                            <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_ManualAdd_Title}" />
+                            <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource AppWarningDeepBrush}" Text="{loc:Loc Shell_Settings_Applications_ManualAdd_Desc}" TextWrapping="Wrap" />
+                            <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
+                              <Button Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_AddManually}" Click="OnAddManualApplicationClick" />
+                            </StackPanel>
+                          </StackPanel>
+                        </Border>
+                        <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderSubtleBrush}" BorderThickness="1" CornerRadius="14">
+                          <StackPanel>
+                            <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_IgnoredSuggestions_Title}" />
+                            <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Applications_IgnoredSuggestions_Desc}" TextWrapping="Wrap" />
+                            <ListBox x:Name="IgnoredSuggestionsListBox" Margin="0,12,0,0" Height="110" Background="Transparent" BorderThickness="0" DisplayMemberPath="Value" />
+                            <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
+                              <Button Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_AllowAgain}" Click="OnRemoveIgnoredSuggestionClick" />
+                            </StackPanel>
+                          </StackPanel>
+                        </Border>
+                        <Border Margin="0,16,0,0" Padding="16" Background="{DynamicResource AppSurfaceBrush}" BorderBrush="{DynamicResource AppBorderSubtleBrush}" BorderThickness="1" CornerRadius="14">
+                          <StackPanel>
+                            <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_Applications_Exclusions_Title}" />
+                            <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Applications_Exclusions_Desc}" TextWrapping="Wrap" />
+                            <ListBox x:Name="ExclusionsListBox" Margin="0,12,0,0" Height="140" Background="Transparent" BorderThickness="0" DisplayMemberPath="Value" />
+                            <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
+                              <Button Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_AddExclusion}" Click="OnAddExclusionClick" />
+                              <Button Margin="12,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Settings_Applications_RemoveExclusion}" Click="OnRemoveExclusionClick" />
+                            </StackPanel>
+                          </StackPanel>
+                        </Border>
+                      </StackPanel>
+                    </Expander>
+                    <TextBlock x:Name="ApplicationsValidationText" Margin="0,16,0,0" Foreground="{DynamicResource AppErrorBrush}" TextWrapping="Wrap" />
+                    <ui:Button x:Name="ApplicationsSaveButton" Appearance="Primary" Margin="0,20,0,0" Width="120" Padding="12,8" HorizontalAlignment="Left" Content="{loc:Loc Common_Save}" Click="OnApplicationsSaveClick" />
+                  </StackPanel>
+                </ScrollViewer>
+              </TabItem>
+
+              <TabItem x:Name="StorageTab" Tag="Storage" Header="{loc:Loc Shell_Settings_Storage_Tab}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                  <StackPanel Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Style="{StaticResource AppHeadingStyle}" Text="{loc:Loc Shell_Settings_Storage_Title}" />
+                      <TextBlock x:Name="StorageDirtyText" Margin="12,3,0,0" Foreground="{DynamicResource AppWarningBrush}" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Storage_RecordingsFolder_Label}" />
+                    <DockPanel Margin="0,8,0,0">
+                      <Button DockPanel.Dock="Right" Width="96" Content="{loc:Loc Common_Browse}" Click="OnBrowseStorageRecordingsClick" />
+                      <TextBox x:Name="StorageRecordingsFolderTextBox" Margin="0,0,12,0" TextChanged="OnStorageInputChanged" />
+                    </DockPanel>
+                    <TextBlock Margin="0,16,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Storage_TranscriptsFolder_Label}" />
+                    <DockPanel Margin="0,8,0,0">
+                      <Button DockPanel.Dock="Right" Width="96" Content="{loc:Loc Common_Browse}" Click="OnBrowseStorageTranscriptsClick" />
+                      <TextBox x:Name="StorageTranscriptsFolderTextBox" Margin="0,0,12,0" TextChanged="OnStorageInputChanged" />
+                    </DockPanel>
+                    <CheckBox x:Name="AudioCompressionCheckBox" Margin="0,20,0,0" Content="{loc:Loc Shell_Settings_Storage_AudioCompression}" Click="OnStorageInputChanged" />
+                    <TextBlock Margin="20,2,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Storage_AudioCompression_Desc}" />
+
+                    <Expander Margin="0,24,0,0" IsExpanded="False">
+                      <Expander.Header>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_General_Advanced}" />
+                      </Expander.Header>
+                      <StackPanel Margin="0,12,0,0">
+                        <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Storage_TempFolder_Label}" />
+                        <DockPanel Margin="0,8,0,0">
+                          <Button DockPanel.Dock="Right" Width="96" Content="{loc:Loc Common_Browse}" Click="OnBrowseStorageTempClick" />
+                          <TextBox x:Name="FailedTempFolderTextBox" Margin="0,0,12,0" TextChanged="OnStorageInputChanged" />
+                        </DockPanel>
+                        <TextBlock Margin="0,16,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Storage_FilenameTemplate_Label}" />
+                        <TextBox x:Name="FilenameTemplateTextBox" Margin="0,8,0,0" TextChanged="OnStorageInputChanged" />
+                        <TextBlock x:Name="FilenamePreviewTextBlock" Margin="0,4,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" TextWrapping="Wrap" />
+                        <CheckBox x:Name="KeepRawAfterSuccessCheckBox" Margin="0,20,0,0" Content="{loc:Loc Shell_Settings_Storage_KeepRawAudio}" Click="OnStorageInputChanged" />
+                        <TextBlock Margin="0,16,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Storage_TempRetention_Label}" />
+                        <ComboBox x:Name="TempRetentionComboBox" Margin="0,8,0,0" SelectionChanged="OnStorageInputChanged" DisplayMemberPath="Label" />
+                      </StackPanel>
+                    </Expander>
+
+                    <TextBlock x:Name="StorageValidationText" Margin="0,16,0,0" Foreground="{DynamicResource AppErrorBrush}" TextWrapping="Wrap" />
+                    <TextBlock x:Name="StorageNoteText" Margin="0,10,0,0" Foreground="{DynamicResource AppWarningContrastBrush}" TextWrapping="Wrap" />
+                    <ui:Button x:Name="StorageSaveButton" Appearance="Primary" Margin="0,20,0,0" Width="120" Padding="12,8" HorizontalAlignment="Left" Content="{loc:Loc Common_Save}" Click="OnStorageSaveClick" />
+                  </StackPanel>
+                </ScrollViewer>
+              </TabItem>
+
+              <TabItem x:Name="TranscriptionTab" Tag="Transcription" Header="{loc:Loc Shell_Settings_Transcription_Tab}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                  <StackPanel Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Style="{StaticResource AppHeadingStyle}" Text="{loc:Loc Shell_Settings_Transcription_Title}" />
+                      <TextBlock x:Name="TranscriptionDirtyText" Margin="12,3,0,0" Foreground="{DynamicResource AppWarningBrush}" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <Border x:Name="SavedApiKeyPanel" Margin="0,20,0,0" Padding="12" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="10">
+                      <StackPanel>
+                        <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_ApiKey_Label}" />
+                        <TextBlock x:Name="SavedApiKeyTextBlock" Margin="0,8,0,0" />
+                        <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
+                          <Button Padding="10,6" Content="{loc:Loc Shell_Settings_Transcription_Change}" Click="OnChangeApiKeyClick" />
+                          <Button Margin="12,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Settings_Transcription_Remove}" Click="OnRemoveApiKeyClick" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Border>
+                    <Border x:Name="EditableApiKeyPanel" Margin="0,20,0,0" Padding="12" Background="{DynamicResource AppSurfaceAltBrush}" CornerRadius="10" Visibility="Collapsed">
+                      <StackPanel>
+                        <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_ApiKey_Label}" />
+                        <Grid Margin="0,8,0,0">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <Grid>
+                            <PasswordBox x:Name="TranscriptionApiKeyPasswordBox" PasswordChanged="OnTranscriptionInputChanged" />
+                            <TextBox x:Name="TranscriptionApiKeyTextBox" Visibility="Collapsed" TextChanged="OnTranscriptionInputChanged" />
+                          </Grid>
+                          <Button Grid.Column="1" Margin="12,0,0,0" Width="88" Click="OnToggleTranscriptionApiKeyVisibilityClick">
+                            <TextBlock x:Name="TranscriptionApiKeyToggleText" Text="{loc:Loc Shell_Settings_Transcription_Show}" />
+                          </Button>
+                          <Button Grid.Column="2" Margin="12,0,0,0" Padding="10,6" Content="{loc:Loc Shell_Settings_Transcription_Cancel}" Click="OnCancelApiKeyEditClick" />
+                        </Grid>
+                      </StackPanel>
+                    </Border>
+                    <TextBlock Margin="0,20,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_Model_Label}" />
+                    <ComboBox x:Name="TranscriptionModelComboBox" Margin="0,8,0,0" SelectionChanged="OnTranscriptionInputChanged" DisplayMemberPath="Label" />
+                    <TextBlock Margin="0,16,0,0" FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_Language_Label}" />
+                    <ComboBox x:Name="TranscriptionLanguageComboBox" Margin="0,8,0,0" SelectionChanged="OnTranscriptionInputChanged" DisplayMemberPath="Label" />
+
+                    <Expander Margin="0,24,0,0" IsExpanded="False">
+                      <Expander.Header>
+                        <TextBlock Style="{StaticResource AppSubheadingStyle}" Text="{loc:Loc Shell_Settings_General_Advanced}" />
+                      </Expander.Header>
+                      <StackPanel Margin="0,12,0,0">
+                        <CheckBox x:Name="DiarizationCheckBox" Content="{loc:Loc Shell_Settings_Transcription_Diarization}" Click="OnTranscriptionInputChanged" />
+                        <TextBlock Margin="20,2,0,0" Style="{StaticResource AppCaptionStyle}" Foreground="{DynamicResource AppTextTertiaryBrush}" Text="{loc:Loc Shell_Settings_Transcription_Diarization_Desc}" />
+                        <UniformGrid x:Name="DiarizationSpeakersPanel" Margin="0,16,0,0" Columns="2" Visibility="Collapsed">
+                          <StackPanel Margin="0,0,12,0">
+                            <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_MinSpeakers_Label}" />
+                            <TextBox x:Name="MinSpeakersTextBox" Margin="0,8,0,0" TextChanged="OnTranscriptionInputChanged" />
+                          </StackPanel>
+                          <StackPanel>
+                            <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_MaxSpeakers_Label}" />
+                            <TextBox x:Name="MaxSpeakersTextBox" Margin="0,8,0,0" TextChanged="OnTranscriptionInputChanged" />
+                          </StackPanel>
+                        </UniformGrid>
+                        <CheckBox x:Name="AutoRetryCheckBox" Margin="0,20,0,0" Content="{loc:Loc Shell_Settings_Transcription_AutoRetry}" Click="OnTranscriptionInputChanged" />
+                        <StackPanel x:Name="RetryCountPanel" Margin="0,8,0,0" Visibility="Collapsed">
+                          <TextBlock FontWeight="SemiBold" Text="{loc:Loc Shell_Settings_Transcription_RetryCount_Label}" />
+                          <TextBox x:Name="RetryCountTextBox" Margin="0,8,0,0" TextChanged="OnTranscriptionInputChanged" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Expander>
+
+                    <TextBlock x:Name="TranscriptionValidationText" Margin="0,16,0,0" Foreground="{DynamicResource AppErrorBrush}" TextWrapping="Wrap" />
+                    <ui:Button x:Name="TranscriptionSaveButton" Appearance="Primary" Margin="0,20,0,0" Width="120" Padding="12,8" HorizontalAlignment="Left" Content="{loc:Loc Common_Save}" Click="OnTranscriptionSaveClick" />
+                  </StackPanel>
+                </ScrollViewer>
+              </TabItem>
+            </TabControl>
+          </Grid>
+        </Grid>
+      </Grid>
+      </DockPanel>
+    </Grid>
+  </Grid>
+</ui:FluentWindow>

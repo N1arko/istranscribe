@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/platform/INFRA-007-cross-platform-core-and-avalonia-shell#desktop-baseline -->
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.Desktop</RootNamespace>
+    <AssemblyName>IsTranscribe.Desktop.UI</AssemblyName>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\isTranscribe.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.0" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.0" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IsTranscribe.Core\IsTranscribe.Core.csproj" />
+    <ProjectReference Include="..\IsTranscribe.Application\IsTranscribe.Application.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,64 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.ConfirmationDialog"
+    x:DataType="vm:ConfirmationDialogViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{Binding Title}"
+    Width="420"
+    SizeToContent="Height"
+    CanResize="False"
+    ShowInTaskbar="False"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterOwner">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#recent-recordings -->
+  <Window.Styles>
+    <Style Selector="Button.danger">
+      <Setter Property="Background" Value="{DynamicResource Brush.Status.Danger}" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,Auto" Margin="24,22">
+    <StackPanel Spacing="8">
+      <TextBlock
+          Text="{Binding Title}"
+          FontSize="22"
+          FontWeight="SemiBold"
+          TextWrapping="Wrap"
+          AutomationProperties.HeadingLevel="1" />
+      <TextBlock
+          Text="{Binding Description}"
+          Foreground="{DynamicResource Brush.Text.Secondary}"
+          FontSize="14"
+          LineHeight="20"
+          TextWrapping="Wrap" />
+    </StackPanel>
+    <Grid Grid.Row="1" Margin="0,22,0,0" RowDefinitions="Auto,Auto">
+      <Button
+          Content="{Binding DestructiveAction}"
+          Command="{Binding DestructiveCommand}"
+          Classes="danger"
+          Padding="13,8"
+          Margin="0,0,0,10"
+          HorizontalAlignment="Left"
+          IsVisible="{Binding HasDestructiveAction}" />
+      <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Spacing="8">
+        <Button Content="{Binding CancelAction}" Command="{Binding CancelCommand}" IsCancel="True" Padding="13,8" />
+        <Button
+            Content="{Binding PrimaryAction}"
+            Command="{Binding PrimaryCommand}"
+            Padding="13,8"
+            IsVisible="{Binding PrimaryIsSafe}" />
+        <Button
+            Content="{Binding PrimaryAction}"
+            Command="{Binding PrimaryCommand}"
+            Classes="danger"
+            Padding="13,8"
+            IsVisible="{Binding PrimaryIsDestructive}" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

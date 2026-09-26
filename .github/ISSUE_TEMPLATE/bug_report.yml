@@ -1,0 +1,22 @@
+name: Bug report / Ошибка
+description: Something did not work as expected.
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: Platform and version
+      description: OS version, app version or commit, and CPU/GPU if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: What happened?
+      description: Steps to reproduce, expected result, and actual result. English or Russian is welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Extra context
+      description: Optional screenshots or redacted logs. Remove private recordings, transcript text, keys, and personal information.

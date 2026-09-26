@@ -1,0 +1,4 @@
+DEVELOPMENT TEST ONLY — DO NOT DISTRIBUTE AS AN INSTALLER
+
+This acceptance kit contains self-signed development MSIX packages and a public
+test certificate. It contains no private key. It is not eligible for public use.

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#engine.projects -->
+    <!-- @spec spec://modules/app/FEAT-016-local-whisper-transcription#worker -->
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IsTranscribe.Transcription.Worker</RootNamespace>
+    <AssemblyName>IsTranscribe.Transcription.Worker</AssemblyName>
+    <Description>Isolated local transcription worker</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- @spec spec://modules/app/FEAT-017-speaker-aware-transcription#diarization -->
+    <!-- Native assets are built from native/speaker with TTS disabled; the NuGet package
+         supplies only the C# binding. Do not redistribute its all-features native build. -->
+    <PackageReference Include="org.k2fsa.sherpa.onnx" Version="1.12.14" ExcludeAssets="native" />
+    <ProjectReference Include="..\IsTranscribe.Transcription.Local\IsTranscribe.Transcription.Local.csproj" />
+  </ItemGroup>
+</Project>

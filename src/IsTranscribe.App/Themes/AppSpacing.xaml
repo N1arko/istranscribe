@@ -1,0 +1,20 @@
+<!-- @spec spec://modules/app/FEAT-008-modern-ui-design-system#behavior.resources.spacing -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="SpaceXs">4</sys:Double>
+    <sys:Double x:Key="SpaceSm">8</sys:Double>
+    <sys:Double x:Key="SpaceMd">12</sys:Double>
+    <sys:Double x:Key="SpaceLg">16</sys:Double>
+    <sys:Double x:Key="SpaceXl">20</sys:Double>
+    <sys:Double x:Key="Space2xl">24</sys:Double>
+    <sys:Double x:Key="Space3xl">32</sys:Double>
+
+    <Thickness x:Key="SpaceMdAll">12</Thickness>
+    <Thickness x:Key="SpaceLgAll">16</Thickness>
+    <Thickness x:Key="SpaceXlAll">20</Thickness>
+    <Thickness x:Key="Space2xlAll">24</Thickness>
+    <Thickness x:Key="Space3xlAll">32</Thickness>
+
+</ResourceDictionary>

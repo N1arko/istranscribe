@@ -1,0 +1,73 @@
+<Window
+    x:Class="IsTranscribe.Desktop.Views.RenameRecordingDialog"
+    x:DataType="vm:RenameRecordingDialogViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:IsTranscribe.Desktop.ViewModels"
+    Title="{Binding DialogTitle}"
+    Width="380"
+    SizeToContent="Height"
+    CanResize="False"
+    ShowInTaskbar="False"
+    Background="{DynamicResource Brush.Window.Background}"
+    WindowStartupLocation="CenterOwner">
+
+  <!-- @spec spec://modules/app/FEAT-013-minimal-desktop-experience#recent-recordings -->
+  <Window.Styles>
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Primary}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="CornerRadius" Value="8" />
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Hover}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+    </Style>
+    <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Brush.Accent.Pressed}" />
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.OnAccent}" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,Auto,Auto" Margin="24,22">
+    <TextBlock
+        Text="{Binding DialogTitle}"
+        Foreground="{DynamicResource Brush.Text.Primary}"
+        FontSize="22"
+        FontWeight="SemiBold"
+        AutomationProperties.HeadingLevel="1" />
+
+    <StackPanel Grid.Row="1" Margin="0,20,0,0" Spacing="7">
+      <TextBlock
+          Text="{Binding FieldLabel}"
+          Foreground="{DynamicResource Brush.Text.Secondary}"
+          FontSize="12" />
+      <TextBox
+          x:Name="NameTextBox"
+          Text="{Binding Name}"
+          MaxLength="{Binding MaximumNameLength}"
+          AutomationProperties.Name="{Binding FieldLabel}"
+          Padding="11,9" />
+    </StackPanel>
+
+    <StackPanel
+        Grid.Row="2"
+        Margin="0,22,0,0"
+        HorizontalAlignment="Right"
+        Orientation="Horizontal"
+        Spacing="8">
+      <Button
+          Content="{Binding CancelAction}"
+          Command="{Binding CancelCommand}"
+          IsCancel="True"
+          Padding="13,8" />
+      <Button
+          Classes="primary"
+          Content="{Binding SaveAction}"
+          Command="{Binding SaveCommand}"
+          IsDefault="True"
+          Padding="13,8" />
+    </StackPanel>
+  </Grid>
+</Window>
