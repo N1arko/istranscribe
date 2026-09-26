@@ -17,7 +17,6 @@
 
 | Work | Title | Specs | Owner | Started | Blocker |
 |---|---|---|---|---|---|
-| [WI-017](work/WI-017-public-github-repository.md) | Public GitHub open-source repository | PROP-000, PROP-006 | @nikita | 2026-09-25 | — |
 | [WI-007](work/WI-007-macos-audio-capture.md) | macOS audio observation and capture | INFRA-010, INFRA-009, FEAT-011 | @nikita | 2026-07-31 | WI-004 required for bundled permission/live acceptance; native and managed audio work can proceed |
 
 ## Blocked
@@ -35,6 +34,7 @@
 
 | Work | Title | Owner | Date |
 |---|---|---|---|
+| [WI-017](work/archive/2026/WI-017-public-github-repository.md) | Public GitHub open-source repository | @nikita | 2026-09-26 |
 | [WI-015](work/archive/2026/WI-015-macos-ask-prompt-visibility.md) | macOS Ask prompt visibility | @nikita | 2026-08-11 |
 | [WI-013](work/archive/2026/WI-013-candidate-gated-audio-observation.md) | Candidate-gated audio observation | @nikita | 2026-08-10 |
 | [WI-001](work/archive/2026/WI-001-spec-workflow-migration.md) | Migrate spec-driven workflow | @nikita | 2026-07-31 |

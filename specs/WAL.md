@@ -4,13 +4,6 @@
 
 ## Active Checkpoints
 
-### WI-017: Public GitHub open-source repository (@nikita)
-- Work: [WI-017](work/WI-017-public-github-repository.md)
-- Updated: 2026-09-26
-- Checkpoint: MIT, English/Russian README, build/privacy/third-party docs, issue forms and security reporting prepared. Publication is authorized; the public repository will start from a clean snapshot, with earlier history retained privately.
-- Next: Publish the clean snapshot, verify anonymous access and close WI-017.
-- Blocker: —
-
 ### WI-014: Zoom screen-share recording continuity (@nikita)
 - Work: [WI-014](work/WI-014-zoom-screen-share-continuity.md)
 - Updated: 2026-08-19
